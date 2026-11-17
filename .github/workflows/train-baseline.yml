@@ -36,7 +36,7 @@ jobs:
       - name: Prepare research baseline splits
         run: python ai/scripts/prepare_dataset.py --input ai/dataset/raw --output ai/dataset/processed --seed 42 --min-per-class 10
       - name: Train experimental 10-genus baseline
-        run: python ai/scripts/train.py --data ai/dataset/processed --output ai/artifacts --epochs 12 --batch-size 16
+        run: python ai/scripts/train.py --data ai/dataset/processed --output ai/artifacts --epochs 12 --batch-size 16 --lr 7e-5
       - name: Evaluate untouched test split
         run: python ai/scripts/evaluate.py --data ai/dataset/processed --checkpoint ai/artifacts/best.pt --output ai/artifacts/evaluation
       - name: Upload research artifacts
