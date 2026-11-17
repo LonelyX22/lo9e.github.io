@@ -16,7 +16,7 @@ def digest(path):
   for chunk in iter(lambda:f.read(1024*1024),b""):h.update(chunk)
  return h.hexdigest()
 def main():
- ap=argparse.ArgumentParser();ap.add_argument("--input",type=Path,required=True);ap.add_argument("--output",type=Path,required=True);ap.add_argument("--seed",type=int,default=42);ap.add_argument("--min-per-class",type=int,default=10);ap.add_argument("--include-auxiliary",action="store_true");a=ap.parse_args()
+ ap=argparse.ArgumentParser();ap.add_argument("--input",type=Path,required=True);ap.add_argument("--output",type=Path,required=True);ap.add_argument("--seed",type=int,default=42);ap.add_argument("--min-per-class",type=int,default=500);ap.add_argument("--include-auxiliary",action="store_true");a=ap.parse_args()
  if not a.input.is_dir():raise SystemExit(f"Input folder not found: {a.input}")
  labels=CLASSES+(["Ct","non_cloud","unknown"] if a.include_auxiliary else [])
  found=defaultdict(list);seen={};rejected=[];folder_map={}
