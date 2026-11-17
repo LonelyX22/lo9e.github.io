@@ -21,7 +21,7 @@ def main():
  p=argparse.ArgumentParser()
  p.add_argument("--data",type=Path,required=True);p.add_argument("--output",type=Path,required=True)
  p.add_argument("--epochs",type=int,default=7);p.add_argument("--batch-size",type=int,default=16)
- p.add_argument("--image-size",type=int,default=160);p.add_argument("--freeze-epochs",type=int,default=3)
+ p.add_argument("--image-size",type=int,default=192);p.add_argument("--freeze-epochs",type=int,default=2)
  p.add_argument("--lr",type=float,default=1e-4);p.add_argument("--seed",type=int,default=42)
  a=p.parse_args()
  if a.image_size<128 or a.image_size>320:raise SystemExit("image-size must be 128..320")
@@ -46,10 +46,9 @@ def main():
  best=-1.;best_path=a.output/"best.pt";epochs=max(1,a.epochs);freeze_epochs=min(max(0,a.freeze_epochs),epochs-1)
  for epoch in range(epochs):
   if epoch==freeze_epochs:
-   # Unfreeze only the final two EfficientNet stages for a controlled fine-tune.
-   for block in list(model.features.children())[-2:]:
-    for q in block.parameters():q.requires_grad=True
-   optimizer=torch.optim.AdamW((q for q in model.parameters() if q.requires_grad),lr=a.lr*.2,weight_decay=1e-4)
+   # Fine-tune the complete feature extractor at a lower learning rate.
+   for q in model.features.parameters():q.requires_grad=True
+   optimizer=torch.optim.AdamW(model.parameters(),lr=a.lr*.15,weight_decay=1e-4)
   elif epoch==0:
    optimizer=torch.optim.AdamW(model.classifier.parameters(),lr=a.lr,weight_decay=1e-4)
   model.train()
