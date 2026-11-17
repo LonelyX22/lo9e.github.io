@@ -44,7 +44,9 @@ def from_dataverse(out,raw,timeout):
       if chunk:f.write(chunk)
   records.append({"id":fid,"name":name,"path":str(dest),"bytes":dest.stat().st_size,"sha256":sha256(dest)})
  extract_archives(out,raw)
- return {"method":"Harvard Dataverse API","version":version.get("versionNumber"),"files":records}
+ image_count=sum(1 for p in raw.rglob("*") if p.is_file() and p.suffix.lower() in {".jpg",".jpeg",".png",".webp"})
+ if image_count < 100: raise RuntimeError(f"Dataverse archive contained only {image_count} recognized images; trying the filtered CCSN mirror.")
+ return {"method":"Harvard Dataverse API","version":version.get("versionNumber"),"image_count":image_count,"files":records}
 def from_huggingface(raw):
  # Fallback mirrors the original CCSN image records only; do not use CloudBench's unrelated images or relevance labels.
  from datasets import load_dataset
