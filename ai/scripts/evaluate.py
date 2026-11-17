@@ -69,10 +69,12 @@ def main():
     }
     # Conservative: never release unless metrics, calibrated selective performance and data volume all pass.
     release_ok=data_target_ok and macro>=.70 and selective_precision>=.90 and selective_coverage>=.15
-    status="validated" if release_ok and calibrated else "research_only"
+    # Beta is for exploratory use only; its scores are not calibrated probabilities.
+    beta_ok=(accuracy>=0.40 and macro>=0.35 and len(test)>=100)
+    status="validated" if release_ok and calibrated else ("beta" if beta_ok else "research_only")
     metadata_path=a.checkpoint.parent/"model_metadata.json"
     metadata=json.loads(metadata_path.read_text(encoding="utf-8")) if metadata_path.exists() else {}
-    metadata.update({"test_metrics":{"accuracy":accuracy,"macro_f1":macro,"selective_precision":selective_precision,"selective_coverage":selective_coverage},"release_thresholds":{"min_confidence":threshold,"min_margin":margin},"status":status,"validation_calibration":report["validation_calibration"],"release_gate":report["release_gate"]})
+    metadata.update({"test_metrics":{"accuracy":accuracy,"macro_f1":macro,"selective_precision":selective_precision,"selective_coverage":selective_coverage},"release_thresholds":{"min_confidence":(threshold if status=="validated" else 0.0),"min_margin":(margin if status=="validated" else 0.0)},"status":status,"beta_notice":"Experimental predictions only. Scores are not calibrated probabilities; verify visually and do not use for safety decisions.","validation_calibration":report["validation_calibration"],"release_gate":report["release_gate"]})
     metadata_path.write_text(json.dumps(metadata,indent=2),encoding="utf-8")
     report["model_status"]=status
     a.output.mkdir(parents=True,exist_ok=True)
