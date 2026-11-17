@@ -31,7 +31,9 @@ Do not publish weights unless held-out accuracy, macro-F1, per-class precision/r
 
 ## Baseline results (17 Nov 2026)
 
-Two CCSN experiments completed. The first reached 36.10% held-out accuracy / 34.28% macro-F1; a fast follow-up reached 15.47% / 14.34%. Neither passed the release gate, so neither model was deployed. See [the measured report](reports/ccsn-baseline-20261117.md).
+The latest 12-epoch EfficientNet-B0 experiment completed, but it is **not production-ready**: held-out accuracy 41.83%, macro-F1 38.93%, and the validation-only rejection calibration could not meet 90% precision at 15% coverage. The workflow correctly left the model as `research_only` and skipped public deployment. See [the measured report](reports/ccsn-baseline-20261117.md).
+
+CCSN has only 139–340 verified unique images per genus in this run (2,323 total after duplicate/conflict filtering), below the initial target of 500 per genus. Additional licensed and expert-verified data is the main blocker; simply increasing epochs cannot solve this data limitation.
 
 ## Important limitation
 CCSN alone is smaller than the 500+ images per class target. Do not claim high accuracy or robust Thai-weather performance from this benchmark alone. Additional correctly licensed, expert-verified images are required.
