@@ -1,29 +1,33 @@
 # Cloud Scanner AI — model development
 
-This repository now contains the reproducible training and evaluation pipeline. **It does not contain trained weights yet.** A model is only deployable after the dataset checks, training, held-out evaluation, calibration and browser parity tests pass.
+This repository contains a reproducible training and evaluation pipeline. **It does not contain trained weights yet.** A model is only deployable after dataset checks, training, held-out evaluation, calibration and browser parity tests pass.
 
-## Label policy
-The target is the 10 WMO cloud genera: Ci, Cc, Cs, Ac, As, Ns, Sc, St, Cu, Cb. CCSN's extra Ct (contrail) is not a WMO genus; keep it as a separate auxiliary class or exclude it from the 10-genus head. Do not map SWIMCAT's appearance labels (veil/patterned/thick dark/thick white) into WMO genera. SWIMCAT clear-sky may support a separate non-cloud/rejection head only if its license permits the intended use. SWIMSEG provides segmentation masks, not genus labels; reserve it for a later localization task.
-
-## Data layout
-Place images in `ai/dataset/raw/<class_code>/` where class_code is one of:
-`Ci Cc Cs Ac As Ns Sc St Cu Cb Ct non_cloud unknown`.
-Only include classes for which the source's labels actually support the target. Keep a source-level manifest and the original dataset license/attribution files. Never relabel a broad appearance class as a specific genus.
-
-## Reproducible run
-Use Python 3.11 or 3.12 in a clean environment:
+## 1. Download the primary dataset
+The agreed primary source is CCSN: 2,543 ground-based images and 11 labels. The 10 WMO genera are Ci, Cc, Cs, Ac, As, Ns, Sc, St, Cu, Cb. Ct (contrail) is not a WMO genus.
 ```bash
 python -m venv .venv
 # activate the environment
 pip install -r ai/requirements.txt
+python ai/scripts/download_ccsn.py
+```
+The downloader records Dataverse file IDs and SHA-256 hashes. CCSN is identified as CC0 1.0 by a published survey; preserve its DOI/citation and verify live Dataverse terms before reuse.
+
+## 2. Inspect and prepare
+Organize extracted images as `ai/dataset/raw/<class_code>/`. Validate images and create deterministic train/validation/test splits:
+```bash
 python ai/scripts/prepare_dataset.py --input ai/dataset/raw --output ai/dataset/processed --seed 42
+```
+Default labels are the 10 WMO genera. Auxiliary labels are not silently merged into the genus classes. The agreed target is 500+ verified images per genus initially and 1,000+ long-term.
+
+## 3. Train and evaluate
+Use Python 3.11 or 3.12:
+```bash
 python ai/scripts/train.py --data ai/dataset/processed --output ai/artifacts --epochs 30
 python ai/scripts/evaluate.py --data ai/dataset/processed --checkpoint ai/artifacts/best.pt --output ai/artifacts/evaluation
 ```
-The preparation script removes byte-identical duplicates and makes deterministic stratified train/validation/test splits. It reports per-class counts and stops if classes are missing or too small. Near-duplicate and capture-session grouping must be added when source metadata becomes available; the report explicitly notes this limitation.
 
-## Acceptance gate
-Do not publish weights unless the report contains held-out test metrics: accuracy, macro-F1, per-class precision/recall/F1, confusion matrix, class counts, and calibration/rejection results. The current small CCSN dataset alone cannot substantiate a robust 500+ images per class target. Collect additional correctly licensed, expert-verified images, particularly from Thailand and different cameras, seasons, times and locations. Do not claim 90%/95% accuracy without a reproducible held-out result.
+## 4. Release gate
+Do not publish weights unless held-out accuracy, macro-F1, per-class precision/recall/F1, confusion matrix, class support, calibration and rejection results are documented. Random image splits do not prove geographic or temporal generalization; group by site/date/session when metadata is available. The frontend enables inference only for a package explicitly marked `validated` with test metrics and calibrated rejection thresholds.
 
-## Browser export
-Training exports `model.onnx` and `model_metadata.json`. Copy both to `models/cloud-classifier/` at the site root only after evaluation passes. Browser inference uses ONNX Runtime Web and verifies the model metadata. The UI must show "model unavailable" rather than fake predictions when artifacts are absent.
+## Important limitation
+CCSN alone is smaller than the 500+ images per class target. Do not claim high accuracy or robust Thai-weather performance from this benchmark alone. Additional correctly licensed, expert-verified images are required.
