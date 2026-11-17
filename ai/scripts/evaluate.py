@@ -52,6 +52,11 @@ def main():
     selective_precision=float((pred[keep]==ty[keep]).mean()) if keep.any() else 0.0
     precision,recall,f1,_=precision_recall_fscore_support(ty,pred,labels=list(range(len(classes))),zero_division=0)
     macro=float(f1_score(ty,pred,average="macro"));accuracy=float(accuracy_score(ty,pred))
+    # The agreed production target is at least 500 verified images per genus.
+    dataset_report_path=a.data/"dataset_report.json"
+    dataset_report=json.loads(dataset_report_path.read_text(encoding="utf-8")) if dataset_report_path.exists() else {}
+    class_counts=dataset_report.get("counts",{})
+    data_target_ok=all(int(class_counts.get(c,0))>=500 for c in classes)
     report={
       "accuracy":accuracy,"macro_f1":macro,
       "per_class":{c:{"precision":float(precision[i]),"recall":float(recall[i]),"f1":float(f1[i]),"support":int((ty==i).sum())} for i,c in enumerate(classes)},
@@ -62,11 +67,6 @@ def main():
       "release_gate":{"minimum_macro_f1":0.70,"minimum_selective_precision":0.90,"minimum_selective_coverage":0.15,"minimum_verified_images_per_class":500,"data_target_met":data_target_ok,"class_image_counts":class_counts},
       "limitations":["Random held-out split only; geographic and temporal generalization is unproven.","CCSN does not represent all Thai sky, camera, seasonal and local weather conditions.","Confidence calibration is based on a small validation split and needs external validation."]
     }
-    # The agreed production target is at least 500 verified images per genus.
-    dataset_report_path=a.data/"dataset_report.json"
-    dataset_report=json.loads(dataset_report_path.read_text(encoding="utf-8")) if dataset_report_path.exists() else {}
-    class_counts=dataset_report.get("counts",{})
-    data_target_ok=all(int(class_counts.get(c,0))>=500 for c in classes)
     # Conservative: never release unless metrics, calibrated selective performance and data volume all pass.
     release_ok=data_target_ok and macro>=.70 and selective_precision>=.90 and selective_coverage>=.15
     status="validated" if release_ok and calibrated else "research_only"
