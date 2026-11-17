@@ -1,0 +1,47 @@
+name: Validate Cloud Scanner source
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Compile Python source
+        run: python -m compileall -q ai/scripts backend/app
+      - name: Check frontend JavaScript
+        run: node --check js/app.js
+      - name: Validate class taxonomy
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("ai/classes.json", encoding="utf-8"))
+          assert len(d["classes"]) == 10
+          assert all(x["wmo_genus"] for x in d["classes"])
+          assert len({x["code"] for x in d["classes"]}) == 10
+          assert "Ct" in d["auxiliary_labels"]
+          print("Taxonomy OK: 10 WMO genera; contrails kept separate")
+          PY
+      - name: Confirm no unvalidated model is shipped
+        run: |
+          test ! -e models/cloud-classifier/model.onnx || python - <<'PY'
+          import json
+          m=json.load(open("models/cloud-classifier/model_metadata.json"))
+          assert m.get("status") == "validated"
+          assert m.get("test_metrics")
+          assert m.get("release_thresholds")
+          PY
