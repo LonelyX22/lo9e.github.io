@@ -62,7 +62,7 @@ jobs:
           cp ai/artifacts/model.onnx models/cloud-classifier/model.onnx
           cp ai/artifacts/model_metadata.json models/cloud-classifier/model_metadata.json
       - name: Upload validated site for Pages
-        if: steps.release_gate.outputs.status == 'validated'
+        if: contains(fromJSON('["validated","beta"]'), steps.release_gate.outputs.status)
         uses: actions/upload-pages-artifact@v3
         with:
           path: .
