@@ -7,7 +7,7 @@ from pathlib import Path
 from PIL import Image, UnidentifiedImageError
 EXTS={".jpg",".jpeg",".png",".webp",".bmp"}
 CLASSES=["Ci","Cc","Cs","Ac","As","Ns","Sc","St","Cu","Cb"]
-ALIASES={"Ci":{"ci","cirrus"},"Cc":{"cc","cirrocumulus"},"Cs":{"cs","cirrostratus"},"Ac":{"ac","altocumulus"},"As":{"as","altostratus"},"Ns":{"ns","nimbostratus"},"Sc":{"sc","stratocumulus"},"St":{"st","stratus"},"Cu":{"cu","cumulus"},"Cb":{"cb","cumulonimbus"},"Ct":{"ct","contrail","contrails"},"non_cloud":{"non_cloud","clear","clear_sky","clear-sky","clearsky"},"unknown":{"unknown","other"}}
+ALIASES={"Ci":{"ci","cirrus"},"Cc":{"cc","cirrocumulus"},"Cs":{"cs","cirrostratus"},"Ac":{"ac","altocumulus"},"As":{"as","altostratus"},"Ns":{"ns","nimbostratus"},"Sc":{"sc","stratocumulus"},"St":{"st","stratus"},"Cu":{"cu","cumulus"},"Cb":{"cb","cumulonimbus"},"Ct":{"ct","contrail","contrails"},"non_cloud":{"non_cloud","no","no_cloud","no-cloud","clear","clear_sky","clear-sky","clearsky","clear sky"},"unknown":{"unknown","other"}}
 def digest(path):
  h=hashlib.sha256()
  with path.open("rb") as f:
