@@ -67,7 +67,7 @@ jobs:
         with:
           path: .
       - name: Deploy validated model to GitHub Pages
-        if: steps.release_gate.outputs.status == 'validated'
+        if: contains(fromJSON('["validated","beta"]'), steps.release_gate.outputs.status)
         uses: actions/deploy-pages@v4
       - name: Upload research artifacts
         if: always()
