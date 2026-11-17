@@ -25,7 +25,7 @@ async function loadModel(){
   const mr=await fetch("./models/cloud-classifier/model_metadata.json",{cache:"no-store"});
   if(!mr.ok)throw Error("metadata missing");
   const meta=await mr.json();modelMeta=meta;
-  if(meta.status!=="validated"||!meta.test_metrics||!meta.release_thresholds)throw Error("not validated");
+  if(meta.status!=="validated"||!meta.test_metrics||!meta.release_thresholds||!Array.isArray(meta.classes)||meta.classes.length!==10||!Array.isArray(meta.input?.shape)||meta.input.shape.length!==4)throw Error("not validated");
   if(!window.ort)throw Error("ONNX Runtime Web failed to load");
   ort.env.wasm.wasmPaths="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.20.1/dist/";
   modelSession=await ort.InferenceSession.create("./models/cloud-classifier/model.onnx",{executionProviders:["wasm"]});
