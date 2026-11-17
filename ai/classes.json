@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "primary_task": "wmo_cloud_genus_classification",
+  "classes": [
+    {"code":"Ci","name_en":"Cirrus","name_th":"เมฆซีร์รัส","wmo_genus":true},
+    {"code":"Cc","name_en":"Cirrocumulus","name_th":"เมฆซีร์โรคิวมูลัส","wmo_genus":true},
+    {"code":"Cs","name_en":"Cirrostratus","name_th":"เมฆซีร์โรสเตรตัส","wmo_genus":true},
+    {"code":"Ac","name_en":"Altocumulus","name_th":"เมฆอัลโตคิวมูลัส","wmo_genus":true},
+    {"code":"As","name_en":"Altostratus","name_th":"เมฆอัลโตสเตรตัส","wmo_genus":true},
+    {"code":"Ns","name_en":"Nimbostratus","name_th":"เมฆนิมโบสเตรตัส","wmo_genus":true},
+    {"code":"Sc","name_en":"Stratocumulus","name_th":"เมฆสเตรโตคิวมูลัส","wmo_genus":true},
+    {"code":"St","name_en":"Stratus","name_th":"เมฆสเตรตัส","wmo_genus":true},
+    {"code":"Cu","name_en":"Cumulus","name_th":"เมฆคิวมูลัส","wmo_genus":true},
+    {"code":"Cb","name_en":"Cumulonimbus","name_th":"เมฆคิวมูโลนิมบัส","wmo_genus":true}
+  ],
+  "auxiliary_labels": ["Ct","non_cloud","unknown"],
+  "important": "Auxiliary labels are not WMO genera and must not be silently merged into the 10-class genus head."
+}
