@@ -23,7 +23,7 @@ def main():
     a=p.parse_args(); seed_all(a.seed); a.output.mkdir(parents=True,exist_ok=True)
     required=["train","validation","test"]
     if any(not (a.data/x).is_dir() for x in required): raise SystemExit("Dataset splits missing. Run prepare_dataset.py first.")
-    train_tf=transforms.Compose([transforms.Resize((256,256)),transforms.RandomResizedCrop(224,scale=(.75,1.0)),transforms.RandomHorizontalFlip(),transforms.ColorJitter(brightness=.12,contrast=.12,saturation=.10,hue=.02),transforms.ToTensor(),transforms.Normalize([.485,.456,.406],[.229,.224,.225])])
+    train_tf=transforms.Compose([transforms.Resize((256,256)),transforms.RandomResizedCrop(224,scale=(.85,1.0)),transforms.RandomHorizontalFlip(),transforms.ColorJitter(brightness=.12,contrast=.12,saturation=.10,hue=.02),transforms.ToTensor(),transforms.Normalize([.485,.456,.406],[.229,.224,.225])])
     eval_tf=transforms.Compose([transforms.Resize((224,224)),transforms.ToTensor(),transforms.Normalize([.485,.456,.406],[.229,.224,.225])])
     train=datasets.ImageFolder(a.data/"train",transform=train_tf)
     val=datasets.ImageFolder(a.data/"validation",transform=eval_tf)
@@ -37,7 +37,7 @@ def main():
     model=models.efficientnet_b0(weights=weights)
     model.classifier[1]=nn.Linear(model.classifier[1].in_features,len(train.classes))
     model.to(device)
-    criterion=nn.CrossEntropyLoss(label_smoothing=.05)
+    counts=np.bincount(train.targets,minlength=len(train.classes)); class_weights=torch.tensor(len(train)/(len(train.classes)*counts),dtype=torch.float32,device=device); criterion=nn.CrossEntropyLoss(weight=class_weights,label_smoothing=.03)
     optimizer=torch.optim.AdamW(model.parameters(),lr=a.lr,weight_decay=1e-4)
     scheduler=torch.optim.lr_scheduler.CosineAnnealingLR(optimizer,T_max=a.epochs)
     best=-1.0; best_path=a.output/"best.pt"
