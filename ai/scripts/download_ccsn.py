@@ -82,5 +82,5 @@ def main():
   source=from_huggingface(a.extract_to)
  manifest={"dataset":"CCSN","persistent_id":PID,"doi":"https://doi.org/10.7910/DVN/CADDPD","source":source,"notes":"Only CCSN path records with explicit row-level CC0 1.0 and matching DOI are accepted by the mirror fallback. Keep source citations; re-check live terms before reuse."}
  (a.output/"download_manifest.json").write_text(json.dumps(manifest,indent=2),encoding="utf-8")
- print(json.dumps({"source":source.get("method"),"unique_images":source.get("unique_images",source.get("image_count",None)),"downloaded_files":len(source.get("files",[])),"manifest":str(a.output/"download_manifest.json")},indent=2))
+ print(json.dumps({"source":source.get("method"),"unique_images":source.get("unique_images",source.get("image_count",None)),"downloaded_files":len(source.get("files",[])),"raw_directories":[str(p.relative_to(a.extract_to)) for p in a.extract_to.rglob("*") if p.is_dir()][:80],"raw_image_samples":[str(p.relative_to(a.extract_to)) for p in a.extract_to.rglob("*") if p.is_file() and p.suffix.lower() in {".jpg",".jpeg",".png",".webp"}][:30],"manifest":str(a.output/"download_manifest.json")},indent=2))
 if __name__=="__main__":main()
