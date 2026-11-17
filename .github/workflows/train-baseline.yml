@@ -18,6 +18,8 @@ concurrency:
 
 jobs:
   train-baseline:
+    environment:
+      name: github-pages
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
@@ -39,7 +41,34 @@ jobs:
         run: python ai/scripts/train.py --data ai/dataset/processed --output ai/artifacts --epochs 7 --freeze-epochs 3 --image-size 160 --batch-size 16 --lr 1e-4
       - name: Evaluate untouched test split
         run: python ai/scripts/evaluate.py --data ai/dataset/processed --checkpoint ai/artifacts/best.pt --output ai/artifacts/evaluation
+      - name: Check model release gate
+        id: release_gate
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          meta=json.loads(Path("ai/artifacts/model_metadata.json").read_text())
+          status=meta.get("status","research_only")
+          print(f"Model release status: {status}")
+          with open(os.environ["GITHUB_OUTPUT"],"a") as f:
+              f.write("status="+status+"\n")
+          PY
+      - name: Copy model into public site only when validated
+        if: steps.release_gate.outputs.status == 'validated'
+        run: |
+          mkdir -p models/cloud-classifier
+          cp ai/artifacts/model.onnx models/cloud-classifier/model.onnx
+          cp ai/artifacts/model_metadata.json models/cloud-classifier/model_metadata.json
+      - name: Upload validated site for Pages
+        if: steps.release_gate.outputs.status == 'validated'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - name: Deploy validated model to GitHub Pages
+        if: steps.release_gate.outputs.status == 'validated'
+        uses: actions/deploy-pages@v4
       - name: Upload research artifacts
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: ccsn-experimental-baseline
