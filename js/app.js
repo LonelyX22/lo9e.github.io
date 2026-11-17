@@ -8,8 +8,8 @@ const LABELS = {
   Ct:["Contrail","เมฆ/แนวไอควบแน่นจากเครื่องบิน"]
 };
 const T = {
- th:{eyebrow:"CLOUD INTELLIGENCE PLATFORM",headline:"มองท้องฟ้าให้ลึกกว่าเดิม",subhead:"สแกนชนิดเมฆ ตรวจคุณภาพภาพ และดูสภาพอากาศจากตำแหน่งของคุณ",scannerTitle:"สแกนท้องฟ้า",ready:"พร้อมใช้งาน",cameraPrompt:"เปิดกล้องหรือเลือกรูปภาพ",cameraHint:"แนะนำให้เห็นท้องฟ้าและเมฆชัดเจน",openCamera:"เปิดกล้อง",chooseImage:"เลือกรูปภาพ",stopCamera:"ปิดกล้อง",analyze:"วิเคราะห์ภาพ",modelMissing:"ยังไม่มีโมเดล AI ที่ผ่านการประเมินและอนุมัติให้ใช้งาน ระบบจะไม่เดาผลแทนโมเดลจริง",resultTitle:"ผลการวิเคราะห์",waiting:"รอภาพสำหรับวิเคราะห์",waitingHint:"ผลจำแนกจะแสดงเมื่อมีโมเดลที่ผ่านการทดสอบ",classification:"การจำแนกเมฆ",confidence:"ความมั่นใจของโมเดล",weatherTitle:"สภาพอากาศบริเวณนี้",locate:"ใช้ตำแหน่งของฉัน",temperature:"อุณหภูมิ",humidity:"ความชื้น",cloudCover:"เมฆปกคลุม",wind:"ลม",weatherHint:"ต้องอนุญาตตำแหน่งเพื่อดึงข้อมูลอากาศ · Open-Meteo",historyTitle:"ประวัติบนอุปกรณ์นี้",export:"ส่งออก",clear:"ล้างประวัติ",noHistory:"ยังไม่มีประวัติการสแกน",privacy:"ประวัติเก็บไว้ในเบราว์เซอร์ของคุณเท่านั้น ไม่ซิงก์ขึ้น Cloud",disclaimerTitle:"หมายเหตุความแม่นยำ",disclaimer:"ผลจำแนกเป็นการประเมินภาพ ไม่ใช่การพยากรณ์ฝนหรือคำเตือนภัย ความมั่นใจไม่เท่ากับความถูกต้องที่รับประกัน",footer:"สำหรับการศึกษาและการวิเคราะห์เบื้องต้น",noModel:"ยังไม่มีโมเดลที่ผ่านการประเมิน",badImage:"ไม่สามารถอ่านภาพนี้ได้",modelNotReady:"พบไฟล์โมเดล แต่ยังไม่ผ่านสถานะ validated จึงยังไม่เปิดให้ทำนาย",analyzing:"กำลังวิเคราะห์ภาพ…",rejected:"ภาพนี้อยู่นอกขอบเขตหรือความมั่นใจไม่เพียงพอ ระบบจึงไม่ระบุชนิดเมฆ",modelResult:"ผลจากโมเดล AI · ไม่ใช่คำพยากรณ์อากาศ"},
- en:{eyebrow:"CLOUD INTELLIGENCE PLATFORM",headline:"See more in every sky",subhead:"Identify cloud types, check image quality and explore weather around your location.",scannerTitle:"Sky scanner",ready:"Ready",cameraPrompt:"Open camera or choose an image",cameraHint:"For best results, capture a clear view of the sky and clouds.",openCamera:"Open camera",chooseImage:"Choose image",stopCamera:"Stop camera",analyze:"Analyze image",modelMissing:"No AI model has passed evaluation and release approval yet. The app will not invent predictions.",resultTitle:"Analysis result",waiting:"Waiting for an image",waitingHint:"Classification appears only when a validated model is available.",classification:"CLOUD CLASSIFICATION",confidence:"Model confidence",weatherTitle:"Local weather",locate:"Use my location",temperature:"Temperature",humidity:"Humidity",cloudCover:"Cloud cover",wind:"Wind",weatherHint:"Location permission required · Open-Meteo",historyTitle:"On-device history",export:"Export",clear:"Clear",noHistory:"No scan history yet",privacy:"History stays in this browser on this device. It is not synced to the cloud.",disclaimerTitle:"Accuracy note",disclaimer:"This is image classification, not a rainfall forecast or severe-weather warning. Confidence is not a guarantee of correctness.",footer:"For education and preliminary analysis",noModel:"No validated model is available",badImage:"Could not read this image",modelNotReady:"Model files found but release status is not validated; predictions remain disabled.",analyzing:"Analyzing image…",rejected:"Image is outside the supported scope or confidence is insufficient. No cloud type is assigned.",modelResult:"AI model output · Not a weather forecast"}
+ th:{eyebrow:"CLOUD INTELLIGENCE PLATFORM",headline:"มองท้องฟ้าให้ลึกกว่าเดิม",subhead:"สแกนชนิดเมฆ ตรวจคุณภาพภาพ และดูสภาพอากาศจากตำแหน่งของคุณ",scannerTitle:"สแกนท้องฟ้า",ready:"พร้อมใช้งาน",cameraPrompt:"เปิดกล้องหรือเลือกรูปภาพ",cameraHint:"แนะนำให้เห็นท้องฟ้าและเมฆชัดเจน",openCamera:"เปิดกล้อง",chooseImage:"เลือกรูปภาพ",stopCamera:"ปิดกล้อง",analyze:"วิเคราะห์ภาพ",modelMissing:"ยังไม่มีโมเดล AI ที่ผ่านการประเมินและอนุมัติให้ใช้งาน ระบบจะไม่เดาผลแทนโมเดลจริง",resultTitle:"ผลการวิเคราะห์",waiting:"รอภาพสำหรับวิเคราะห์",waitingHint:"ผลจำแนกจะแสดงเมื่อมีโมเดลที่ผ่านการทดสอบ",classification:"การจำแนกเมฆ",confidence:"ความมั่นใจของโมเดล",weatherTitle:"สภาพอากาศบริเวณนี้",locate:"ใช้ตำแหน่งของฉัน",temperature:"อุณหภูมิ",humidity:"ความชื้น",cloudCover:"เมฆปกคลุม",wind:"ลม",weatherHint:"ต้องอนุญาตตำแหน่งเพื่อดึงข้อมูลอากาศ · Open-Meteo",historyTitle:"ประวัติบนอุปกรณ์นี้",export:"ส่งออก",clear:"ล้างประวัติ",noHistory:"ยังไม่มีประวัติการสแกน",privacy:"ประวัติเก็บไว้ในเบราว์เซอร์ของคุณเท่านั้น ไม่ซิงก์ขึ้น Cloud",disclaimerTitle:"หมายเหตุความแม่นยำ",disclaimer:"ผลจำแนกเป็นการประเมินภาพ ไม่ใช่การพยากรณ์ฝนหรือคำเตือนภัย ความมั่นใจไม่เท่ากับความถูกต้องที่รับประกัน",footer:"สำหรับการศึกษาและการวิเคราะห์เบื้องต้น",noModel:"ยังไม่มีโมเดล AI จำแนกชนิดเมฆที่ผ่านการรับรอง แต่ใช้การประเมินภาพเบื้องต้นได้",visualTitle:"ประมาณเมฆปกคลุมในภาพ",visualNote:"ประเมินจากสีและความสว่างของพิกเซล ไม่ใช่ AI จำแนกชนิดเมฆหรือพยากรณ์อากาศ",noSky:"ภาพนี้ตรวจพบท้องฟ้าไม่เพียงพอ ลองถ่ายให้เห็นท้องฟ้ากว้างขึ้น",badImage:"ไม่สามารถอ่านภาพนี้ได้",modelNotReady:"พบไฟล์โมเดล แต่ยังไม่ผ่านสถานะ validated จึงยังไม่เปิดให้ทำนาย",analyzing:"กำลังวิเคราะห์ภาพ…",rejected:"ภาพนี้อยู่นอกขอบเขตหรือความมั่นใจไม่เพียงพอ ระบบจึงไม่ระบุชนิดเมฆ",modelResult:"ผลจากโมเดล AI · ไม่ใช่คำพยากรณ์อากาศ"},
+ en:{eyebrow:"CLOUD INTELLIGENCE PLATFORM",headline:"See more in every sky",subhead:"Identify cloud types, check image quality and explore weather around your location.",scannerTitle:"Sky scanner",ready:"Ready",cameraPrompt:"Open camera or choose an image",cameraHint:"For best results, capture a clear view of the sky and clouds.",openCamera:"Open camera",chooseImage:"Choose image",stopCamera:"Stop camera",analyze:"Analyze image",modelMissing:"No AI model has passed evaluation and release approval yet. The app will not invent predictions.",resultTitle:"Analysis result",waiting:"Waiting for an image",waitingHint:"Classification appears only when a validated model is available.",classification:"CLOUD CLASSIFICATION",confidence:"Model confidence",weatherTitle:"Local weather",locate:"Use my location",temperature:"Temperature",humidity:"Humidity",cloudCover:"Cloud cover",wind:"Wind",weatherHint:"Location permission required · Open-Meteo",historyTitle:"On-device history",export:"Export",clear:"Clear",noHistory:"No scan history yet",privacy:"History stays in this browser on this device. It is not synced to the cloud.",disclaimerTitle:"Accuracy note",disclaimer:"This is image classification, not a rainfall forecast or severe-weather warning. Confidence is not a guarantee of correctness.",footer:"For education and preliminary analysis",noModel:"No validated cloud-genus AI model yet. Basic image analysis is available.",visualTitle:"Estimated cloud coverage in image",visualNote:"Pixel color and brightness estimate only; not AI cloud-genus classification or a weather forecast.",noSky:"Not enough recognizable sky. Try a wider sky photo.",badImage:"Could not read this image",modelNotReady:"Model files found but release status is not validated; predictions remain disabled.",analyzing:"Analyzing image…",rejected:"Image is outside the supported scope or confidence is insufficient. No cloud type is assigned.",modelResult:"AI model output · Not a weather forecast"}
 };
 let lang=localStorage.getItem("csp_lang")||"th", stream=null, imageSource=null, modelSession=null, modelMeta=null;
 function tr(k){return T[lang][k]||T.en[k]||k}
@@ -30,7 +30,7 @@ async function loadModel(){
   ort.env.wasm.wasmPaths="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.20.1/dist/";
   modelSession=await ort.InferenceSession.create("./models/cloud-classifier/model.onnx",{executionProviders:["wasm"]});
   $("modelStatus").textContent=lang==="th"?"AI พร้อมใช้งาน":"AI ready";$("modelStatus").classList.remove("muted");setMessage(lang==="th"?"โหลดโมเดลที่ผ่านการประเมินแล้ว":"Validated model loaded");
- }catch(e){modelSession=null;$("modelStatus").textContent=lang==="th"?"ยังไม่มีโมเดลที่รับรอง":"Model not released";setMessage(e.message==="not validated"?tr("modelNotReady"):tr("noModel"))}
+ }catch(e){modelSession=null;$("modelStatus").textContent=lang==="th"?"โหมดประเมินภาพ":"Visual scan mode";setMessage(tr("noModel"))}
 }
 function getImageElement(){
  if(imageSource===$("video")){if(!$("video").videoWidth)throw Error(tr("badImage"));return $("video")}
@@ -51,23 +51,46 @@ function preprocess(el){
 }
 function softmax(a){const m=Math.max(...a),e=a.map(v=>Math.exp(v-m)),s=e.reduce((x,y)=>x+y,0);return e.map(v=>v/s)}
 function addHistory(label,confidence){const h=getHistory();h.unshift({label,confidence,time:new Date().toISOString()});localStorage.setItem("csp_history",JSON.stringify(h.slice(0,100)));renderHistory()}
+function estimateCloudPixels(el){
+ const w=el.videoWidth||el.naturalWidth,h=el.videoHeight||el.naturalHeight;
+ if(!w||!h)throw Error(tr("badImage"));
+ const scale=Math.min(1,320/Math.max(w,h)),cw=Math.max(1,Math.round(w*scale)),ch=Math.max(1,Math.round(h*scale));
+ const canvas=document.createElement("canvas");canvas.width=cw;canvas.height=ch;
+ const ctx=canvas.getContext("2d",{willReadFrequently:true});ctx.drawImage(el,0,0,cw,ch);
+ const px=ctx.getImageData(0,0,cw,ch).data;let sky=0,cloud=0;
+ for(let i=0;i<px.length;i+=4){const r=px[i],g=px[i+1],b=px[i+2],mx=Math.max(r,g,b),mn=Math.min(r,g,b),sat=mx-mn;
+  const isSky=(b>r*1.04&&b>g*.91&&b>65)||(mx>170&&sat<48);
+  if(isSky){sky++;if(mx>150&&sat<58)cloud++}}
+ if(sky<Math.max(100,cw*ch*.035))throw Error(tr("noSky"));
+ return {coverage:Math.max(0,Math.min(100,cloud/sky*100)),skyRatio:sky/(cw*ch)*100};
+}
 $("analyzeBtn").onclick=async()=>{
- if(!modelSession||!modelMeta){setMessage(tr("noModel"));return}
+ if(!imageSource)return;
  try{
   setMessage(tr("analyzing"));$("analyzeBtn").disabled=true;
-  const tensor=preprocess(getImageElement()),out=await modelSession.run({[modelSession.inputNames[0]]:tensor});
-  const logits=Array.from(out[modelSession.outputNames[0]].data),probs=softmax(logits);
-  const ranked=probs.map((p,i)=>({p,i})).sort((a,b)=>b.p-a.p),top=ranked[0],second=ranked[1];
-  const threshold=Number(modelMeta.release_thresholds.min_confidence),margin=Number(modelMeta.release_thresholds.min_margin);
-  if(!Number.isFinite(threshold)||!Number.isFinite(margin)||top.p<threshold||top.p-second.p<margin){
-    $("resultEmpty").hidden=false;$("resultContent").hidden=true;setMessage(tr("rejected"));return;
+  const el=getImageElement();
+  if(modelSession&&modelMeta){
+   const tensor=preprocess(el),out=await modelSession.run({[modelSession.inputNames[0]]:tensor});
+   const probs=softmax(Array.from(out[modelSession.outputNames[0]].data));
+   const ranked=probs.map((p,i)=>({p,i})).sort((a,b)=>b.p-a.p),top=ranked[0],second=ranked[1];
+   const threshold=Number(modelMeta.release_thresholds.min_confidence),margin=Number(modelMeta.release_thresholds.min_margin);
+   if(!Number.isFinite(threshold)||!Number.isFinite(margin)||top.p<threshold||top.p-second.p<margin)throw Error(tr("rejected"));
+   const code=modelMeta.classes[top.i],names=LABELS[code]||[code,code];
+   $("metricLabel").textContent=tr("confidence");$("cloudName").textContent=names[0];$("cloudThai").textContent=names[1];
+   $("confidence").textContent=(top.p*100).toFixed(1)+"%";$("confidenceBar").style.width=(top.p*100)+"%";
+   $("modelNote").textContent=tr("modelResult");addHistory(names[0],top.p);
+  }else{
+   const r=estimateCloudPixels(el);
+   $("metricLabel").textContent=tr("visualTitle");$("cloudName").textContent=r.coverage.toFixed(0)+"%";
+   $("cloudThai").textContent=lang==="th"?"สัดส่วนพิกเซลสว่างสีจางในบริเวณที่ตรวจพบท้องฟ้า":"Bright, low-saturation pixels among detected sky pixels";
+   $("confidence").textContent=r.skyRatio.toFixed(0)+"% "+(lang==="th"?"พื้นที่ภาพที่ตรวจพบเป็นท้องฟ้า":"detected sky area");
+   $("confidenceBar").style.width=r.coverage+"%";$("modelNote").textContent=tr("visualNote");
+   addHistory((lang==="th"?"เมฆปกคลุมโดยประมาณ ":"Estimated cloud coverage ")+r.coverage.toFixed(0)+"%",null);
   }
-  const code=modelMeta.classes[top.i],names=LABELS[code]||[code,code];
   $("resultEmpty").hidden=true;$("resultContent").hidden=false;
-  $("cloudName").textContent=names[0];$("cloudThai").textContent=names[1];
-  $("confidence").textContent=(top.p*100).toFixed(1)+"%";$("confidenceBar").style.width=(top.p*100)+"%";
-  $("modelNote").textContent=tr("modelResult");setMessage(tr("modelResult"));addHistory(names[0],top.p);
- }catch(e){setMessage(e.message||tr("badImage"))}finally{$("analyzeBtn").disabled=false}
+  setMessage(modelSession?tr("modelResult"):tr("visualNote"));
+ }catch(e){$("resultEmpty").hidden=false;$("resultContent").hidden=true;setMessage(e.message||tr("badImage"))}
+ finally{$("analyzeBtn").disabled=false}
 };
 $("weatherBtn").onclick=()=>{if(!navigator.geolocation){$("weatherNote").textContent="Geolocation is not supported.";return} $("weatherNote").textContent=lang==="th"?"กำลังขอตำแหน่ง…":"Requesting location…";navigator.geolocation.getCurrentPosition(async p=>{try{const u=new URL("https://api.open-meteo.com/v1/forecast");u.search=new URLSearchParams({latitude:p.coords.latitude,longitude:p.coords.longitude,current:"temperature_2m,relative_humidity_2m,cloud_cover,wind_speed_10m",timezone:"auto"});const d=await(await fetch(u)).json(),c=d.current;$("temp").textContent=c.temperature_2m+"°C";$("humidity").textContent=c.relative_humidity_2m+"%";$("cloudCover").textContent=c.cloud_cover+"%";$("wind").textContent=c.wind_speed_10m+" km/h";$("weatherNote").textContent="Open-Meteo · "+c.time}catch(e){$("weatherNote").textContent="Weather data unavailable: "+e.message}},e=>$("weatherNote").textContent=e.message,{timeout:12000})};
 function getHistory(){try{return JSON.parse(localStorage.getItem("csp_history")||"[]")}catch{return[]}}
