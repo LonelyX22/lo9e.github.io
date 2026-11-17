@@ -8,6 +8,7 @@ https://lonelyx22.github.io/
 ## Available now
 - Responsive public website for mobile and desktop.
 - Camera capture with explicit browser permission, or upload an image.
+- Browser-side visual scan estimates the proportion of bright, low-saturation pixels in detected sky regions when no validated AI model is available. This is explicitly a heuristic estimate, not cloud-genus AI or a weather forecast.
 - Thai / English interface.
 - Local-only scan history, export to JSON and clear-history controls.
 - Optional location-based current weather from Open-Meteo, kept separate from image classification.
