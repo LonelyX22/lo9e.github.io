@@ -31,7 +31,7 @@ Do not publish weights unless held-out accuracy, macro-F1, per-class precision/r
 
 ## Baseline results (17 Nov 2026)
 
-The first automated CCSN run completed with 36.10% held-out accuracy and 34.28% macro-F1 on 349 test images. It failed the release gate and was deliberately not deployed. See [the measured report](reports/ccsn-baseline-20261117.md). A second, fuller fine-tuning run is being used as an experiment; no accuracy is promised.
+Two CCSN experiments completed. The first reached 36.10% held-out accuracy / 34.28% macro-F1; a fast follow-up reached 15.47% / 14.34%. Neither passed the release gate, so neither model was deployed. See [the measured report](reports/ccsn-baseline-20261117.md).
 
 ## Important limitation
 CCSN alone is smaller than the 500+ images per class target. Do not claim high accuracy or robust Thai-weather performance from this benchmark alone. Additional correctly licensed, expert-verified images are required.
