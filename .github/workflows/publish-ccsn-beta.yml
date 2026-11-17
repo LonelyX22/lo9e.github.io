@@ -1,0 +1,59 @@
+name: Publish CCSN Beta model for public testing
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+    paths:
+      - ".github/workflows/publish-ccsn-beta.yml"
+
+permissions:
+  actions: read
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout website
+        uses: actions/checkout@v4
+
+      - name: Download completed CCSN training artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ccsn-experimental-baseline
+          run-id: 44072714989
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          path: /tmp/ccsn-artifact
+
+      - name: Install beta model files
+        run: |
+          set -euo pipefail
+          mkdir -p models/cloud-classifier
+          cp /tmp/ccsn-artifact/artifacts/model.onnx models/cloud-classifier/model.onnx
+          cp /tmp/ccsn-artifact/artifacts/model_metadata.json models/cloud-classifier/model_metadata.json
+          test -s models/cloud-classifier/model.onnx
+          test -s models/cloud-classifier/model_metadata.json
+          echo "CCSN Beta model files installed for public testing."
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload website with beta model
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
