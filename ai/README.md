@@ -22,7 +22,7 @@ Default labels are the 10 WMO genera. Auxiliary labels are not silently merged i
 ## 3. Train and evaluate
 Use Python 3.11 or 3.12:
 ```bash
-python ai/scripts/train.py --data ai/dataset/processed --output ai/artifacts --epochs 30
+python ai/scripts/train.py --data ai/dataset/processed --output ai/artifacts --epochs 20 --image-size 224 --freeze-epochs 3
 python ai/scripts/evaluate.py --data ai/dataset/processed --checkpoint ai/artifacts/best.pt --output ai/artifacts/evaluation
 ```
 
