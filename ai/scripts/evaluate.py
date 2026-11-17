@@ -21,7 +21,9 @@ def main():
     p.add_argument("--data",type=Path,required=True);p.add_argument("--checkpoint",type=Path,required=True)
     p.add_argument("--output",type=Path,required=True);p.add_argument("--batch-size",type=int,default=32)
     a=p.parse_args();device=torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    ck=torch.load(a.checkpoint,map_location="cpu",weights_only=False); image_size=int(ck.get("image_size",224))\n    tf=transforms.Compose([transforms.Resize((image_size,image_size)),transforms.ToTensor(),transforms.Normalize([.485,.456,.406],[.229,.224,.225])])
+    ck=torch.load(a.checkpoint,map_location="cpu",weights_only=False)
+    image_size=int(ck.get("image_size",224))
+    tf=transforms.Compose([transforms.Resize((image_size,image_size)),transforms.ToTensor(),transforms.Normalize([.485,.456,.406],[.229,.224,.225])])
     val=datasets.ImageFolder(a.data/"validation",transform=tf);test=datasets.ImageFolder(a.data/"test",transform=tf)
     classes=ck["classes"]
     if val.classes!=classes or test.classes!=classes:raise SystemExit("Class order mismatch between checkpoint and validation/test data.")
