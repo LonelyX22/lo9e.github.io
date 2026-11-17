@@ -29,7 +29,7 @@ def main():
  # Find label directories recursively (CCSN archives often wrap classes in a parent directory).
  for folder in (p for p in a.input.rglob("*") if p.is_dir()):
   for label,names in ALIASES.items():
-   if folder.name in names:folder_map[folder]=label;break
+   if folder.name.lower() in names and "__MACOSX" not in folder.parts:folder_map[folder]=label;break
  # Also accept the input directory itself if it is a single class folder.
  if a.input.name in {n for names in ALIASES.values() for n in names}:
   for label,names in ALIASES.items():
@@ -37,7 +37,7 @@ def main():
  for folder,label in folder_map.items():
   if label not in labels:continue
   for p in folder.rglob("*"):
-   if p.suffix.lower() not in EXTS:continue
+   if p.suffix.lower() not in EXTS or p.name.startswith("._") or "__MACOSX" in p.parts:continue
    try:
     with Image.open(p) as im: im.verify()
     sha=digest(p)
