@@ -6,6 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
+  actions: read
   contents: read
   pages: write
   id-token: write
@@ -23,14 +24,41 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Download completed experimental CCSN model
+        uses: actions/download-artifact@v4
+        with:
+          name: ccsn-experimental-baseline
+          run-id: 44072714989
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          path: /tmp/ccsn-artifact
+
+      - name: Install beta model for public testing
+        run: |
+          set -euo pipefail
+          mkdir -p models/cloud-classifier
+          cp /tmp/ccsn-artifact/artifacts/model.onnx models/cloud-classifier/model.onnx
+          cp /tmp/ccsn-artifact/artifacts/model_metadata.json models/cloud-classifier/model_metadata.json
+          test -s models/cloud-classifier/model.onnx
+          python - <<'PY'
+          import json
+          p="models/cloud-classifier/model_metadata.json"
+          m=json.load(open(p, encoding="utf-8"))
+          assert m.get("status") == "beta", f"Expected beta model, got {m.get('status')!r}"
+          print("Installed experimental beta model:", m.get("status"), m.get("test_metrics"))
+          PY
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
         with:
           enablement: true
-      - name: Upload site
+
+      - name: Upload website with beta model
         uses: actions/upload-pages-artifact@v3
         with:
           path: .
-      - name: Deploy
+
+      - name: Deploy beta model to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
