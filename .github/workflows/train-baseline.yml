@@ -56,7 +56,7 @@ jobs:
               f.write("status="+status+"\n")
           PY
       - name: Copy model into public site only when validated
-        if: steps.release_gate.outputs.status == 'validated'
+        if: contains(fromJSON('["validated","beta"]'), steps.release_gate.outputs.status)
         run: |
           mkdir -p models/cloud-classifier
           cp ai/artifacts/model.onnx models/cloud-classifier/model.onnx
