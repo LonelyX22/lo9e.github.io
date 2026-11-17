@@ -18,5 +18,28 @@
 - 1,013 images with binary cloud masks (cloud vs non-cloud), not cloud genus labels.
 - Use only for a future segmentation component after checking license and download terms. Do not treat masks as genus labels.
 
+
+## Candidate: HuaYun-BJUT-MIP Cloud Dataset (HBMCD) — permission required
+
+- Project: https://github.com/SadaharuZL/HuaYun-BJUT-MIP-Cloud-Dataset
+- The repository describes 25,119 ground-based images in 11 labels: ten WMO genera plus No Cloud, with labels reviewed by company professional staff.
+- The repository states that the images originate from proprietary HUAYUN SOUDING equipment and links a download. No explicit open licence or commercial reuse permission was established during this review.
+- **Status: NOT CLEARED.** Do not download into the public training pipeline, redistribute images, or use the dataset to train a publicly deployed model until the owner confirms written permission and permitted model-training/deployment rights.
+- If permission is obtained, map the source `No` folder to the separate `non_cloud` auxiliary label. Do not merge it into any cloud genus.
+- Reference paper: Zhang et al. (2020), “Cloud Recognition Based on Lightweight Neural Network,” APSIPA ASC.
+
+## Candidate: TJNU Ground-based Cloud Dataset — agreement required
+
+- Project: https://github.com/shuangliutjnu/TJNU-Ground-based-Cloud-Dataset
+- The repository describes 19,000 expert-annotated images collected across nine provinces, but its seven labels merge several WMO genera (for example, Ac+Cc and Cb+Ns).
+- The repository requires users to read and accept its GCD Agreement before download/use. Its merged categories cannot be silently relabelled as individual genera.
+- **Status: NOT CLEARED.** Review and accept the agreement, then decide whether the seven grouped classes are useful for a separate coarse-classification task. Do not mix them into the ten-genus classifier without a defensible relabelling protocol.
+
+## Candidate: WEBCAM — terms review required
+
+- Project: https://github.com/MarcusCoteFIT/webcam-ground-based-cloud-image-dataset
+- Describes more than 15,500 labelled images across nine aviation-oriented categories, including towering cumulus, clear sky, fog/obscuration and precipitation.
+- **Status: NOT CLEARED.** Confirm licence and rights for commercial/public model training before using. Its labels do not map one-to-one to all ten WMO genera.
+
 ## Data sufficiency
 CCSN has only 139–340 images per genus and cannot meet the agreed 500+ images per genus initial target by itself. Long-term target is 1,000+ per genus. Additional correctly licensed, expert-verified images are required, especially from Thailand and diverse seasons, times, locations and camera devices. No weights or accuracy claims should be published until the data target, label review and held-out evaluation are complete.
