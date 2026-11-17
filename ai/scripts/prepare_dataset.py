@@ -44,7 +44,7 @@ def main():
  if small:
   report={"status":"blocked_insufficient_data","counts":counts,"minimum_per_class":a.min_per_class,"missing_or_small":small,"rejected":rejected}
   (a.output/"dataset_report.json").write_text(json.dumps(report,indent=2),encoding="utf-8")
-  raise SystemExit("Not enough verified images per class; see dataset_report.json. No training split created.")
+  print(json.dumps({"status":"blocked_insufficient_data","counts":counts,"small_classes":small,"matched_class_directories":[str(x) for x in folder_map]},indent=2)); raise SystemExit("Not enough verified images per class; see dataset_report.json. No training split created.")
  rng=random.Random(a.seed);split_counts={}
  for label in labels:
   paths=found[label][:];rng.shuffle(paths);n=len(paths);nt=max(1,round(n*.15));nv=max(1,round(n*.15))
