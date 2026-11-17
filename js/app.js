@@ -76,11 +76,13 @@ $("analyzeBtn").onclick=async()=>{
    const threshold=Number(modelMeta.release_thresholds.min_confidence),margin=Number(modelMeta.release_thresholds.min_margin);
    if(!Number.isFinite(threshold)||!Number.isFinite(margin)||top.p<threshold||top.p-second.p<margin)throw Error(tr("rejected"));
    const code=modelMeta.classes[top.i],names=LABELS[code]||[code,code];
+   $("classificationLabel").textContent=tr("classification");
    $("metricLabel").textContent=tr("confidence");$("cloudName").textContent=names[0];$("cloudThai").textContent=names[1];
    $("confidence").textContent=(top.p*100).toFixed(1)+"%";$("confidenceBar").style.width=(top.p*100)+"%";
    $("modelNote").textContent=tr("modelResult");addHistory(names[0],top.p);
   }else{
    const r=estimateCloudPixels(el);
+   $("classificationLabel").textContent=lang==="th"?"การประเมินภาพเบื้องต้น · ยังไม่ใช่การจำแนกชนิดเมฆ":"Basic image estimate · not cloud classification";
    $("metricLabel").textContent=tr("visualTitle");$("cloudName").textContent=r.coverage.toFixed(0)+"%";
    $("cloudThai").textContent=lang==="th"?"สัดส่วนพิกเซลสว่างสีจางในบริเวณที่ตรวจพบท้องฟ้า":"Bright, low-saturation pixels among detected sky pixels";
    $("confidence").textContent=r.skyRatio.toFixed(0)+"% "+(lang==="th"?"พื้นที่ภาพที่ตรวจพบเป็นท้องฟ้า":"detected sky area");
