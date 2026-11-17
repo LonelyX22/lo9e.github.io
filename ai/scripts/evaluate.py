@@ -59,11 +59,16 @@ def main():
       "classes":classes,"test_images":int(len(test)),
       "validation_calibration":{"target_precision":0.90,"minimum_coverage":0.15,"achieved_precision":precision_v,"coverage":coverage_v,"threshold":threshold,"margin":margin,"found_threshold":calibrated},
       "test_selective":{"precision":selective_precision,"coverage":selective_coverage,"accepted_images":int(keep.sum())},
-      "release_gate":{"minimum_macro_f1":0.70,"minimum_selective_precision":0.90,"minimum_selective_coverage":0.15},
+      "release_gate":{"minimum_macro_f1":0.70,"minimum_selective_precision":0.90,"minimum_selective_coverage":0.15,"minimum_verified_images_per_class":500,"data_target_met":data_target_ok,"class_image_counts":class_counts},
       "limitations":["Random held-out split only; geographic and temporal generalization is unproven.","CCSN does not represent all Thai sky, camera, seasonal and local weather conditions.","Confidence calibration is based on a small validation split and needs external validation."]
     }
-    # Conservative: never mark the model validated unless both overall and selective test gates pass.
-    release_ok=macro>=.70 and selective_precision>=.90 and selective_coverage>=.15
+    # The agreed production target is at least 500 verified images per genus.
+    dataset_report_path=a.data/"dataset_report.json"
+    dataset_report=json.loads(dataset_report_path.read_text(encoding="utf-8")) if dataset_report_path.exists() else {}
+    class_counts=dataset_report.get("counts",{})
+    data_target_ok=all(int(class_counts.get(c,0))>=500 for c in classes)
+    # Conservative: never release unless metrics, calibrated selective performance and data volume all pass.
+    release_ok=data_target_ok and macro>=.70 and selective_precision>=.90 and selective_coverage>=.15
     status="validated" if release_ok and calibrated else "research_only"
     metadata_path=a.checkpoint.parent/"model_metadata.json"
     metadata=json.loads(metadata_path.read_text(encoding="utf-8")) if metadata_path.exists() else {}
