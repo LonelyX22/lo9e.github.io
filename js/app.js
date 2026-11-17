@@ -38,14 +38,14 @@ function getImageElement(){
  throw Error(tr("badImage"));
 }
 function preprocess(el){
- const canvas=document.createElement("canvas");canvas.width=224;canvas.height=224;
+ const size=Number(modelMeta?.input?.shape?.[2]||224);\n const canvas=document.createElement("canvas");canvas.width=size;canvas.height=size;
  const ctx=canvas.getContext("2d",{willReadFrequently:true});
  const w=el.videoWidth||el.naturalWidth,h=el.videoHeight||el.naturalHeight;
  ctx.drawImage(el,0,0,224,224);
- const px=ctx.getImageData(0,0,224,224).data, data=new Float32Array(1*3*224*224);
- const mean=[.485,.456,.406],std=[.229,.224,.225],plane=224*224;
+ const px=ctx.getImageData(0,0,size,size).data, plane=size*size, data=new Float32Array(1*3*plane);
+ const mean=[.485,.456,.406],std=[.229,.224,.225];
  for(let i=0;i<plane;i++){data[i]=(px[i*4]/255-mean[0])/std[0];data[plane+i]=(px[i*4+1]/255-mean[1])/std[1];data[2*plane+i]=(px[i*4+2]/255-mean[2])/std[2]}
- return new ort.Tensor("float32",data,[1,3,224,224]);
+ return new ort.Tensor("float32",data,[1,3,size,size]);
 }
 function softmax(a){const m=Math.max(...a),e=a.map(v=>Math.exp(v-m)),s=e.reduce((x,y)=>x+y,0);return e.map(v=>v/s)}
 function addHistory(label,confidence){const h=getHistory();h.unshift({label,confidence,time:new Date().toISOString()});localStorage.setItem("csp_history",JSON.stringify(h.slice(0,100)));renderHistory()}
