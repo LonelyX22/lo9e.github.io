@@ -27,7 +27,7 @@ def main():
     val=datasets.ImageFolder(a.data/"validation",transform=tf);test=datasets.ImageFolder(a.data/"test",transform=tf)
     classes=ck["classes"]
     if val.classes!=classes or test.classes!=classes:raise SystemExit("Class order mismatch between checkpoint and validation/test data.")
-    model=models.efficientnet_b0(weights=None);model.classifier[1]=nn.Linear(model.classifier[1].in_features,len(classes))
+    model=models.efficientnet_b0(weights=None);model.classifier[1]=nn.Sequential(nn.Dropout(p=.25),nn.Linear(model.classifier[1].in_features,len(classes)))
     model.load_state_dict(ck["state_dict"]);model.to(device).eval()
     vy,vp=collect(model,val,device,a.batch_size);ty,tp=collect(model,test,device,a.batch_size)
     # Calibrate only on validation predictions. Search for the widest accepted coverage
