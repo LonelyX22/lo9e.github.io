@@ -29,5 +29,9 @@ python ai/scripts/evaluate.py --data ai/dataset/processed --checkpoint ai/artifa
 ## 4. Release gate
 Do not publish weights unless held-out accuracy, macro-F1, per-class precision/recall/F1, confusion matrix, class support, calibration and rejection results are documented. Random image splits do not prove geographic or temporal generalization; group by site/date/session when metadata is available. The frontend enables inference only for a package explicitly marked `validated` with test metrics and calibrated rejection thresholds.
 
-## Baseline results (17 Nov 2026)\n\nThe first automated CCSN run completed with 36.10% held-out accuracy and 34.28% macro-F1 on 349 test images. It failed the release gate and was deliberately not deployed. See [the measured report](reports/ccsn-baseline-20261117.md). A second, fuller fine-tuning run is being used as an experiment; no accuracy is promised.\n\n## Important limitation
+## Baseline results (17 Nov 2026)
+
+The first automated CCSN run completed with 36.10% held-out accuracy and 34.28% macro-F1 on 349 test images. It failed the release gate and was deliberately not deployed. See [the measured report](reports/ccsn-baseline-20261117.md). A second, fuller fine-tuning run is being used as an experiment; no accuracy is promised.
+
+## Important limitation
 CCSN alone is smaller than the 500+ images per class target. Do not claim high accuracy or robust Thai-weather performance from this benchmark alone. Additional correctly licensed, expert-verified images are required.
