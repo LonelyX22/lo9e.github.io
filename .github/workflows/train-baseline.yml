@@ -1,0 +1,50 @@
+name: Train experimental CCSN cloud baseline
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "ai/scripts/**"
+      - "ai/requirements.txt"
+      - ".github/workflows/train-baseline.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cloud-model-baseline
+  cancel-in-progress: false
+
+jobs:
+  train-baseline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install CPU training dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install --index-url https://download.pytorch.org/whl/cpu torch torchvision
+          python -m pip install Pillow numpy scikit-learn pandas matplotlib tqdm onnx onnxruntime requests
+      - name: Download CCSN from Harvard Dataverse
+        run: python ai/scripts/download_ccsn.py
+      - name: Prepare research baseline splits
+        run: python ai/scripts/prepare_dataset.py --input ai/dataset/raw --output ai/dataset/processed --seed 42 --min-per-class 10
+      - name: Train experimental 10-genus baseline
+        run: python ai/scripts/train.py --data ai/dataset/processed --output ai/artifacts --epochs 12 --batch-size 16
+      - name: Evaluate untouched test split
+        run: python ai/scripts/evaluate.py --data ai/dataset/processed --checkpoint ai/artifacts/best.pt --output ai/artifacts/evaluation
+      - name: Upload research artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ccsn-experimental-baseline
+          path: |
+            ai/artifacts/
+            ai/dataset/processed/dataset_report.json
+            ai/dataset/downloads/ccsn/download_manifest.json
+          retention-days: 30
