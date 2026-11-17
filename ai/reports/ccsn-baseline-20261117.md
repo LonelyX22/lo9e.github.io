@@ -2,15 +2,15 @@
 
 ## Latest completed experiment
 
-[Latest GitHub Actions run](https://github.com/LonelyX22/lo9e.github.io/actions/runs/44044991214) completed all training and evaluation steps successfully.
+[Latest 20-epoch GitHub Actions run](https://github.com/LonelyX22/lo9e.github.io/actions/runs/44050393405) completed all training and evaluation steps successfully.
 
 - Architecture: torchvision EfficientNet-B0 with ImageNet pretrained weights
-- Input: 192 × 192 RGB
-- Training: 12 epochs, CPU
-- Best validation macro F1: 0.3617
+- Input: 224 × 224 RGB
+- Training: 20 epochs, CPU
+- Best validation macro F1: 0.4065
 - Held-out test images: 349
-- Held-out accuracy: **41.83%**
-- Held-out macro F1: **38.93%**
+- Held-out accuracy: **42.41%**
+- Held-out macro F1: **38.34%**
 - Validation calibration: no threshold met the 90% precision target at minimum 15% coverage
 - Test selective coverage: **0%**
 - Model status: `research_only`
@@ -38,20 +38,22 @@ Source: Harvard Dataverse CCSN, DOI [10.7910/DVN/CADDPD](https://doi.org/10.7910
 
 Three exact-duplicate groups had conflicting class labels and were excluded. Fourteen byte-identical same-class duplicates were removed. No genus reaches the project's initial target of 500 verified images.
 
-## Per-class held-out results
+## Latest 20-epoch per-class held-out results
 
 | Class | Precision | Recall | F1 | Test images |
 |---|---:|---:|---:|---:|
-| Ac | 31.25% | 15.15% | 20.41% | 33 |
-| As | 42.42% | 50.00% | 45.90% | 28 |
-| Cb | 42.86% | 51.43% | 46.75% | 35 |
-| Cc | 70.83% | 42.50% | 53.13% | 40 |
-| Ci | 35.14% | 61.90% | 44.83% | 21 |
-| Cs | 36.84% | 16.28% | 22.58% | 43 |
-| Cu | 32.50% | 48.15% | 38.81% | 27 |
-| Ns | 51.61% | 39.02% | 44.44% | 41 |
-| Sc | 41.05% | 76.47% | 53.42% | 51 |
-| St | 33.33% | 13.33% | 19.05% | 30 |
+| Class | Precision | Recall | F1 | Test images |
+|---|---:|---:|---:|---:|
+| Ac | 25.00% | 15.15% | 18.87% | 33 |
+| As | 33.33% | 60.71% | 43.04% | 28 |
+| Cb | 41.46% | 48.57% | 44.74% | 35 |
+| Cc | 75.00% | 37.50% | 50.00% | 40 |
+| Ci | 42.86% | 71.43% | 53.57% | 21 |
+| Cs | 50.00% | 11.63% | 18.87% | 43 |
+| Cu | 35.90% | 51.85% | 42.42% | 27 |
+| Ns | 47.83% | 53.66% | 50.57% | 41 |
+| Sc | 45.12% | 72.55% | 55.64% | 51 |
+| St | 20.00% | 3.33% | 5.71% | 30 |
 
 ## Release decision
 
