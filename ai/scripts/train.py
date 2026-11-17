@@ -59,7 +59,7 @@ def main():
     model.load_state_dict(ckpt["state_dict"]); model.eval()
     dummy=torch.zeros(1,3,224,224)
     onnx_path=a.output/"model.onnx"
-    torch.onnx.export(model,dummy,onnx_path,input_names=["images"],output_names=["logits"],dynamic_axes={"images":{0:"batch"},"logits":{0:"batch"}},opset_version=17)
+    torch.onnx.export(model,dummy,onnx_path,input_names=["images"],output_names=["logits"],dynamic_axes={"images":{0:"batch"},"logits":{0:"batch"}},opset_version=17,dynamo=False)
     metadata={"model_name":"Cloud Scanner AI Pro EfficientNet-B0","architecture":"torchvision.efficientnet_b0","input":{"name":"images","shape":[1,3,224,224],"color":"RGB","resize":"224x224","normalization":"ImageNet mean=[0.485,0.456,0.406], std=[0.229,0.224,0.225]"},"output":{"name":"logits","postprocess":"softmax"},"classes":ckpt["classes"],"best_validation_macro_f1":best,"test_metrics":None,"status":"trained_not_yet_test_evaluated","seed":a.seed,"warning":"Do not deploy as validated until evaluate.py is run on untouched test data and model calibration/rejection are checked."}
     (a.output/"model_metadata.json").write_text(json.dumps(metadata,indent=2),encoding="utf-8")
     print(f"Saved checkpoint={best_path} ONNX={onnx_path}")
