@@ -2,19 +2,21 @@
 
 ## Latest completed experiment
 
-[GitHub Actions run](https://github.com/LonelyX22/lo9e.github.io/actions/runs/44040877468) completed successfully as a workflow. Workflow success means training and evaluation scripts ran; it does **not** mean the model passed production validation.
+[Latest GitHub Actions run](https://github.com/LonelyX22/lo9e.github.io/actions/runs/44044991214) completed all training and evaluation steps successfully.
 
-- Architecture: torchvision EfficientNet-B0, ImageNet pretrained weights
+- Architecture: torchvision EfficientNet-B0 with ImageNet pretrained weights
 - Input: 192 × 192 RGB
-- Training: 12 epochs (CPU)
+- Training: 12 epochs, CPU
 - Best validation macro F1: 0.3617
 - Held-out test images: 349
 - Held-out accuracy: **41.83%**
 - Held-out macro F1: **38.93%**
-- Validation calibration: no threshold met 90% precision at minimum 15% coverage
+- Validation calibration: no threshold met the 90% precision target at minimum 15% coverage
 - Test selective coverage: **0%**
 - Model status: `research_only`
-- Deployment: skipped intentionally; no model weights were published to GitHub Pages
+- Public deployment: model copy and Pages deployment were intentionally skipped by the release gate
+
+A successful workflow means the experiment completed; it does not mean the model passed the release gate.
 
 ## Dataset audit
 
@@ -55,25 +57,35 @@ Three exact-duplicate groups had conflicting class labels and were excluded. Fou
 
 **RESEARCH ONLY — NOT APPROVED FOR PUBLIC CLOUD-GENUS PREDICTIONS.**
 
-The existing conservative gates remain:
+The release gates remain:
 - Macro F1 ≥ 0.70
 - Selective precision ≥ 0.90
 - Selective coverage ≥ 0.15
 - At least 500 verified images per genus
 
-## Data expansion candidates (not yet approved for training)
+## Data expansion candidates — rights not cleared
 
-- [HuaYun/BJUT-MIP (HBMCD)](https://github.com/SadaharuZL/HuaYun-BJUT-MIP-Cloud-Dataset) reports 25,119 ground-based images and expert-labelled WMO genera plus a no-cloud class. Its README says the images originate from proprietary company equipment; a clear reuse licence was not established in this review. **Do not download into training or redistribute until permission/licence is confirmed.**
-- [WEBCAM dataset](https://github.com/MarcusCoteFIT/webcam-ground-based-cloud-image-dataset) reports more than 15,500 labelled images across nine categories, including towering cumulus. Its non-commercial/no-derivatives terms must be reviewed against model training and public deployment before use. **Do not mix into the public-service training set without rights clearance.**
+- [HuaYun-BJUT-MIP (HBMCD)](https://github.com/SadaharuZL/HuaYun-BJUT-MIP-Cloud-Dataset) reports 25,119 ground-based images, ten WMO genera and a no-cloud class, with professional labels. Its repository says the images originate from proprietary company equipment and does not establish a clear open licence. Written permission for model training and public deployment is required before use.
+- [TJNU Ground-based Cloud Dataset](https://github.com/shuangliutjnu/TJNU-Ground-based-Cloud-Dataset) reports 19,000 expert-annotated images but groups several genera into seven sky-condition classes. Its GCD Agreement must be reviewed; grouped labels must not be relabelled as individual genera.
+- [WEBCAM](https://github.com/MarcusCoteFIT/webcam-ground-based-cloud-image-dataset) reports more than 15,500 images across nine aviation-oriented categories. Its licence and rights for commercial/public training need confirmation; labels do not map one-to-one to the ten genera.
 
-## Next engineering work
+No candidate dataset above has been added to training. The source register records these restrictions.
 
-1. Obtain explicit reuse permission or a compatible licence for additional expert-labelled data.
-2. Add a provenance manifest for every image (source, licence, label, capture site/date where available, SHA-256).
-3. Split by capture session/site/date where metadata permits; keep a truly untouched external test set.
-4. Train and compare multiple architectures and augmentation strategies; retain the best validation checkpoint only.
-5. Calibrate rejection on validation data, then measure it once on the untouched test set.
-6. Build a separate unknown/non-cloud detector and evaluate real phone photos, including partial sky, roofs, trees, haze and mixed cloud scenes.
-7. Add subtype labels such as Cumulus congestus only when expert-annotated subtype data exists. A genus-only CCSN label cannot supervise subtype predictions.
+## Engineering changes after this run
 
-Random splits of this small dataset do not prove geographic, seasonal, camera or Thai-weather generalization.
+- The dataset preparation script now maps a source folder named `No` to the separate auxiliary `non_cloud` class when auxiliary labels are enabled. This does not itself add HBMCD images or clear their licence.
+- The public scanner's pixel heuristic is now explicitly described as a simple bright/low-saturation pixel indicator, **not actual cloud coverage and not cloud-genus identification**.
+- The frontend still refuses to load a model unless its metadata status is `validated`; the research ONNX file is not published to the live site.
+
+## Next required work
+
+1. Obtain written data rights for at least one suitable additional expert-labelled dataset.
+2. Build a provenance manifest per image: source, licence, label, SHA-256, and capture site/date/session when available.
+3. Review class mapping before mixing datasets; keep non-cloud, fog, precipitation, mixed and subtype labels separate from WMO genera unless the taxonomy explicitly supports them.
+4. Use site/date/session-aware splits where possible and retain an untouched external test set.
+5. Train and compare multiple architectures and augmentation strategies; tune only on train/validation data.
+6. Calibrate rejection on validation data and measure it once on the untouched test set.
+7. Collect expert-verified Thai sky images across seasons, times, camera devices and mixed/partial-sky scenes.
+8. Add subtype labels such as Cumulus congestus only when the training set contains expert-annotated subtype labels.
+
+Random splits on CCSN do not establish geographic, seasonal, camera or Thai-weather generalization.
