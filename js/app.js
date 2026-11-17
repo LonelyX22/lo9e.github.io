@@ -38,11 +38,13 @@ function getImageElement(){
  throw Error(tr("badImage"));
 }
 function preprocess(el){
- const size=Number(modelMeta?.input?.shape?.[2]||224);\n const canvas=document.createElement("canvas");canvas.width=size;canvas.height=size;
+ const size=Number(modelMeta?.input?.shape?.[2]||224);
+ const canvas=document.createElement("canvas");canvas.width=size;canvas.height=size;
  const ctx=canvas.getContext("2d",{willReadFrequently:true});
- const w=el.videoWidth||el.naturalWidth,h=el.videoHeight||el.naturalHeight;
+ const pxSource=el.videoWidth||el.naturalWidth;
+ if(!pxSource)throw Error(tr("badImage"));
  ctx.drawImage(el,0,0,size,size);
- const px=ctx.getImageData(0,0,size,size).data, plane=size*size, data=new Float32Array(1*3*plane);
+ const px=ctx.getImageData(0,0,size,size).data, plane=size*size, data=new Float32Array(3*plane);
  const mean=[.485,.456,.406],std=[.229,.224,.225];
  for(let i=0;i<plane;i++){data[i]=(px[i*4]/255-mean[0])/std[0];data[plane+i]=(px[i*4+1]/255-mean[1])/std[1];data[2*plane+i]=(px[i*4+2]/255-mean[2])/std[2]}
  return new ort.Tensor("float32",data,[1,3,size,size]);
