@@ -41,8 +41,7 @@ function preprocess(el){
  const canvas=document.createElement("canvas");canvas.width=224;canvas.height=224;
  const ctx=canvas.getContext("2d",{willReadFrequently:true});
  const w=el.videoWidth||el.naturalWidth,h=el.videoHeight||el.naturalHeight;
- const scale=Math.max(224/w,224/h),sw=224/scale,sh=224/scale,sx=(w-sw)/2,sy=(h-sh)/2;
- ctx.drawImage(el,sx,sy,sw,sh,0,0,224,224);
+ ctx.drawImage(el,0,0,224,224);
  const px=ctx.getImageData(0,0,224,224).data, data=new Float32Array(1*3*224*224);
  const mean=[.485,.456,.406],std=[.229,.224,.225],plane=224*224;
  for(let i=0;i<plane;i++){data[i]=(px[i*4]/255-mean[0])/std[0];data[plane+i]=(px[i*4+1]/255-mean[1])/std[1];data[2*plane+i]=(px[i*4+2]/255-mean[2])/std[2]}
