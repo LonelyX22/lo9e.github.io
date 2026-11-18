@@ -1,19 +1,123 @@
 <!doctype html>
-<html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#10243d"><meta name="description" content="Cloud Scanner AI Pro"><title>Cloud Scanner AI Pro</title><link rel="manifest" href="manifest.webmanifest"><link rel="stylesheet" href="css/app.css"></head>
-<body><header class="topbar"><a class="brand" href="#"><span class="brand-icon">☁</span><span>Cloud Scanner <b>AI Pro</b><small>Atmosphere intelligence</small></span></a><div class="top-actions"><span id="modelStatus" class="pill muted">AI model not installed</span><button id="langBtn" class="ghost">EN</button></div></header>
-<main><section class="hero"><div><p class="eyebrow" data-i18n="eyebrow">CLOUD INTELLIGENCE PLATFORM</p><h1 data-i18n="headline">มองท้องฟ้าให้ลึกกว่าเดิม</h1><p class="sub" data-i18n="subhead">สแกนชนิดเมฆ ตรวจคุณภาพภาพ และดูสภาพอากาศจากตำแหน่งของคุณ</p></div><div class="hero-mark">☁️</div></section>
-<section class="layout"><div class="panel scanner"><div class="panel-head"><div><p class="eyebrow">01 / SCANNER</p><h2 data-i18n="scannerTitle">สแกนท้องฟ้า</h2></div><span id="scanState" class="pill muted" data-i18n="ready">พร้อมใช้งาน</span></div>
-<div class="model-loader">
- <div class="model-loader-head">
-  <div><p class="eyebrow">AI ENGINE / 10 CLOUD GENERA</p><strong data-i18n="modelDownloadReady">ดาวน์โหลดโมเดลทดลองเพื่อเริ่มจำแนกเมฆ 10 ชนิด</strong><small id="modelInstallNote">โมเดลจะถูกเก็บไว้ในอุปกรณ์นี้ หลังดาวน์โหลดเสร็จจึงเริ่มสแกนได้</small></div>
-  <span class="beta-chip">BETA MODEL</span>
- </div>
- <button id="downloadModelBtn" class="download-model"><span class="download-icon">↓</span><span id="downloadModelLabel">ดาวน์โหลด AI โมเดล</span></button>
- <div id="modelProgressWrap" class="model-progress" hidden><div class="progress-track"><i id="modelProgressBar"></i></div><span id="modelProgressText">0%</span></div>
-</div>
-<div class="viewfinder"><video id="video" autoplay playsinline muted hidden></video><img id="preview" alt="Selected sky preview" hidden><div id="emptyState" class="empty"><span>☁️</span><b data-i18n="cameraPrompt">เปิดกล้องหรือเลือกรูปภาพ</b><small data-i18n="cameraHint">แนะนำให้เห็นท้องฟ้าและเมฆชัดเจน</small></div><div class="view-label">LIVE / IMAGE INPUT</div></div>
-<div class="controls"><button id="cameraBtn" class="primary">◎ <span data-i18n="openCamera">เปิดกล้อง</span></button><label class="button secondary">＋ <span data-i18n="chooseImage">เลือกรูปภาพ</span><input id="fileInput" type="file" accept="image/*" hidden></label><button id="stopCameraBtn" class="ghost" disabled data-i18n="stopCamera">ปิดกล้อง</button></div><button id="analyzeBtn" class="analyze" disabled>✦ <span data-i18n="analyze">วิเคราะห์ภาพ</span></button><p id="scanMessage" class="notice" data-i18n="modelMissing">กดดาวน์โหลด AI โมเดลก่อน จึงจะเริ่มวิเคราะห์ชนิดเมฆได้ · รุ่นทดลองอาจจำแนกผิด</p></div>
-<div class="panel results"><div class="panel-head"><div><p class="eyebrow">02 / ANALYSIS</p><h2 data-i18n="resultTitle">ผลการวิเคราะห์</h2></div><span class="pill muted">AI / WEATHER</span></div><div class="result-empty" id="resultEmpty"><span>⌁</span><b data-i18n="waiting">รอภาพสำหรับวิเคราะห์</b><small data-i18n="waitingHint">ผลจำแนกจะแสดงเมื่อมีโมเดลที่ผ่านการทดสอบ</small></div><div id="resultContent" hidden><p class="eyebrow" id="classificationLabel" data-i18n="classification">การจำแนกเมฆ</p><h3 id="cloudName">—</h3><p id="cloudThai" class="muted-text">—</p><div class="metric"><span id="metricLabel">ประมาณสัดส่วนเมฆในภาพ</span><b id="confidence">—</b></div><div class="meter"><i id="confidenceBar"></i></div><p id="modelNote" class="muted-text"></p></div>
-<div class="weather-block"><div class="panel-head compact"><h3 data-i18n="weatherTitle">สภาพอากาศบริเวณนี้</h3><button id="weatherBtn" class="text-btn" data-i18n="locate">ใช้ตำแหน่งของฉัน</button></div><div class="weather-grid"><div><small data-i18n="temperature">อุณหภูมิ</small><b id="temp">—</b></div><div><small data-i18n="humidity">ความชื้น</small><b id="humidity">—</b></div><div><small data-i18n="cloudCover">เมฆปกคลุม</small><b id="cloudCover">—</b></div><div><small data-i18n="wind">ลม</small><b id="wind">—</b></div></div><p id="weatherNote" class="tiny muted-text" data-i18n="weatherHint">ต้องอนุญาตตำแหน่งเพื่อดึงข้อมูลอากาศ · ใช้ข้อมูลจาก Open-Meteo</p></div></div></section>
-<section class="panel history"><div class="panel-head"><div><p class="eyebrow">03 / LOCAL STORAGE</p><h2 data-i18n="historyTitle">ประวัติบนอุปกรณ์นี้</h2></div><div><button id="exportBtn" class="text-btn" data-i18n="export">ส่งออก</button><button id="clearHistoryBtn" class="text-btn danger" data-i18n="clear">ล้างประวัติ</button></div></div><div id="historyList" class="history-list"><p class="muted-text" data-i18n="noHistory">ยังไม่มีประวัติการสแกน</p></div><p class="tiny muted-text" data-i18n="privacy">ประวัติเก็บไว้ในเบราว์เซอร์ของคุณเท่านั้น ไม่ซิงก์ขึ้น Cloud</p></section>
-<section class="disclaimer"><b data-i18n="disclaimerTitle">หมายเหตุความแม่นยำ</b><p data-i18n="disclaimer">การจำแนกเมฆจากภาพเพียงอย่างเดียวไม่ใช่การพยากรณ์ฝนหรือคำเตือนภัย ข้อมูลอากาศแสดงแยกจากผล AI และขึ้นกับผู้ให้บริการข้อมูล</p></section></main><footer>Cloud Scanner AI Pro · V2 foundation · <span data-i18n="footer">สร้างเพื่อการศึกษาและการวิเคราะห์เบื้องต้น</span></footer><script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.20.1/dist/ort.min.js"></script><script src="js/app.js" defer></script></body></html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#050d1c">
+<meta name="description" content="Cloud Scanner AI Pro — Cyber Sky Intelligence">
+<title>Cloud Scanner AI Pro | Cyber Sky</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="css/app.css?v=5">
+</head>
+<body>
+<div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
+<header class="topbar">
+  <a class="brand" href="#" aria-label="Cloud Scanner AI Pro home">
+    <span class="brand-icon">☁</span><span class="brand-copy"><b>CLOUD<span>SCANNER</span></b><small>AI PRO <i> / </i> ATMOSPHERE INTELLIGENCE</small></span>
+  </a>
+  <nav class="main-nav" aria-label="Main navigation">
+    <a href="#scanner">SCANNER</a><a href="#analysis">ANALYSIS</a><a href="#weather">WEATHER</a><a href="#history">HISTORY</a>
+  </nav>
+  <div class="top-actions"><span id="modelStatus" class="system-status muted"><i></i> AI MODEL OFFLINE</span><button id="langBtn" class="lang-btn">EN</button></div>
+</header>
+
+<main class="shell">
+  <section class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow"><span class="live-dot"></span> NEXT-GEN ATMOSPHERE INTELLIGENCE</p>
+      <h1 data-i18n="headline">มองท้องฟ้าให้ลึกกว่าเดิม</h1>
+      <p class="sub" data-i18n="subhead">สแกนชนิดเมฆ ตรวจคุณภาพภาพ และดูสภาพอากาศจากตำแหน่งของคุณ</p>
+      <div class="hero-tags"><span>10 CLOUD GENERA</span><span>ON-DEVICE AI</span><span>LIVE SCAN</span></div>
+    </div>
+    <div class="hero-orbit" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit-core">☁</div><span class="orbit-label orbit-label-a">ATM / 01</span><span class="orbit-label orbit-label-b">AI VISION</span></div>
+    <div class="hero-index"><small>PROJECT</small><b>CS<span>/</span>V2</b><small>CYBER SKY EDITION</small></div>
+  </section>
+
+  <section class="quickbar" aria-label="System overview">
+    <div><small>ENGINE</small><b>ONNX <em>RUNTIME</em></b></div>
+    <div><small>CLASSIFIER</small><b>10 <em>GENERA</em></b></div>
+    <div><small>PROCESSING</small><b>LOCAL <em>DEVICE</em></b></div>
+    <div><small>MODE</small><b class="cyan-text">EXPERIMENTAL</b></div>
+  </section>
+
+  <section id="scanner" class="section-block">
+    <div class="section-heading"><div><p class="eyebrow">01 / VISUAL INPUT</p><h2 data-i18n="scannerTitle">สแกนท้องฟ้า</h2></div><span id="scanState" class="section-state" data-i18n="ready"><i></i> พร้อมใช้งาน</span></div>
+    <div class="scanner-layout">
+      <div class="capture-panel cyber-panel">
+        <div class="panel-topline"><span>LIVE FEED <b>///</b> IMAGE INPUT</span><span class="rec-indicator"><i></i> SENSOR READY</span></div>
+        <div class="viewfinder">
+          <video id="video" autoplay playsinline muted hidden></video>
+          <img id="preview" alt="Selected sky preview" hidden>
+          <div id="emptyState" class="empty"><div class="empty-cloud">☁</div><b data-i18n="cameraPrompt">เปิดกล้องหรือเลือกรูปภาพ</b><small data-i18n="cameraHint">แนะนำให้เห็นท้องฟ้าและเมฆชัดเจน</small><span class="empty-crosshair">＋</span></div>
+          <div class="view-label">CAM-01 <span>•</span> SKY DETECTION AREA</div>
+          <span class="corner corner-tl"></span><span class="corner corner-tr"></span><span class="corner corner-bl"></span><span class="corner corner-br"></span>
+          <div class="scanline"></div>
+        </div>
+        <div class="capture-footer"><span><i class="live-dot"></i> INPUT CHANNEL / 01</span><span>IMAGE FORMAT: JPG · PNG · WEBP</span></div>
+      </div>
+
+      <aside class="control-panel">
+        <div class="cyber-panel engine-card">
+          <div class="panel-topline"><span>AI ENGINE CONTROL</span><span class="beta-chip">BETA</span></div>
+          <div class="engine-icon">⌘</div>
+          <p class="eyebrow">MODEL PACKAGE / 10 CLASSES</p>
+          <strong data-i18n="modelDownloadReady">ดาวน์โหลดโมเดลทดลองเพื่อเริ่มจำแนกเมฆ 10 ชนิด</strong>
+          <small id="modelInstallNote">โมเดลจะถูกเก็บไว้ในอุปกรณ์นี้ หลังดาวน์โหลดเสร็จจึงเริ่มสแกนได้</small>
+          <button id="downloadModelBtn" class="download-model"><span class="download-icon">↓</span><span id="downloadModelLabel">ดาวน์โหลด AI โมเดล</span><span class="button-arrow">↗</span></button>
+          <div id="modelProgressWrap" class="model-progress" hidden><div class="progress-track"><i id="modelProgressBar"></i></div><span id="modelProgressText">0%</span></div>
+        </div>
+        <div class="cyber-panel action-card">
+          <div class="panel-topline"><span>SCAN CONTROLS</span><span class="control-number">02</span></div>
+          <div class="action-grid">
+            <button id="cameraBtn" class="action-btn action-primary"><span>◎</span><b data-i18n="openCamera">เปิดกล้อง</b><small>LIVE CAMERA</small></button>
+            <label class="action-btn action-secondary"><span>＋</span><b data-i18n="chooseImage">เลือกรูปภาพ</b><small>UPLOAD IMAGE</small><input id="fileInput" type="file" accept="image/*" hidden></label>
+          </div>
+          <button id="stopCameraBtn" class="stop-camera" disabled>Ⅱ <span data-i18n="stopCamera">ปิดกล้อง</span></button>
+          <button id="analyzeBtn" class="analyze" disabled><span class="analyze-icon">✳</span><span data-i18n="analyze">วิเคราะห์ภาพ</span><b>RUN AI <i>→</i></b></button>
+          <p id="scanMessage" class="notice" data-i18n="modelMissing">กดดาวน์โหลด AI โมเดลรุ่นทดลองก่อนเริ่มวิเคราะห์ ระบบจะไม่เดาผลหากยังไม่ได้ติดตั้งโมเดล</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section id="analysis" class="section-block">
+    <div class="section-heading"><div><p class="eyebrow">02 / NEURAL ANALYSIS</p><h2 data-i18n="resultTitle">ผลการวิเคราะห์</h2></div><span class="section-state">AI OUTPUT <i class="state-square"></i></span></div>
+    <div class="analysis-layout">
+      <div class="cyber-panel result-panel">
+        <div class="panel-topline"><span>CLASSIFICATION RESULT</span><span class="result-code">CS / 02</span></div>
+        <div class="result-empty" id="resultEmpty"><span class="result-symbol">⌁</span><b data-i18n="waiting">รอภาพสำหรับวิเคราะห์</b><small data-i18n="waitingHint">ผลจำแนกจะแสดงเมื่อดาวน์โหลดและติดตั้งโมเดล AI แล้ว</small></div>
+        <div id="resultContent" hidden>
+          <p class="eyebrow" id="classificationLabel" data-i18n="classification">การจำแนกเมฆ</p>
+          <h3 id="cloudName">—</h3><p id="cloudThai" class="cloud-thai">—</p>
+          <div class="confidence-head"><span id="metricLabel">ความมั่นใจของโมเดล</span><b id="confidence">—</b></div>
+          <div class="meter"><i id="confidenceBar"></i></div>
+          <p id="modelNote" class="model-note"></p>
+        </div>
+        <div class="result-bottomline"><span>MODEL OUTPUT</span><span>NOT A WEATHER FORECAST</span></div>
+      </div>
+      <div id="weather" class="cyber-panel weather-panel">
+        <div class="panel-topline"><span>ATMOSPHERIC TELEMETRY</span><span class="weather-pulse">● LIVE DATA</span></div>
+        <div class="weather-title"><div><p class="eyebrow">LOCAL ENVIRONMENT</p><h3 data-i18n="weatherTitle">สภาพอากาศบริเวณนี้</h3></div><span class="weather-glyph">◉</span></div>
+        <button id="weatherBtn" class="weather-locate" data-i18n="locate">ใช้ตำแหน่งของฉัน <span>↗</span></button>
+        <div class="weather-grid">
+          <div><small data-i18n="temperature">อุณหภูมิ</small><b id="temp">—</b><i>°C</i></div>
+          <div><small data-i18n="humidity">ความชื้น</small><b id="humidity">—</b><i>%</i></div>
+          <div><small data-i18n="cloudCover">เมฆปกคลุม</small><b id="cloudCover">—</b><i>%</i></div>
+          <div><small data-i18n="wind">ลม</small><b id="wind">—</b><i>KM/H</i></div>
+        </div>
+        <p id="weatherNote" class="weather-note" data-i18n="weatherHint">ต้องอนุญาตตำแหน่งเพื่อดึงข้อมูลอากาศ · Open-Meteo</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="history" class="cyber-panel history-panel">
+    <div class="section-heading"><div><p class="eyebrow">03 / LOCAL ARCHIVE</p><h2 data-i18n="historyTitle">ประวัติบนอุปกรณ์นี้</h2></div><div class="history-actions"><button id="exportBtn" class="text-btn" data-i18n="export">ส่งออก</button><button id="clearHistoryBtn" class="text-btn danger" data-i18n="clear">ล้างประวัติ</button></div></div>
+    <div id="historyList" class="history-list"><p class="muted-text" data-i18n="noHistory">ยังไม่มีประวัติการสแกน</p></div>
+    <p class="privacy-note" data-i18n="privacy">ประวัติเก็บไว้ในเบราว์เซอร์ของคุณเท่านั้น ไม่ซิงก์ขึ้น Cloud</p>
+  </section>
+  <section class="disclaimer"><b data-i18n="disclaimerTitle">หมายเหตุความแม่นยำ</b><p data-i18n="disclaimer">การจำแนกเมฆจากภาพเพียงอย่างเดียวไม่ใช่การพยากรณ์ฝนหรือคำเตือนภัย ข้อมูลอากาศแสดงแยกจากผล AI และขึ้นกับผู้ให้บริการข้อมูล</p></section>
+</main>
+<footer><span class="footer-mark">☁</span> CLOUD SCANNER AI PRO <i> / </i> CYBER SKY EDITION <span>BUILT FOR THE SKY.</span></footer>
+<script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.20.1/dist/ort.min.js"></script>
+<script src="js/app.js" defer></script>
+</body></html>
