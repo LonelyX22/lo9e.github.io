@@ -70,7 +70,7 @@ jobs:
           cp /tmp/ccsn-artifact/artifacts/model.onnx models/cloud-classifier/model.onnx
           cp /tmp/ccsn-artifact/artifacts/model_metadata.json models/cloud-classifier/model_metadata.json
           test -s models/cloud-classifier/model.onnx
-          MODEL_RUN_ID: ${{ steps.latest_model.outputs.run_id }}
+          export MODEL_RUN_ID="${{ steps.latest_model.outputs.run_id }}"
           python - <<'PY'
           import json, os
           p="models/cloud-classifier/model_metadata.json"
