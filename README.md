@@ -13,10 +13,10 @@ https://lonelyx22.github.io/
 - Local-only scan history, export to JSON and clear-history controls.
 - Optional location-based current weather from Open-Meteo, kept separate from image classification.
 - PWA shell and service-worker caching for app assets.
-- Safe model gate: no cloud label is produced unless an ONNX model package is marked `validated` and contains held-out test metrics plus calibrated rejection thresholds.
+- Explicit model installation: users download the actual ONNX model into browser-local IndexedDB; image analysis is enabled only after the download and ONNX session initialization complete. A cached model is reused only when its version matches the published model.
 
 ## AI model status
-The dedicated cloud-genus model is under experimental training using CCSN. A successful training run is not, by itself, evidence of production accuracy. The model must pass the held-out evaluation and conservative release gate before it can be copied to `models/cloud-classifier/` and enabled in the public site. Until then, the scanner correctly reports that no validated model is available rather than making up an answer.
+The current 10-genus EfficientNet-B0 model is published as an explicitly labelled beta for public testing. Latest held-out test results: accuracy 42.12%, macro F1 40.11%. It has not passed the production release gate. Users must press Download AI Model; the ONNX file is fetched from the site, stored in browser-local IndexedDB, and loaded with ONNX Runtime Web before the Analyze button becomes available. The beta can make incorrect predictions and must not be used for safety or weather-warning decisions.
 
 ## Taxonomy
 The primary classifier targets the 10 WMO cloud genera: Ci, Cc, Cs, Ac, As, Ns, Sc, St, Cu, Cb. Contrails (Ct), clear sky/non-cloud and unknown/out-of-scope images are kept as separate auxiliary labels and are not falsely described as cloud genera.
