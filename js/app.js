@@ -8,30 +8,137 @@ const LABELS = {
   Ct:["Contrail","เมฆ/แนวไอควบแน่นจากเครื่องบิน"]
 };
 const T = {
- th:{eyebrow:"CLOUD INTELLIGENCE PLATFORM",headline:"มองท้องฟ้าให้ลึกกว่าเดิม",subhead:"สแกนชนิดเมฆ ตรวจคุณภาพภาพ และดูสภาพอากาศจากตำแหน่งของคุณ",scannerTitle:"สแกนท้องฟ้า",ready:"พร้อมใช้งาน",cameraPrompt:"เปิดกล้องหรือเลือกรูปภาพ",cameraHint:"แนะนำให้เห็นท้องฟ้าและเมฆชัดเจน",openCamera:"เปิดกล้อง",chooseImage:"เลือกรูปภาพ",stopCamera:"ปิดกล้อง",analyze:"วิเคราะห์ภาพ",modelMissing:"ยังไม่มีโมเดล AI ที่ผ่านการประเมินและอนุมัติให้ใช้งาน ระบบจะไม่เดาผลแทนโมเดลจริง",resultTitle:"ผลการวิเคราะห์",waiting:"รอภาพสำหรับวิเคราะห์",waitingHint:"ผลจำแนกจะแสดงเมื่อมีโมเดลที่ผ่านการทดสอบ",classification:"การจำแนกเมฆ",confidence:"ความมั่นใจของโมเดล",weatherTitle:"สภาพอากาศบริเวณนี้",locate:"ใช้ตำแหน่งของฉัน",temperature:"อุณหภูมิ",humidity:"ความชื้น",cloudCover:"เมฆปกคลุม",wind:"ลม",weatherHint:"ต้องอนุญาตตำแหน่งเพื่อดึงข้อมูลอากาศ · Open-Meteo",historyTitle:"ประวัติบนอุปกรณ์นี้",export:"ส่งออก",clear:"ล้างประวัติ",noHistory:"ยังไม่มีประวัติการสแกน",privacy:"ประวัติเก็บไว้ในเบราว์เซอร์ของคุณเท่านั้น ไม่ซิงก์ขึ้น Cloud",disclaimerTitle:"หมายเหตุความแม่นยำ",disclaimer:"ผลจำแนกเป็นการประเมินภาพ ไม่ใช่การพยากรณ์ฝนหรือคำเตือนภัย ความมั่นใจไม่เท่ากับความถูกต้องที่รับประกัน",footer:"สำหรับการศึกษาและการวิเคราะห์เบื้องต้น",noModel:"ยังไม่มีโมเดล AI จำแนกชนิดเมฆที่ผ่านการรับรอง แต่ใช้การประเมินภาพเบื้องต้นได้",visualTitle:"สัดส่วนพิกเซลสว่างสีจาง",visualNote:"เป็นเพียงตัวชี้วัดจากสีและความสว่างของพิกเซล ไม่ใช่สัดส่วนเมฆจริง ไม่ใช่ AI จำแนกชนิดเมฆ และไม่ใช่การพยากรณ์อากาศ",noSky:"ภาพนี้ตรวจพบท้องฟ้าไม่เพียงพอ ลองถ่ายให้เห็นท้องฟ้ากว้างขึ้น",badImage:"ไม่สามารถอ่านภาพนี้ได้",modelNotReady:"พบไฟล์โมเดล แต่ยังไม่ผ่านสถานะ validated จึงยังไม่เปิดให้ทำนาย",analyzing:"กำลังวิเคราะห์ภาพ…",rejected:"ภาพนี้อยู่นอกขอบเขตหรือความมั่นใจไม่เพียงพอ ระบบจึงไม่ระบุชนิดเมฆ",modelResult:"ผลจากโมเดล AI · ไม่ใช่คำพยากรณ์อากาศ"},
- en:{eyebrow:"CLOUD INTELLIGENCE PLATFORM",headline:"See more in every sky",subhead:"Identify cloud types, check image quality and explore weather around your location.",scannerTitle:"Sky scanner",ready:"Ready",cameraPrompt:"Open camera or choose an image",cameraHint:"For best results, capture a clear view of the sky and clouds.",openCamera:"Open camera",chooseImage:"Choose image",stopCamera:"Stop camera",analyze:"Analyze image",modelMissing:"No AI model has passed evaluation and release approval yet. The app will not invent predictions.",resultTitle:"Analysis result",waiting:"Waiting for an image",waitingHint:"Classification appears only when a validated model is available.",classification:"CLOUD CLASSIFICATION",confidence:"Model confidence",weatherTitle:"Local weather",locate:"Use my location",temperature:"Temperature",humidity:"Humidity",cloudCover:"Cloud cover",wind:"Wind",weatherHint:"Location permission required · Open-Meteo",historyTitle:"On-device history",export:"Export",clear:"Clear",noHistory:"No scan history yet",privacy:"History stays in this browser on this device. It is not synced to the cloud.",disclaimerTitle:"Accuracy note",disclaimer:"This is image classification, not a rainfall forecast or severe-weather warning. Confidence is not a guarantee of correctness.",footer:"For education and preliminary analysis",noModel:"No validated cloud-genus AI model yet. Basic image analysis is available.",visualTitle:"Bright, low-saturation pixel ratio",visualNote:"A simple pixel-color/brightness indicator only; it is not actual cloud coverage, AI cloud-genus classification or a weather forecast.",noSky:"Not enough recognizable sky. Try a wider sky photo.",badImage:"Could not read this image",modelNotReady:"Model files found but release status is not validated; predictions remain disabled.",analyzing:"Analyzing image…",rejected:"Image is outside the supported scope or confidence is insufficient. No cloud type is assigned.",modelResult:"AI model output · Not a weather forecast"}
+ th:{eyebrow:"CLOUD INTELLIGENCE PLATFORM",headline:"มองท้องฟ้าให้ลึกกว่าเดิม",subhead:"สแกนชนิดเมฆ ตรวจคุณภาพภาพ และดูสภาพอากาศจากตำแหน่งของคุณ",scannerTitle:"สแกนท้องฟ้า",ready:"พร้อมใช้งาน",cameraPrompt:"เปิดกล้องหรือเลือกรูปภาพ",cameraHint:"แนะนำให้เห็นท้องฟ้าและเมฆชัดเจน",openCamera:"เปิดกล้อง",chooseImage:"เลือกรูปภาพ",stopCamera:"ปิดกล้อง",analyze:"วิเคราะห์ภาพ",modelMissing:"ยังไม่มีโมเดล AI ที่ผ่านการประเมินและอนุมัติให้ใช้งาน ระบบจะไม่เดาผลแทนโมเดลจริง",resultTitle:"ผลการวิเคราะห์",waiting:"รอภาพสำหรับวิเคราะห์",waitingHint:"ผลจำแนกจะแสดงเมื่อมีโมเดลที่ผ่านการทดสอบ",classification:"การจำแนกเมฆ",confidence:"ความมั่นใจของโมเดล",weatherTitle:"สภาพอากาศบริเวณนี้",locate:"ใช้ตำแหน่งของฉัน",temperature:"อุณหภูมิ",humidity:"ความชื้น",cloudCover:"เมฆปกคลุม",wind:"ลม",weatherHint:"ต้องอนุญาตตำแหน่งเพื่อดึงข้อมูลอากาศ · Open-Meteo",historyTitle:"ประวัติบนอุปกรณ์นี้",export:"ส่งออก",clear:"ล้างประวัติ",noHistory:"ยังไม่มีประวัติการสแกน",privacy:"ประวัติเก็บไว้ในเบราว์เซอร์ของคุณเท่านั้น ไม่ซิงก์ขึ้น Cloud",disclaimerTitle:"หมายเหตุความแม่นยำ",disclaimer:"ผลจำแนกเป็นการประเมินภาพ ไม่ใช่การพยากรณ์ฝนหรือคำเตือนภัย ความมั่นใจไม่เท่ากับความถูกต้องที่รับประกัน",footer:"สำหรับการศึกษาและการวิเคราะห์เบื้องต้น",noModel:"ยังไม่มีโมเดล AI จำแนกชนิดเมฆที่ผ่านการรับรอง แต่ใช้การประเมินภาพเบื้องต้นได้",visualTitle:"สัดส่วนพิกเซลสว่างสีจาง",visualNote:"เป็นเพียงตัวชี้วัดจากสีและความสว่างของพิกเซล ไม่ใช่สัดส่วนเมฆจริง ไม่ใช่ AI จำแนกชนิดเมฆ และไม่ใช่การพยากรณ์อากาศ",noSky:"ภาพนี้ตรวจพบท้องฟ้าไม่เพียงพอ ลองถ่ายให้เห็นท้องฟ้ากว้างขึ้น",badImage:"ไม่สามารถอ่านภาพนี้ได้",modelNotReady:"พบไฟล์โมเดล แต่ยังไม่ผ่านสถานะ validated จึงยังไม่เปิดให้ทำนาย",analyzing:"กำลังวิเคราะห์ภาพ…",rejected:"ภาพนี้อยู่นอกขอบเขตหรือความมั่นใจไม่เพียงพอ ระบบจึงไม่ระบุชนิดเมฆ",modelResult:"ผลจากโมเดล AI · ไม่ใช่คำพยากรณ์อากาศ",downloadModel:"ดาวน์โหลด AI โมเดล",modelDownloadReady:"ดาวน์โหลดโมเดลทดลองเพื่อเริ่มจำแนกเมฆ 10 ชนิด",modelDownloading:"กำลังดาวน์โหลดโมเดล…",modelInstalled:"ติดตั้งโมเดลแล้ว พร้อมสแกน",modelDownloadFailed:"ดาวน์โหลดไม่สำเร็จ กรุณาลองอีกครั้ง"},
+ en:{eyebrow:"CLOUD INTELLIGENCE PLATFORM",headline:"See more in every sky",subhead:"Identify cloud types, check image quality and explore weather around your location.",scannerTitle:"Sky scanner",ready:"Ready",cameraPrompt:"Open camera or choose an image",cameraHint:"For best results, capture a clear view of the sky and clouds.",openCamera:"Open camera",chooseImage:"Choose image",stopCamera:"Stop camera",analyze:"Analyze image",modelMissing:"No AI model has passed evaluation and release approval yet. The app will not invent predictions.",resultTitle:"Analysis result",waiting:"Waiting for an image",waitingHint:"Classification appears only when a validated model is available.",classification:"CLOUD CLASSIFICATION",confidence:"Model confidence",weatherTitle:"Local weather",locate:"Use my location",temperature:"Temperature",humidity:"Humidity",cloudCover:"Cloud cover",wind:"Wind",weatherHint:"Location permission required · Open-Meteo",historyTitle:"On-device history",export:"Export",clear:"Clear",noHistory:"No scan history yet",privacy:"History stays in this browser on this device. It is not synced to the cloud.",disclaimerTitle:"Accuracy note",disclaimer:"This is image classification, not a rainfall forecast or severe-weather warning. Confidence is not a guarantee of correctness.",footer:"For education and preliminary analysis",noModel:"No validated cloud-genus AI model yet. Basic image analysis is available.",visualTitle:"Bright, low-saturation pixel ratio",visualNote:"A simple pixel-color/brightness indicator only; it is not actual cloud coverage, AI cloud-genus classification or a weather forecast.",noSky:"Not enough recognizable sky. Try a wider sky photo.",badImage:"Could not read this image",modelNotReady:"Model files found but release status is not validated; predictions remain disabled.",analyzing:"Analyzing image…",rejected:"Image is outside the supported scope or confidence is insufficient. No cloud type is assigned.",modelResult:"AI model output · Not a weather forecast",downloadModel:"Download AI model",modelDownloadReady:"Download the experimental model to identify 10 cloud genera.",modelDownloading:"Downloading model…",modelInstalled:"Model installed · Ready to scan",modelDownloadFailed:"Download failed. Please try again."}
 };
-let lang=localStorage.getItem("csp_lang")||"th", stream=null, imageSource=null, modelSession=null, modelMeta=null;
+let lang=localStorage.getItem("csp_lang")||"th", stream=null, imageSource=null, modelSession=null, modelMeta=null;\nconst MODEL_META_URL="./models/cloud-classifier/model_metadata.json", MODEL_FILE_URL="./models/cloud-classifier/model.onnx", MODEL_DB="cloud-scanner-ai-cache";
 function tr(k){return T[lang][k]||T.en[k]||k}
-function setLang(){document.documentElement.lang=lang;document.querySelectorAll("[data-i18n]").forEach(el=>{const k=el.dataset.i18n;if(T[lang][k])el.textContent=T[lang][k]});$("langBtn").textContent=lang==="th"?"EN":"TH";localStorage.setItem("csp_lang",lang)}
+function setLang(){document.documentElement.lang=lang;document.querySelectorAll("[data-i18n]").forEach(el=>{const k=el.dataset.i18n;if(T[lang][k])el.textContent=T[lang][k]});$("langBtn").textContent=lang==="th"?"EN":"TH";localStorage.setItem("csp_lang",lang);if($("downloadModelLabel"))$("downloadModelLabel").textContent=modelSession?(lang==="th"?"✓ ติดตั้งแล้ว · พร้อมใช้งาน":"✓ Installed · Ready"):tr("downloadModel");if($("modelInstallNote")&&!modelSession)$("modelInstallNote").textContent=tr("modelDownloadReady")}
 $("langBtn").onclick=()=>{lang=lang==="th"?"en":"th";setLang();renderHistory()};
 function setMessage(s){$("scanMessage").textContent=s}
 function stopStream(){if(stream)stream.getTracks().forEach(t=>t.stop());stream=null;$("video").srcObject=null;$("video").hidden=true;$("stopCameraBtn").disabled=true}
-$("cameraBtn").onclick=async()=>{try{if(!navigator.mediaDevices?.getUserMedia)throw Error("Camera requires HTTPS or localhost.");stopStream();stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:"environment"}},audio:false});$("video").srcObject=stream;await $("video").play();$("video").hidden=false;$("preview").hidden=true;$("emptyState").hidden=true;imageSource=$("video");$("stopCameraBtn").disabled=false;$("analyzeBtn").disabled=false}catch(e){setMessage(e.message)}};
-$("stopCameraBtn").onclick=()=>{stopStream();if(!$("preview").src)$("emptyState").hidden=false;imageSource=$("preview").src?$("preview"):null;$("analyzeBtn").disabled=!imageSource};
-$("fileInput").onchange=e=>{const f=e.target.files?.[0];if(!f||!f.type.startsWith("image/"))return;stopStream();const url=URL.createObjectURL(f);$("preview").src=url;$("preview").hidden=false;$("video").hidden=true;$("emptyState").hidden=true;imageSource=$("preview");$("analyzeBtn").disabled=false;setMessage(f.name)};
+$("cameraBtn").onclick=async()=>{try{if(!navigator.mediaDevices?.getUserMedia)throw Error("Camera requires HTTPS or localhost.");stopStream();stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:"environment"}},audio:false});$("video").srcObject=stream;await $("video").play();$("video").hidden=false;$("preview").hidden=true;$("emptyState").hidden=true;imageSource=$("video");$("stopCameraBtn").disabled=false;$("analyzeBtn").disabled=!modelSession}catch(e){setMessage(e.message)}};
+$("stopCameraBtn").onclick=()=>{stopStream();if(!$("preview").src)$("emptyState").hidden=false;imageSource=$("preview").src?$("preview"):null;$("analyzeBtn").disabled=!imageSource||!modelSession};
+$("fileInput").onchange=e=>{const f=e.target.files?.[0];if(!f||!f.type.startsWith("image/"))return;stopStream();const url=URL.createObjectURL(f);$("preview").src=url;$("preview").hidden=false;$("video").hidden=true;$("emptyState").hidden=true;imageSource=$("preview");$("analyzeBtn").disabled=!modelSession;setMessage(f.name)};
+function openModelDB(){
+ return new Promise((resolve,reject)=>{
+  if(!("indexedDB" in window)){reject(new Error("Browser storage is unavailable"));return}
+  const req=indexedDB.open(MODEL_DB,1);
+  req.onupgradeneeded=()=>{if(!req.result.objectStoreNames.contains("models"))req.result.createObjectStore("models")};
+  req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error||new Error("Could not open local model storage"));
+ });
+}
+async function readCachedModel(){
+ const db=await openModelDB();
+ return new Promise((resolve,reject)=>{
+  const tx=db.transaction("models","readonly"),req=tx.objectStore("models").get("cloud-classifier");
+  req.onsuccess=()=>{const value=req.result||null;db.close();resolve(value)};
+  req.onerror=()=>{db.close();reject(req.error||new Error("Could not read cached model"))};
+ });
+}
+async function saveCachedModel(buffer,meta){
+ const db=await openModelDB();
+ return new Promise((resolve,reject)=>{
+  const tx=db.transaction("models","readwrite");
+  tx.objectStore("models").put({buffer,meta,downloadedAt:Date.now()},"cloud-classifier");
+  tx.oncomplete=()=>{db.close();resolve()};
+  tx.onerror=()=>{db.close();reject(tx.error||new Error("Could not save model on this device"))};
+  tx.onabort=()=>{db.close();reject(tx.error||new Error("Model storage was interrupted"))};
+ });
+}
+function validModelMetadata(meta){
+ return !!meta&&["beta","validated"].includes(meta.status)&&Array.isArray(meta.classes)&&meta.classes.length===10&&Array.isArray(meta.input?.shape)&&meta.input.shape.length===4&&meta.input.shape[1]===3;
+}
+function setModelProgress(received,total){
+ const wrap=$("modelProgressWrap");wrap.hidden=false;
+ const pct=total?Math.min(100,Math.round(received/total*100)):0;
+ $("modelProgressBar").style.width=pct+"%";
+ $("modelProgressText").textContent=total?pct+"% · "+(received/1048576).toFixed(1)+" / "+(total/1048576).toFixed(1)+" MB":(received/1048576).toFixed(1)+" MB";
+}
+function setModelReady(meta,source){
+ modelMeta=meta;
+ $("modelStatus").textContent=meta.status==="beta"?(lang==="th"?"AI รุ่นทดลอง":"AI BETA"):(lang==="th"?"AI พร้อมใช้":"AI READY");
+ $("modelStatus").classList.remove("muted");
+ $("downloadModelBtn").disabled=true;
+ $("downloadModelLabel").textContent=lang==="th"?"✓ ติดตั้งแล้ว · พร้อมใช้งาน":"✓ Installed · Ready";
+ $("modelInstallNote").textContent=lang==="th"?(source==="cache"?"พบโมเดลในอุปกรณ์นี้แล้ว · พร้อมใช้งาน":"ดาวน์โหลดและติดตั้งโมเดลบนอุปกรณ์นี้เรียบร้อย"):(source==="cache"?"Model found on this device · Ready":"Model downloaded and installed on this device");
+ $("modelProgressWrap").hidden=true;
+ $("analyzeBtn").disabled=!imageSource;
+ setMessage(meta.status==="beta"?(lang==="th"?"เปิดใช้ AI รุ่นทดลองแล้ว · ผลอาจจำแนกผิด":"Experimental beta model ready · predictions may be wrong"):(lang==="th"?"โมเดลพร้อมใช้งาน":"Model ready"));
+}
+async function createModelSession(buffer,meta){
+ if(!validModelMetadata(meta))throw new Error("Model metadata is invalid or unsupported");
+ if(!window.ort)throw new Error("ONNX Runtime Web failed to load");
+ ort.env.wasm.wasmPaths="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.20.1/dist/";
+ const bytes=buffer instanceof Uint8Array?buffer:new Uint8Array(buffer);
+ const session=await ort.InferenceSession.create(bytes,{executionProviders:["wasm"]});
+ modelSession=session;modelMeta=meta;
+}
 async function loadModel(){
  try{
-  const mr=await fetch("./models/cloud-classifier/model_metadata.json",{cache:"no-store"});
-  if(!mr.ok)throw Error("metadata missing");
-  const meta=await mr.json();modelMeta=meta;
-  if(!["validated","beta"].includes(meta.status)||!meta.test_metrics||!meta.release_thresholds||!Array.isArray(meta.classes)||meta.classes.length!==10||!Array.isArray(meta.input?.shape)||meta.input.shape.length!==4)throw Error("not validated");
-  if(!window.ort)throw Error("ONNX Runtime Web failed to load");
-  ort.env.wasm.wasmPaths="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.20.1/dist/";
-  modelSession=await ort.InferenceSession.create("./models/cloud-classifier/model.onnx",{executionProviders:["wasm"]});
-  $("modelStatus").textContent=meta.status==="beta"?(lang==="th"?"AI รุ่นทดลอง":"AI beta"):(lang==="th"?"AI พร้อมใช้งาน":"AI ready");$("modelStatus").classList.remove("muted");setMessage(meta.status==="beta"?(lang==="th"?"โหลด AI รุ่นทดลองแล้ว · ผลยังไม่ใช่คำยืนยัน":"Beta AI loaded · results are not definitive"):(lang==="th"?"โหลดโมเดลที่ผ่านการประเมินแล้ว":"Validated model loaded"));
- }catch(e){modelSession=null;$("modelStatus").textContent=lang==="th"?"โหมดประเมินภาพ":"Visual scan mode";setMessage(tr("noModel"))}
+  const mr=await fetch(MODEL_META_URL,{cache:"no-store"});
+  if(!mr.ok)throw new Error("Model metadata is not published yet");
+  const remoteMeta=await mr.json();
+  if(!validModelMetadata(remoteMeta))throw new Error("No supported beta or validated model is published");
+  const cached=await readCachedModel();
+  if(cached&&cached.meta&&cached.meta.model_version===remoteMeta.model_version&&cached.buffer){
+   $("modelStatus").textContent=lang==="th"?"กำลังเปิด AI…":"Loading AI…";
+   await createModelSession(cached.buffer,remoteMeta);
+   setModelReady(remoteMeta,"cache");
+  }else{
+   $("modelStatus").textContent=lang==="th"?"ยังไม่ได้ดาวน์โหลด AI":"AI not downloaded";
+   $("modelStatus").classList.add("muted");
+   $("downloadModelBtn").disabled=false;
+   $("downloadModelLabel").textContent=tr("downloadModel");
+   $("modelInstallNote").textContent=tr("modelDownloadReady");
+   setMessage(lang==="th"?"กดดาวน์โหลด AI โมเดลก่อนเริ่มวิเคราะห์ · โมเดลจะถูกเก็บไว้ในอุปกรณ์นี้":"Download the AI model before analysis. It will be stored on this device.");
+   $("analyzeBtn").disabled=true;
+  }
+ }catch(e){
+  $("modelStatus").textContent=lang==="th"?"AI ยังไม่พร้อม":"AI unavailable";
+  $("modelStatus").classList.add("muted");
+  $("downloadModelBtn").disabled=false;
+  $("downloadModelLabel").textContent=tr("downloadModel");
+  $("modelInstallNote").textContent=e.message||tr("modelDownloadFailed");
+  $("analyzeBtn").disabled=true;
+  setMessage(tr("modelDownloadFailed"));
+ }
 }
+$("downloadModelBtn").onclick=async()=>{
+ const btn=$("downloadModelBtn");
+ btn.disabled=true;$("downloadModelLabel").textContent=lang==="th"?"กำลังเตรียมดาวน์โหลด…":"Preparing download…";
+ $("modelStatus").textContent=lang==="th"?"กำลังดาวน์โหลด…":"Downloading…";
+ $("modelProgressWrap").hidden=false;setModelProgress(0,0);
+ try{
+  const mr=await fetch(MODEL_META_URL,{cache:"no-store"});
+  if(!mr.ok)throw new Error("Model metadata unavailable ("+mr.status+")");
+  const meta=await mr.json();
+  if(!validModelMetadata(meta))throw new Error("Published model metadata is invalid");
+  const response=await fetch(MODEL_FILE_URL,{cache:"no-store"});
+  if(!response.ok)throw new Error("Model download failed ("+response.status+")");
+  const total=Number(response.headers.get("content-length")||0),reader=response.body?.getReader();
+  let buffer;
+  if(reader){
+   const chunks=[];let received=0;
+   while(true){const part=await reader.read();if(part.done)break;chunks.push(part.value);received+=part.value.length;setModelProgress(received,total)}
+   const merged=new Uint8Array(received);let offset=0;
+   for(const chunk of chunks){merged.set(chunk,offset);offset+=chunk.length}
+   buffer=merged.buffer;
+  }else{buffer=await response.arrayBuffer();setModelProgress(buffer.byteLength,buffer.byteLength)}
+  if(buffer.byteLength<1024*1024)throw new Error("Downloaded model file is unexpectedly small");
+  $("downloadModelLabel").textContent=lang==="th"?"กำลังติดตั้ง AI…":"Installing AI…";
+  await createModelSession(buffer,meta);
+  await saveCachedModel(buffer,meta);
+  setModelReady(meta,"download");
+ }catch(e){
+  modelSession=null;modelMeta=null;
+  $("modelStatus").textContent=lang==="th"?"ดาวน์โหลดไม่สำเร็จ":"Download failed";
+  $("modelStatus").classList.add("muted");
+  $("modelInstallNote").textContent=(e.message||tr("modelDownloadFailed"))+" · "+(lang==="th"?"ลองใหม่อีกครั้ง":"Please try again");
+  $("downloadModelLabel").textContent=tr("downloadModel");btn.disabled=false;
+  $("analyzeBtn").disabled=true;setMessage(tr("modelDownloadFailed"));
+ }
+};
 function getImageElement(){
  if(imageSource===$("video")){if(!$("video").videoWidth)throw Error(tr("badImage"));return $("video")}
  if(imageSource===$("preview")&&$("preview").complete&&$("preview").naturalWidth)return $("preview");
@@ -89,7 +196,7 @@ $("analyzeBtn").onclick=async()=>{
   $("resultEmpty").hidden=true;$("resultContent").hidden=false;
   setMessage(modelSession?tr("modelResult"):tr("visualNote"));
  }catch(e){$("resultEmpty").hidden=false;$("resultContent").hidden=true;setMessage(e.message||tr("badImage"))}
- finally{$("analyzeBtn").disabled=false}
+ finally{$("analyzeBtn").disabled=!modelSession||!imageSource}
 };
 $("weatherBtn").onclick=()=>{if(!navigator.geolocation){$("weatherNote").textContent="Geolocation is not supported.";return} $("weatherNote").textContent=lang==="th"?"กำลังขอตำแหน่ง…":"Requesting location…";navigator.geolocation.getCurrentPosition(async p=>{try{const u=new URL("https://api.open-meteo.com/v1/forecast");u.search=new URLSearchParams({latitude:p.coords.latitude,longitude:p.coords.longitude,current:"temperature_2m,relative_humidity_2m,cloud_cover,wind_speed_10m",timezone:"auto"});const d=await(await fetch(u)).json(),c=d.current;$("temp").textContent=c.temperature_2m+"°C";$("humidity").textContent=c.relative_humidity_2m+"%";$("cloudCover").textContent=c.cloud_cover+"%";$("wind").textContent=c.wind_speed_10m+" km/h";$("weatherNote").textContent="Open-Meteo · "+c.time}catch(e){$("weatherNote").textContent="Weather data unavailable: "+e.message}},e=>$("weatherNote").textContent=e.message,{timeout:12000})};
 function getHistory(){try{return JSON.parse(localStorage.getItem("csp_history")||"[]")}catch{return[]}}
