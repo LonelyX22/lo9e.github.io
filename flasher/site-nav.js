@@ -40,7 +40,7 @@
       faqQ5:'เปิดหน้าเว็บแล้ว แต่มอเตอร์ไม่หมุน?', faqA5:'ตรวจว่ากด ENABLE หรือ ARM แล้วหรือยัง ตรวจไฟเลี้ยงมอเตอร์ 12V สายสัญญาณระหว่าง ESP32 กับ L298N และการต่อขั้วมอเตอร์ ทดสอบโดยยกใบพัดให้พ้นพื้นและอย่าแตะส่วนที่หมุน',
       faqQ6:'มอเตอร์หยุดเองเมื่อ Wi-Fi หลุด เป็นเพราะอะไร?', faqA6:'เฟิร์มแวร์ ESP32-C5 ที่ใช้ระบบ failsafe จะหยุดมอเตอร์เมื่อไม่ได้รับคำสั่งควบคุมตามเวลาที่กำหนด เป็นระบบป้องกันเมื่อสัญญาณขาด หากต้องการใช้งานต่อ ให้เชื่อมต่อใหม่และเปิดระบบควบคุมอีกครั้ง',
       faqQ7:'มอเตอร์หมุนกลับทิศ ต้องแก้อย่างไร?', faqA7:'ตรวจสอบการต่อสายมอเตอร์ซ้ายและขวา หรือปรับค่าตัวแปร INVERT_LEFT_MOTOR / INVERT_RIGHT_MOTOR ในโค้ดให้ตรงกับทิศทางการติดตั้ง แล้วคอมไพล์และแฟลชใหม่',
-      faqFooterNote:'คำถามที่พบบ่อยและการแก้ไขปัญหา', faqFooterTag:'IF IT PERSISTS, OPEN A GITHUB ISSUE',
+      faqNoteTitle:'ยังแก้ปัญหาไม่ได้?', faqNoteText:'รวบรวมรุ่นบอร์ด เวอร์ชัน Firmware และข้อความ Error แล้วส่งรายละเอียดให้ผู้พัฒนาผ่าน GitHub Issues', faqFooterNote:'คำถามที่พบบ่อยและการแก้ไขปัญหา', faqFooterTag:'IF IT PERSISTS, OPEN A GITHUB ISSUE',
       contactEyebrow:'/// DEVELOPER SUPPORT', contactTitle1:'ติดต่อ', contactTitle2:'ผู้พัฒนา',
       contactLead:'พบข้อผิดพลาด มีข้อเสนอแนะ หรือต้องการช่วยพัฒนาโครงงาน สามารถเปิดประเด็นผ่าน GitHub เพื่อให้ตรวจสอบและติดตามการแก้ไขได้',
       contactRepoTitle:'SOURCE CODE', contactRepoText:'ดูซอร์สโค้ด เว็บไซต์ และไฟล์ที่เกี่ยวข้องกับโครงงานบน GitHub',
@@ -88,7 +88,7 @@
       faqQ5:'The page opens, but the motors do not move.', faqA5:'Check whether ENABLE or ARM has been pressed. Verify the 12V motor supply, signal wiring between ESP32 and L298N, and motor connections. Test with propellers clear and keep hands away from moving parts.',
       faqQ6:'The motors stop when Wi-Fi disconnects. Why?', faqA6:'The ESP32-C5 firmware with failsafe stops the motors when control commands are not received within the configured timeout. Reconnect and enable the control system again before continuing.',
       faqQ7:'The motors rotate in the wrong direction. How can I fix this?', faqA7:'Check the left and right motor wiring or adjust INVERT_LEFT_MOTOR / INVERT_RIGHT_MOTOR in the code to match the installation, then compile and flash again.',
-      faqFooterNote:'Frequently asked questions and troubleshooting', faqFooterTag:'IF IT PERSISTS, OPEN A GITHUB ISSUE',
+      faqNoteTitle:'Still need help?', faqNoteText:'Collect your board model, firmware version, and error message, then send the details through GitHub Issues.', faqFooterNote:'Frequently asked questions and troubleshooting', faqFooterTag:'IF IT PERSISTS, OPEN A GITHUB ISSUE',
       contactEyebrow:'/// DEVELOPER SUPPORT', contactTitle1:'CONTACT THE', contactTitle2:'DEVELOPER',
       contactLead:'Found a bug, have a suggestion, or want to contribute? Open an issue on GitHub so the project can be reviewed and tracked.',
       contactRepoTitle:'SOURCE CODE', contactRepoText:'Explore the website source, firmware tools, and project files on GitHub.',
@@ -104,7 +104,7 @@
     document.documentElement.lang = lang;
     document.querySelectorAll('[data-site-i18n]').forEach(el => {
       const value = words[lang][el.dataset.siteI18n];
-      if (value !== undefined) el.textContent = value;
+      if (value !== undefined) if (el.tagName === 'TEXTAREA' || el.tagName === 'INPUT') el.value = value; else el.textContent = value;
     });
     document.querySelectorAll('[data-site-lang]').forEach(button => {
       const active = button.dataset.siteLang === lang;
