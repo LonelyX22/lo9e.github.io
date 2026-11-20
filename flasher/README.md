@@ -6,7 +6,7 @@ Browser-based ESP32 firmware flasher for the BOAT RC controller project.
 
 After the repository's GitHub Pages deployment completes:
 
-https://lonelyx22.github.io/flasher/
+https://lonelyx22.github.io/lo9e.github.io/flasher/
 
 ## Supported chips
 
