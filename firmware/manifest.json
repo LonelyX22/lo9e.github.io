@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repository": "LonelyX22/lo9e.github.io",
-  "updated_at": "2026-11-20T13:30:26.853Z",
+  "updated_at": "2026-11-20T13:30:31.369Z",
   "boards": [
     {
       "id": "esp32",
@@ -9,17 +9,6 @@
       "chip": "ESP32",
       "latest": "v1.0.6",
       "releases": [
-        {
-          "version": "v1.0.1",
-          "filename": "asd.ino.merged.bin",
-          "path": "firmware/releases/esp32/v1.0.1/asd.ino.merged.bin",
-          "address": "0x0",
-          "image_type": "merged",
-          "size_bytes": 4194304,
-          "sha256": "18d0d721ea76e1fe91922863100ef979be3ecb597b076a41da6c3dedfb60bc19",
-          "notes": "asd",
-          "published_at": "2026-11-20T04:50:43.865Z"
-        },
         {
           "version": "v1.0.2",
           "filename": "test.ino.merged.bin",
