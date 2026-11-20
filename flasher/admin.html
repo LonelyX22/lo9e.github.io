@@ -1,58 +1,99 @@
 <!doctype html>
-<html lang="en"><head>
+<html lang="th"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#080b09"><title>BOAT FLASHER // Firmware Admin</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#080b09;--panel:#111713;--line:#29382c;--muted:#819083;--text:#edf4e9;--green:#b6ff36;--yellow:#ffd447;--red:#ff4b3e;--mono:'IBM Plex Mono',monospace;--display:'Barlow Condensed',Impact,sans-serif}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:var(--mono);min-height:100vh;background-image:linear-gradient(#b6ff3608 1px,transparent 1px),linear-gradient(90deg,#b6ff3608 1px,transparent 1px);background-size:36px 36px}.wrap{width:min(1040px,calc(100% - 34px));margin:auto}header{height:78px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}a{color:var(--green);text-decoration:none}.brand{font:900 26px var(--display);letter-spacing:1.5px;color:var(--text)}.brand span{color:var(--green)}.tag{font-size:9px;color:var(--muted);letter-spacing:1.5px}.hero{padding:40px 0 24px}.eyebrow{font-size:10px;letter-spacing:2px;color:var(--green)}h1{font:900 clamp(42px,7vw,70px)/.9 var(--display);margin:12px 0}h1 em{font-style:normal;color:var(--green)}.sub{font-size:11px;color:var(--muted);line-height:1.8;max-width:720px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.card{background:linear-gradient(145deg,#141b15,#0e130f);border:1px solid var(--line);padding:21px;position:relative}.card:before{content:"";position:absolute;top:0;left:0;width:48px;height:2px;background:var(--green)}h2{font:800 24px var(--display);margin:0 0 16px}.field{margin:13px 0}label{display:block;font-size:9px;color:var(--muted);letter-spacing:1.4px;margin:0 0 7px}input,select,textarea{width:100%;background:#090e0a;border:1px solid #354536;color:var(--text);padding:12px;font:11px var(--mono);border-radius:0;outline:none}textarea{min-height:84px;resize:vertical}input:focus,select:focus,textarea:focus{border-color:var(--green)}input[type=checkbox]{width:auto;accent-color:var(--green)}.check{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:10px}.btn{border:0;background:var(--green);color:#0b1008;font:800 19px var(--display);letter-spacing:1px;padding:13px 17px;cursor:pointer}.btn:disabled{opacity:.35;cursor:not-allowed}.btn.alt{background:#1b251c;color:var(--text);border:1px solid var(--line);font-size:13px}.btn.danger{background:#321a17;color:#ffb2a9;border:1px solid #71352d}.full{width:100%}.row{display:flex;gap:9px;align-items:center}.row>*{flex:1}.hint{font-size:9px;color:var(--muted);line-height:1.8;margin:9px 0}.status{padding:10px 12px;border:1px solid var(--line);background:#090e0a;color:var(--muted);font-size:10px;line-height:1.7;margin:12px 0;white-space:pre-wrap}.status.ok{border-color:#56752c;color:var(--green)}.status.err{border-color:#71352d;color:#ff958b}.list{display:grid;gap:8px}.release{border:1px solid var(--line);background:#0b100c;padding:12px}.release strong{font:700 18px var(--display)}.release small{display:block;color:var(--muted);font-size:9px;line-height:1.7;margin-top:4px}.pill{display:inline-block;font-size:8px;color:#0b1008;background:var(--green);padding:4px 6px;margin-left:6px}.muted{color:var(--muted)}.hidden{display:none!important}.security{border-left:2px solid var(--yellow);padding:10px 12px;background:#ffd4470a;color:#bcb18a;font-size:9px;line-height:1.8;margin-top:14px}.footer{padding:24px 0 38px;color:#657365;font-size:9px;display:flex;justify-content:space-between;gap:10px}@media(max-width:720px){.grid{grid-template-columns:1fr}.row{flex-direction:column;align-items:stretch}.footer{flex-direction:column}header{gap:10px}.tag{text-align:right}}
-</style></head>
+</style>
+.lang-switch{display:inline-flex;align-items:center;gap:3px;padding:3px;border:1px solid var(--line);background:#090e0a}.lang-switch button{border:0;background:transparent;color:var(--muted);padding:6px 9px;font:700 10px var(--mono);cursor:pointer}.lang-switch button.active{background:var(--green);color:#0a1008}.header-tools{display:flex;align-items:center;gap:12px;flex-wrap:wrap}html[lang="th"] body{font-family:'Noto Sans Thai',sans-serif}html[lang="th"] h1,html[lang="th"] h2,html[lang="th"] .btn,html[lang="th"] .brand{font-family:'Noto Sans Thai',sans-serif;letter-spacing:0}html[lang="th"] .eyebrow,html[lang="th"] label,html[lang="th"] .tag,html[lang="th"] .hint,html[lang="th"] .status,html[lang="th"] .security,html[lang="th"] .check,html[lang="th"] .footer{letter-spacing:0}html[lang="th"] .lang-switch button{font-family:'Noto Sans Thai',sans-serif}@media(max-width:720px){.header-tools{gap:7px}}
+</head>
 <body><div class="wrap">
-<header><a class="brand" href="./">BOAT<span>FLASHER</span> <small class="tag"> / ADMIN</small></a><div class="tag">FIRMWARE CONTROL // OWNER ACCESS</div></header>
-<section class="hero"><div class="eyebrow">/// RELEASE MANAGEMENT CONSOLE</div><h1>FIRMWARE <em>CONTROL.</em></h1><p class="sub">Publish firmware builds, manage release history and choose which version appears as LATEST on the public flasher. Firmware files and the version catalog are stored in this GitHub repository.</p></section>
+<header><a class="brand" href="./">BOAT<span>FLASHER</span> <small class="tag" data-i18n="adminTag"> / ผู้ดูแลระบบ</small></a><div class="header-tools"><div class="lang-switch" role="group" aria-label="Language"><button type="button" id="langTH" class="active" aria-pressed="true">ไทย</button><button type="button" id="langEN" aria-pressed="false">EN</button></div><span class="tag" data-i18n="headerTag">จัดการเฟิร์มแวร์ // สำหรับเจ้าของระบบ</span></div></header>
+<section class="hero"><div class="eyebrow" data-i18n="heroEyebrow">/// ศูนย์จัดการเวอร์ชันเฟิร์มแวร์</div><h1><span data-i18n="heroTitle">จัดการ</span> <em data-i18n="heroEm">เฟิร์มแวร์</em></h1><p class="sub" data-i18n="heroDesc">อัปโหลดเฟิร์มแวร์ จัดการประวัติเวอร์ชัน และกำหนดเวอร์ชันล่าสุดที่จะแสดงบนหน้า Flash สาธารณะ ไฟล์และรายการเวอร์ชันจะถูกจัดเก็บไว้ใน GitHub Repository นี้</p></section>
 <div class="grid">
 <section class="card">
-<h2>01 / OWNER AUTHENTICATION</h2>
-<div class="field"><label for="token">GITHUB FINE-GRAINED PERSONAL ACCESS TOKEN</label><input id="token" type="password" autocomplete="off" placeholder="github_pat_..."></div>
-<button class="btn full" id="auth">VERIFY OWNER ACCESS ↗</button>
-<div class="status" id="authStatus">Not connected. Enter an owner token to enable release management.</div>
-<div class="security"><b>SECURITY:</b> This page is public, but publishing requires a token belonging to the repository owner. The token is kept only in this tab's memory and is not saved to localStorage or sent anywhere except api.github.com. Use a fine-grained token limited to this repository with Contents: Read and write and Metadata: Read-only. Never share the token.</div>
-<p class="hint">Create a token in GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens. <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">Open token settings ↗</a> Select only LonelyX22/lo9e.github.io. The token is cleared when this page is closed or refreshed.</p>
+<h2 data-i18n="authHeading">01 / ยืนยันสิทธิ์เจ้าของระบบ</h2>
+<div class="field"><label for="token" data-i18n="tokenLabel">GITHUB FINE-GRAINED PERSONAL ACCESS TOKEN</label><input id="token" type="password" autocomplete="off" placeholder="github_pat_..."></div>
+<button class="btn full" id="auth" data-i18n="verifyButton">ตรวจสอบสิทธิ์ GitHub ↗</button>
+<div class="status" id="authStatus" data-i18n="authInitial">ยังไม่ได้เชื่อมต่อ กรุณาใส่ Token ของเจ้าของ Repository เพื่อเปิดใช้งานการจัดการเวอร์ชัน</div>
+<div class="security"><b data-i18n="securityLabel">ความปลอดภัย:</b> <span data-i18n="securityText">หน้านี้เป็นหน้าสาธารณะ แต่การเผยแพร่ต้องใช้ Token ของเจ้าของ Repository เท่านั้น Token จะเก็บไว้ในหน่วยความจำของแท็บนี้ ไม่บันทึกลง localStorage และไม่ส่งไปที่อื่นนอกจาก api.github.com ให้ใช้ Fine-grained Token ที่จำกัดเฉพาะ Repository นี้ โดยกำหนด Contents: Read and write และ Metadata: Read-only ห้ามส่ง Token ให้ผู้อื่น</span></div>
+<p class="hint"><span data-i18n="tokenHelp">สร้าง Token ที่ GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens</span> <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener" data-i18n="openTokenSettings">เปิดหน้าสร้าง Token ↗</a> <span data-i18n="tokenHelpTail">เลือกเฉพาะ LonelyX22/lo9e.github.io เมื่อปิดหรือรีเฟรชหน้านี้ ระบบจะล้าง Token ออกจากหน่วยความจำ</span></p>
 </section>
 <section class="card">
-<h2>02 / PUBLISH NEW FIRMWARE</h2>
-<div class="field"><label for="board">TARGET BOARD</label><select id="board"><option value="esp32">ESP32 DevKit V1</option><option value="esp32c5">ESP32-C5</option></select></div>
+<h2 data-i18n="publishHeading">02 / เผยแพร่เฟิร์มแวร์ใหม่</h2>
+<div class="field"><label for="board" data-i18n="targetBoard">บอร์ดเป้าหมาย</label><select id="board"><option value="esp32">ESP32 DevKit V1</option><option value="esp32c5">ESP32-C5</option></select></div>
 <div class="row">
-<div class="field"><label for="version">VERSION</label><input id="version" type="text" placeholder="v1.0.1"></div>
-<div class="field"><label for="imageType">IMAGE TYPE</label><select id="imageType"><option value="merged">Complete merged image — flash at 0x0</option><option value="app">Application image — flash at 0x10000</option></select></div>
+<div class="field"><label for="version" data-i18n="versionLabel">เวอร์ชัน</label><input id="version" type="text" placeholder="v1.0.1"></div>
+<div class="field"><label for="imageType" data-i18n="imageType">ประเภทไฟล์</label><select id="imageType"><option value="merged" data-i18n="imageMerged">ไฟล์รวมทั้งชุด (แฟลชที่ 0x0)</option><option value="app" data-i18n="imageApp">ไฟล์โปรแกรมเท่านั้น (แฟลชที่ 0x10000)</option></select></div>
 </div>
-<div class="field"><label for="notes">RELEASE NOTES</label><textarea id="notes" placeholder="What changed in this firmware?"></textarea></div>
-<div class="field"><label for="firmware">FIRMWARE FILE (.BIN)</label><input id="firmware" type="file" accept=".bin,application/octet-stream"></div>
-<label class="check"><input id="makeLatest" type="checkbox" checked> Set this release as LATEST immediately after upload</label>
-<p class="hint">Recommended: upload the complete merged .bin generated for the exact target board. Never mix ESP32 and ESP32-C5 firmware. Maximum upload size: 20 MB.</p>
-<button class="btn full" id="publish" disabled>PUBLISH FIRMWARE RELEASE →</button>
-<div class="status" id="publishStatus">Verify owner access before publishing.</div>
+<div class="field"><label for="notes" data-i18n="releaseNotes">รายละเอียดการอัปเดต</label><textarea id="notes" placeholder="มีอะไรใหม่ในเฟิร์มแวร์เวอร์ชันนี้?" data-i18n-placeholder="notesPlaceholder"></textarea></div>
+<div class="field"><label for="firmware" data-i18n="firmwareFile">ไฟล์เฟิร์มแวร์ (.BIN)</label><input id="firmware" type="file" accept=".bin,application/octet-stream"></div>
+<label class="check"><input id="makeLatest" type="checkbox" checked> <span data-i18n="makeLatest">ตั้งเวอร์ชันนี้เป็นเวอร์ชันล่าสุดทันทีหลังอัปโหลด</span></label>
+<p class="hint" data-i18n="publishHint">แนะนำให้อัปโหลดไฟล์ .bin แบบ Merged ที่ Build สำหรับบอร์ดรุ่นนี้โดยเฉพาะ ห้ามใช้เฟิร์มแวร์ ESP32 ปกติปนกับ ESP32-C5 ขนาดไฟล์สูงสุด 20 MB</p>
+<button class="btn full" id="publish" disabled data-i18n="publishButton">เผยแพร่เฟิร์มแวร์ →</button>
+<div class="status" id="publishStatus" data-i18n="publishInitial">กรุณาตรวจสอบสิทธิ์เจ้าของระบบก่อนเผยแพร่</div>
 </section>
 <section class="card">
-<h2>03 / VERSION CONTROL</h2>
-<div class="field"><label for="latestBoard">BOARD</label><select id="latestBoard"><option value="esp32">ESP32 DevKit V1</option><option value="esp32c5">ESP32-C5</option></select></div>
-<div class="field"><label for="latestVersion">SET LATEST VERSION</label><select id="latestVersion" disabled><option>No releases published</option></select></div>
-<button class="btn alt full" id="saveLatest" disabled>SAVE LATEST VERSION</button>
-<div class="status" id="catalogStatus">Connect as the repository owner to load the release catalog.</div>
+<h2 data-i18n="versionHeading">03 / จัดการเวอร์ชันล่าสุด</h2>
+<div class="field"><label for="latestBoard" data-i18n="boardLabel">บอร์ด</label><select id="latestBoard"><option value="esp32">ESP32 DevKit V1</option><option value="esp32c5">ESP32-C5</option></select></div>
+<div class="field"><label for="latestVersion" data-i18n="setLatest">กำหนดเวอร์ชันล่าสุด</label><select id="latestVersion" disabled><option>ยังไม่มีเวอร์ชันที่เผยแพร่</option></select></div>
+<button class="btn alt full" id="saveLatest" disabled data-i18n="saveLatest">บันทึกเวอร์ชันล่าสุด</button>
+<div class="status" id="catalogStatus" data-i18n="catalogInitial">เชื่อมต่อด้วยบัญชีเจ้าของ Repository เพื่อโหลดรายการเวอร์ชัน</div>
 </section>
 <section class="card">
-<h2>04 / PUBLISHED RELEASES</h2>
-<div class="list" id="releases"><div class="release"><span class="muted">No catalog loaded.</span></div></div>
-<p class="hint">Existing versions remain available to users unless you change the latest pointer. Releases are immutable; publish a new version instead of replacing an old one.</p>
+<h2 data-i18n="publishedHeading">04 / เวอร์ชันที่เผยแพร่แล้ว</h2>
+<div class="list" id="releases"><div class="release"><span class="muted" data-i18n="noCatalog">ยังไม่ได้โหลดรายการเวอร์ชัน</span></div></div>
+<p class="hint" data-i18n="publishedHint">เวอร์ชันเก่ายังคงให้ผู้ใช้เลือกได้ จนกว่าจะเปลี่ยนตัวชี้เวอร์ชันล่าสุด ระบบจะไม่เขียนทับเวอร์ชันเดิม หากต้องการอัปเดตให้เผยแพร่เป็นหมายเลขเวอร์ชันใหม่</p>
 </section>
 </div>
-<div class="footer"><span>BOAT FLASHER <b style="color:var(--green)">///</b> OWNER CONSOLE</span><a href="./">BACK TO FLASHER ↗</a></div>
+<div class="footer"><span>BOAT FLASHER <b style="color:var(--green)">///</b> <span data-i18n="footerTag">หน้าจัดการสำหรับเจ้าของระบบ</span></span><a href="./" data-i18n="backToFlasher">กลับไปหน้าแฟลช ↗</a></div>
 </div>
 <script>
 const OWNER='LonelyX22',REPO='LonelyX22/lo9e.github.io',BRANCH='main',MANIFEST='firmware/manifest.json';
-const $=id=>document.getElementById(id);let token='',manifest=null,ownerVerified=false;
-function status(id,msg,kind){const el=$(id);el.textContent=msg;el.className='status'+(kind?' '+kind:'')}
+const $=id=>document.getElementById(id),LANG_KEY='boatFlasherLanguage';
+const words={
+th:{
+adminTag:' / ผู้ดูแลระบบ',headerTag:'จัดการเฟิร์มแวร์ // สำหรับเจ้าของระบบ',heroEyebrow:'/// ศูนย์จัดการเวอร์ชันเฟิร์มแวร์',heroTitle:'จัดการ',heroEm:'เฟิร์มแวร์',heroDesc:'อัปโหลดเฟิร์มแวร์ จัดการประวัติเวอร์ชัน และกำหนดเวอร์ชันล่าสุดที่จะแสดงบนหน้า Flash สาธารณะ ไฟล์และรายการเวอร์ชันจะถูกจัดเก็บไว้ใน GitHub Repository นี้',authHeading:'01 / ยืนยันสิทธิ์เจ้าของระบบ',tokenLabel:'GITHUB FINE-GRAINED PERSONAL ACCESS TOKEN',verifyButton:'ตรวจสอบสิทธิ์ GitHub ↗',authInitial:'ยังไม่ได้เชื่อมต่อ กรุณาใส่ Token ของเจ้าของ Repository เพื่อเปิดใช้งานการจัดการเวอร์ชัน',securityLabel:'ความปลอดภัย:',securityText:'หน้านี้เป็นหน้าสาธารณะ แต่การเผยแพร่ต้องใช้ Token ของเจ้าของ Repository เท่านั้น Token จะเก็บไว้ในหน่วยความจำของแท็บนี้ ไม่บันทึกลง localStorage และไม่ส่งไปที่อื่นนอกจาก api.github.com ให้ใช้ Fine-grained Token ที่จำกัดเฉพาะ Repository นี้ โดยกำหนด Contents: Read and write และ Metadata: Read-only ห้ามส่ง Token ให้ผู้อื่น',tokenHelp:'สร้าง Token ที่ GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens',openTokenSettings:'เปิดหน้าสร้าง Token ↗',tokenHelpTail:'เลือกเฉพาะ LonelyX22/lo9e.github.io เมื่อปิดหรือรีเฟรชหน้านี้ ระบบจะล้าง Token ออกจากหน่วยความจำ',publishHeading:'02 / เผยแพร่เฟิร์มแวร์ใหม่',targetBoard:'บอร์ดเป้าหมาย',versionLabel:'เวอร์ชัน',imageType:'ประเภทไฟล์',imageMerged:'ไฟล์รวมทั้งชุด (แฟลชที่ 0x0)',imageApp:'ไฟล์โปรแกรมเท่านั้น (แฟลชที่ 0x10000)',releaseNotes:'รายละเอียดการอัปเดต',notesPlaceholder:'มีอะไรใหม่ในเฟิร์มแวร์เวอร์ชันนี้?',firmwareFile:'ไฟล์เฟิร์มแวร์ (.BIN)',makeLatest:'ตั้งเวอร์ชันนี้เป็นเวอร์ชันล่าสุดทันทีหลังอัปโหลด',publishHint:'แนะนำให้อัปโหลดไฟล์ .bin แบบ Merged ที่ Build สำหรับบอร์ดรุ่นนี้โดยเฉพาะ ห้ามใช้เฟิร์มแวร์ ESP32 ปกติปนกับ ESP32-C5 ขนาดไฟล์สูงสุด 20 MB',publishButton:'เผยแพร่เฟิร์มแวร์ →',publishInitial:'กรุณาตรวจสอบสิทธิ์เจ้าของระบบก่อนเผยแพร่',versionHeading:'03 / จัดการเวอร์ชันล่าสุด',boardLabel:'บอร์ด',setLatest:'กำหนดเวอร์ชันล่าสุด',saveLatest:'บันทึกเวอร์ชันล่าสุด',catalogInitial:'เชื่อมต่อด้วยบัญชีเจ้าของ Repository เพื่อโหลดรายการเวอร์ชัน',publishedHeading:'04 / เวอร์ชันที่เผยแพร่แล้ว',noCatalog:'ยังไม่ได้โหลดรายการเวอร์ชัน',publishedHint:'เวอร์ชันเก่ายังคงให้ผู้ใช้เลือกได้ จนกว่าจะเปลี่ยนตัวชี้เวอร์ชันล่าสุด ระบบจะไม่เขียนทับเวอร์ชันเดิม หากต้องการอัปเดตให้เผยแพร่เป็นหมายเลขเวอร์ชันใหม่',footerTag:'หน้าจัดการสำหรับเจ้าของระบบ',backToFlasher:'กลับไปหน้าแฟลช ↗',noReleases:'ยังไม่มีเวอร์ชันที่เผยแพร่',latest:'ล่าสุด',image:'ไฟล์',published:'เผยแพร่เมื่อ',catalogLoaded:'โหลดรายการแล้ว',authChecking:'กำลังตรวจสอบบัญชี GitHub และสิทธิ์เข้าถึง Repository...',tokenRequired:'กรุณาวาง Token ก่อน',verified:'ยืนยันเจ้าของระบบสำเร็จ:',catalogAccess:'เข้าถึงรายการเฟิร์มแวร์ได้แล้ว',tokenWrong:'Token นี้เป็นของ',tokenNotOwner:'ไม่ใช่บัญชี',writePermission:'Token นี้ไม่มีสิทธิ์เขียน Repository กรุณาเปิด Contents: Read and write',preparing:'กำลังเตรียมไฟล์และคำนวณ SHA-256...',versionFormat:'รูปแบบเวอร์ชันไม่ถูกต้อง ตัวอย่างเช่น v1.0.1',chooseBin:'กรุณาเลือกไฟล์เฟิร์มแวร์ .bin',fileTooLarge:'ไฟล์มีขนาดเกิน 20 MB',targetMissing:'ไม่พบข้อมูลบอร์ดเป้าหมายในรายการ',versionExists:'มีเวอร์ชันนี้อยู่แล้ว กรุณาใช้หมายเลขเวอร์ชันใหม่',uploading:'กำลังอัปโหลด',uploadWait:'ไปยัง GitHub กรุณารอสักครู่...',updatingCatalog:'อัปโหลดไฟล์แล้ว กำลังอัปเดตรายการเวอร์ชันสาธารณะ...',publishedMsg:'เผยแพร่',nowLatest:'และตั้งเป็นเวอร์ชันล่าสุดแล้ว',availableHistory:'เพิ่มในประวัติเวอร์ชันแล้ว',saveLatestWait:'กำลังบันทึกเวอร์ชันล่าสุด...',latestUpdated:'เปลี่ยนเวอร์ชันล่าสุดเป็น',error:'เกิดข้อผิดพลาด:',retryNote:'หากอัปโหลดไฟล์สำเร็จแต่รายการเวอร์ชันอัปเดตไม่สำเร็จ ให้รีเฟรชและตรวจสอบรายการก่อนลองใหม่ โดยใช้หมายเลขเวอร์ชันใหม่เท่านั้น'
+},
+en:{
+adminTag:' / ADMIN',headerTag:'FIRMWARE CONTROL // OWNER ACCESS',heroEyebrow:'/// RELEASE MANAGEMENT CONSOLE',heroTitle:'FIRMWARE',heroEm:'CONTROL.',heroDesc:'Publish firmware builds, manage release history and choose which version appears as LATEST on the public flasher. Firmware files and the version catalog are stored in this GitHub repository.',authHeading:'01 / OWNER AUTHENTICATION',tokenLabel:'GITHUB FINE-GRAINED PERSONAL ACCESS TOKEN',verifyButton:'VERIFY OWNER ACCESS ↗',authInitial:'Not connected. Enter an owner token to enable release management.',securityLabel:'SECURITY:',securityText:'This page is public, but publishing requires a token belonging to the repository owner. The token is kept only in this tab memory, is not saved to localStorage and is only sent to api.github.com. Use a fine-grained token limited to this repository with Contents: Read and write and Metadata: Read-only. Never share the token.',tokenHelp:'Create a token in GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens.',openTokenSettings:'Open token settings ↗',tokenHelpTail:'Select only LonelyX22/lo9e.github.io. The token is cleared when this page is closed or refreshed.',publishHeading:'02 / PUBLISH NEW FIRMWARE',targetBoard:'TARGET BOARD',versionLabel:'VERSION',imageType:'IMAGE TYPE',imageMerged:'Complete merged image (flash at 0x0)',imageApp:'Application image only (flash at 0x10000)',releaseNotes:'RELEASE NOTES',notesPlaceholder:'What changed in this firmware?',firmwareFile:'FIRMWARE FILE (.BIN)',makeLatest:'Set this release as LATEST immediately after upload',publishHint:'Recommended: upload the complete merged .bin built for the exact target board. Never mix ESP32 and ESP32-C5 firmware. Maximum upload size: 20 MB.',publishButton:'PUBLISH FIRMWARE RELEASE →',publishInitial:'Verify owner access before publishing.',versionHeading:'03 / VERSION CONTROL',boardLabel:'BOARD',setLatest:'SET LATEST VERSION',saveLatest:'SAVE LATEST VERSION',catalogInitial:'Connect as the repository owner to load the release catalog.',publishedHeading:'04 / PUBLISHED RELEASES',noCatalog:'No catalog loaded.',publishedHint:'Existing versions remain available to users unless you change the latest pointer. Releases are immutable; publish a new version instead of replacing an old one.',footerTag:'OWNER CONSOLE',backToFlasher:'BACK TO FLASHER ↗',noReleases:'No releases published',latest:'LATEST',image:'Image',published:'Published',catalogLoaded:'Catalog loaded',authChecking:'Checking GitHub identity and repository access...',tokenRequired:'Paste your fine-grained token first.',verified:'Verified owner:',catalogAccess:'Catalog access confirmed.',tokenWrong:'This token belongs to',tokenNotOwner:'not',writePermission:'This token does not have repository write permission. Enable Contents: Read and write.',preparing:'Preparing firmware image and SHA-256 checksum...',versionFormat:'Use semantic version format, for example v1.0.1.',chooseBin:'Choose a .bin firmware file.',fileTooLarge:'File exceeds the 20 MB limit.',targetMissing:'Target board is missing from manifest.',versionExists:'This version already exists. Publish a new version number.',uploading:'Uploading',uploadWait:'to GitHub... This may take a moment.',updatingCatalog:'Firmware uploaded. Updating public version catalog...',publishedMsg:'Published',nowLatest:'It is now LATEST.',availableHistory:'available in version history.',saveLatestWait:'Saving latest version...',latestUpdated:'Latest version updated to',error:'Error:',retryNote:'If the binary uploaded but catalog update failed, refresh and check the release list before retrying with a new version number only.'
+}};
+let lang=localStorage.getItem(LANG_KEY)||'th',token='',manifest=null,ownerVerified=false;
+function tr(key){return (words[lang]&&words[lang][key])||words.en[key]||key}
+function localizeStatus(msg){
+ if(!msg)return msg;
+ const fixed={'Not connected. Enter an owner token to enable release management.':'authInitial','Verify owner access before publishing.':'publishInitial','Connect as the repository owner to load the release catalog.':'catalogInitial','Paste your fine-grained token first.':'tokenRequired','Checking GitHub identity and repository access...':'authChecking','Preparing firmware image and SHA-256 checksum...':'preparing','Firmware uploaded. Updating public version catalog...':'updatingCatalog','Saving latest version...':'saveLatestWait'};
+ if(fixed[msg])return tr(fixed[msg]);
+ if(msg.startsWith('Verified owner: ')){const user=msg.slice('Verified owner: '.length).split(' · ')[0];return tr('verified')+' '+user+' · '+tr('catalogAccess')}
+ if(msg.startsWith('Catalog loaded · ')){const count=msg.split(' · ')[1]||'';return tr('catalogLoaded')+' · '+count}
+ if(msg.startsWith('Use semantic version format'))return tr('versionFormat');
+ if(msg.startsWith('Choose a .bin'))return tr('chooseBin');
+ if(msg.startsWith('File exceeds'))return tr('fileTooLarge');
+ if(msg==='Target board is missing from manifest.')return tr('targetMissing');
+ if(msg==='This version already exists. Publish a new version number.')return tr('versionExists');
+ if(msg.startsWith('Uploading ')){const file=msg.slice(9).split(' to GitHub')[0];return tr('uploading')+' '+file+' '+tr('uploadWait')}
+ if(msg.startsWith('Published ')){const parts=msg.split('. It is now ');const name=parts[0].slice(9);return tr('publishedMsg')+' '+name+'. '+(parts[1]&&parts[1].includes('LATEST')?tr('nowLatest'):tr('availableHistory'))}
+ if(msg.startsWith('Latest version updated to '))return tr('latestUpdated')+' '+msg.slice('Latest version updated to '.length).replace(/\.$/,'')+'.';
+ if(msg.startsWith('This token belongs to ')){const parts=msg.split(', not ');return tr('tokenWrong')+' '+(parts[0]||'').slice(22)+', '+tr('tokenNotOwner')+' '+(parts[1]||OWNER)+'.'}
+ if(msg.startsWith('This token does not have repository write permission'))return tr('writePermission');
+ if(msg.includes('If the binary uploaded but catalog update failed'))return (lang==='th'?tr('error')+' ':'')+msg.split(' If the binary uploaded')[0]+'. '+tr('retryNote');
+ if(lang==='th'&&(/\(HTTP \d+\)/.test(msg)||/GitHub|API|token|permission/i.test(msg)))return tr('error')+' '+msg;
+ return msg;
+}
+function status(id,msg,kind){const el=$(id);el.dataset.raw=msg;el.textContent=localizeStatus(msg);el.className='status'+(kind?' '+kind:'')}
+function applyLanguage(){
+ document.documentElement.lang=lang;
+ document.querySelectorAll('[data-i18n]').forEach(el=>{el.textContent=tr(el.dataset.i18n)});
+ document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{el.placeholder=tr(el.dataset.i18nPlaceholder)});
+ $('langTH').classList.toggle('active',lang==='th');$('langEN').classList.toggle('active',lang==='en');$('langTH').setAttribute('aria-pressed',String(lang==='th'));$('langEN').setAttribute('aria-pressed',String(lang==='en'));
+ document.querySelectorAll('.status[data-raw]').forEach(el=>{el.textContent=localizeStatus(el.dataset.raw)});
+ if(manifest)render();
+ document.title=lang==='th'?'BOAT FLASHER // จัดการเฟิร์มแวร์':'BOAT FLASHER // Firmware Admin';
+}
+function setLanguage(next){lang=next;localStorage.setItem(LANG_KEY,lang);applyLanguage()}
 function headers(){return {'Accept':'application/vnd.github+json','Authorization':'Bearer '+token,'X-GitHub-Api-Version':'2022-11-28','Content-Type':'application/json'}}
 async function api(path,options){const res=await fetch('https://api.github.com'+path,options||{headers:headers()});const body=await res.text();let data={};try{data=body?JSON.parse(body):{}}catch{}if(!res.ok)throw new Error((data.message||('GitHub API '+res.status))+' (HTTP '+res.status+')');return data}
 function toB64(bytes){let binary='';for(let i=0;i<bytes.length;i+=0x8000)binary+=String.fromCharCode(...bytes.subarray(i,Math.min(i+0x8000,bytes.length)));return btoa(binary)}
@@ -65,14 +106,15 @@ function render(){
  if(!manifest)return;
  const id=$('latestBoard').value,board=boardInfo(id),releases=(board&&board.releases||[]).slice().sort((a,b)=>String(b.published_at||'').localeCompare(String(a.published_at||'')));
  $('latestVersion').innerHTML='';
- if(!releases.length){const o=document.createElement('option');o.textContent='No releases published';o.value='';$('latestVersion').append(o);$('latestVersion').disabled=true;$('saveLatest').disabled=true}
- else{releases.forEach(r=>{const o=document.createElement('option');o.value=r.version;o.textContent=r.version+((board.latest===r.version)?' — CURRENT LATEST':'');$('latestVersion').append(o)});$('latestVersion').value=board.latest||releases[0].version;$('latestVersion').disabled=false;$('saveLatest').disabled=!ownerVerified}
+ if(!releases.length){const o=document.createElement('option');o.textContent=tr('noReleases');o.value='';$('latestVersion').append(o);$('latestVersion').disabled=true;$('saveLatest').disabled=true}
+ else{releases.forEach(r=>{const o=document.createElement('option');o.value=r.version;o.textContent=r.version+((board.latest===r.version)?' — '+tr('latest'):'');$('latestVersion').append(o)});$('latestVersion').value=board.latest||releases[0].version;$('latestVersion').disabled=false;$('saveLatest').disabled=!ownerVerified}
  const list=$('releases');list.innerHTML='';
- manifest.boards.forEach(b=>{(b.releases||[]).slice().sort((a,c)=>String(c.published_at||'').localeCompare(String(a.published_at||''))).forEach(r=>{const item=document.createElement('div');item.className='release';const title=document.createElement('strong');title.textContent=b.name+' · '+r.version;if(b.latest===r.version){const pill=document.createElement('span');pill.className='pill';pill.textContent='LATEST';title.append(pill)}const detail=document.createElement('small');detail.textContent=(r.notes||'No release notes')+'\nImage: '+r.filename+' · '+(r.size_bytes/1024).toFixed(1)+' KB · '+(r.address||'0x0')+'\nPublished: '+(r.published_at||'');item.append(title,detail);list.append(item)})});
- if(!list.children.length)list.innerHTML='<div class="release"><span class="muted">No firmware releases published yet.</span></div>';
+ manifest.boards.forEach(b=>{(b.releases||[]).slice().sort((a,c)=>String(c.published_at||'').localeCompare(String(a.published_at||''))).forEach(r=>{const item=document.createElement('div');item.className='release';const title=document.createElement('strong');title.textContent=b.name+' · '+r.version;if(b.latest===r.version){const pill=document.createElement('span');pill.className='pill';pill.textContent=tr('latest');title.append(pill)}const detail=document.createElement('small');detail.textContent=(r.notes||tr('noCatalog'))+'\n'+tr('image')+': '+r.filename+' · '+(r.size_bytes/1024).toFixed(1)+' KB · '+(r.address||'0x0')+'\n'+tr('published')+': '+(r.published_at||'');item.append(title,detail);list.append(item)})});
+ if(!list.children.length)list.innerHTML='<div class="release"><span class="muted">'+tr('noReleases')+'.</span></div>';
  status('catalogStatus','Catalog loaded · '+manifest.boards.reduce((n,b)=>n+(b.releases||[]).length,0)+' release(s).','ok');
 }
 async function refreshCatalog(){const got=await getManifest();manifest=got.manifest;render()}
+$('langTH').addEventListener('click',()=>setLanguage('th'));$('langEN').addEventListener('click',()=>setLanguage('en'));
 $('auth').addEventListener('click',async()=>{
  const entered=$('token').value.trim();if(!entered){status('authStatus','Paste your fine-grained token first.','err');return}
  token=entered;$('token').value='';status('authStatus','Checking GitHub identity and repository access...');
@@ -107,4 +149,5 @@ $('publish').addEventListener('click',async()=>{
  finally{$('publish').disabled=!ownerVerified}
 });
 window.addEventListener('beforeunload',()=>{token='';});
+applyLanguage();
 </script></body></html>
