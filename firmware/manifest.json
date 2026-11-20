@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
   "repository": "LonelyX22/lo9e.github.io",
-  "updated_at": "2026-11-20T13:50:44.091Z",
+  "updated_at": "2026-11-20T14:15:01.862Z",
   "boards": [
     {
       "id": "esp32",
       "name": "ESP32 DevKit V1",
       "chip": "ESP32",
-      "latest": "v1.0.3",
+      "latest": "v1.0.4",
       "releases": [
         {
           "version": "v1.0.1",
@@ -41,6 +41,17 @@
           "sha256": "aa2489a7e491a8f0cb6b6259206d9c7c1ffc3a58e17fa9b9198eab003df794d3",
           "notes": "ตัวหลัก 2 esp32",
           "published_at": "2026-11-20T13:50:40.890Z"
+        },
+        {
+          "version": "v1.0.4",
+          "filename": "asd.ino.merged.bin",
+          "path": "firmware/releases/esp32/v1.0.4/asd.ino.merged.bin",
+          "address": "0x0",
+          "image_type": "merged",
+          "size_bytes": 4194304,
+          "sha256": "e7e682784faf159c729b9319636d62d00f09f23d134116284633c4c536a9c711",
+          "notes": "",
+          "published_at": "2026-11-20T14:15:01.862Z"
         }
       ]
     },
