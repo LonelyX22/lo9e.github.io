@@ -8,6 +8,12 @@ After the repository's GitHub Pages deployment completes:
 
 https://lonelyx22.github.io/lo9e.github.io/flasher/
 
+## Firmware version management
+
+- Public firmware catalog: shown inside the flasher under Firmware Center.
+- Owner release manager: [Open Admin Dashboard](https://lonelyx22.github.io/lo9e.github.io/flasher/admin.html).
+- Admin publishing instructions and token permissions: see [firmware/README.md](../firmware/README.md).
+
 ## Supported chips
 
 - ESP32 classic (ESP32 DevKit V1 / WROOM)
