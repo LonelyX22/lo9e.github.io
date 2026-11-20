@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090b0b"><meta name="description" content="ช่องทางติดต่อผู้พัฒนาและแจ้งปัญหาโครงงานเรือเก็บขยะ">
+<title>Contact Developer | BOAT FLASHER</title>
+<link rel="stylesheet" href="site-nav.css">
+</head>
+<body class="site-body"><div class="site-wrap"><header class="site-topbar">
+  <a class="site-brand" href="home.html" aria-label="BOAT FLASHER Home">
+    <span><strong>BOAT FLASHER ///</strong><small data-site-i18n="navBrandSub">SMART TRASH COLLECTION BOAT</small></span>
+  </a>
+  <nav class="site-nav" aria-label="Main navigation">
+    <a href="home.html"  data-site-i18n="navHome">หน้า Home</a>
+    <a href="index.html"  data-site-i18n="navFlash">Flash Firmware</a>
+    <a href="wifi.html"  data-site-i18n="navWifi">ควบคุมเรือผ่าน Wi-Fi</a>
+    <a href="faq.html"  data-site-i18n="navFaq">FAQ / แก้ไขปัญหา</a>
+    <a href="contact.html" aria-current="page" data-site-i18n="navContact">ติดต่อผู้พัฒนา</a>
+  </nav>
+  <div class="site-actions">
+    <div class="site-lang" role="group" aria-label="Language">
+      <button type="button" data-site-lang="en" aria-pressed="false">EN</button>
+      <button type="button" data-site-lang="th" aria-pressed="true">ไทย</button>
+    </div>
+    <a class="site-github" href="https://github.com/LonelyX22/lo9e.github.io" target="_blank" rel="noopener" data-site-i18n="navGithub">GitHub</a>
+    <a class="site-cta" href="index.html"><span data-site-i18n="navCta">เริ่มแฟลชเลย</span> ›</a>
+  </div>
+</header>
+<main class="site-page">
+  <section class="site-page-intro">
+    <p class="site-kicker" data-site-i18n="contactEyebrow">/// DEVELOPER SUPPORT</p>
+    <h1><span data-site-i18n="contactTitle1">ติดต่อ</span><br><em data-site-i18n="contactTitle2">ผู้พัฒนา</em></h1>
+    <p class="site-lead" data-site-i18n="contactLead">พบข้อผิดพลาด มีข้อเสนอแนะ หรือต้องการช่วยพัฒนาโครงงาน สามารถเปิดประเด็นผ่าน GitHub เพื่อให้ตรวจสอบและติดตามการแก้ไขได้</p>
+  </section>
+  <section class="site-section site-contact-grid">
+    <a class="site-contact-link" href="https://github.com/LonelyX22/lo9e.github.io" target="_blank" rel="noopener">
+      <small>01 / GITHUB REPOSITORY</small><h3 data-site-i18n="contactRepoTitle">SOURCE CODE</h3><p data-site-i18n="contactRepoText">ดูซอร์สโค้ด เว็บไซต์ และไฟล์ที่เกี่ยวข้องกับโครงงานบน GitHub</p><span class="site-button outline" style="margin-top:18px">OPEN GITHUB ↗</span>
+    </a>
+    <a class="site-contact-link" href="https://github.com/LonelyX22/lo9e.github.io/issues" target="_blank" rel="noopener">
+      <small>02 / SUPPORT & FEEDBACK</small><h3 data-site-i18n="contactIssueTitle">REPORT A PROBLEM</h3><p data-site-i18n="contactIssueText">แจ้งปัญหา บอกขั้นตอนที่ทำให้เกิดข้อผิดพลาด และแนบภาพหน้าจอหรือ Serial Log เพื่อช่วยวิเคราะห์</p><span class="site-button primary" style="margin-top:18px">OPEN AN ISSUE ↗</span>
+    </a>
+  </section>
+  <section class="site-section site-panel">
+    <h2 class="site-panel-title" data-site-i18n="contactTemplateTitle">ข้อมูลที่ควรแนบเมื่อแจ้งปัญหา</h2>
+    <p class="site-lead" style="font-size:12px;margin-bottom:14px" data-site-i18n="contactTemplateText">คัดลอกแบบฟอร์มด้านล่างไปกรอกใน GitHub Issue เพื่อให้ตรวจสอบได้รวดเร็วขึ้น</p>
+    <textarea class="site-template" id="issueTemplate" readonly>บอร์ดที่ใช้:
+เวอร์ชัน Firmware:
+อุปกรณ์ที่ใช้ควบคุม:
+เบราว์เซอร์:
+อาการที่พบ:
+ขั้นตอนที่ทำให้เกิดปัญหา:
+ข้อความ Error / Serial Log:</textarea>
+    <div class="site-copy-row"><span class="site-meta">TIP: INCLUDE A SCREENSHOT OR SERIAL LOG IF AVAILABLE.</span><button class="site-copy-btn" id="copyTemplate" type="button" data-site-i18n="contactCopy">คัดลอกข้อความ</button></div>
+  </section>
+</main><footer class="site-footer"><span><b>BOAT FLASHER ///</b> <span data-site-i18n="contactFooterNote"></span></span><span data-site-i18n="contactFooterTag"></span></footer>
+</div>
+<script src="site-nav.js"></script>
+<script>
+const copyButton=document.getElementById('copyTemplate');
+copyButton.addEventListener('click',async()=>{
+  const text=document.getElementById('issueTemplate').value;
+  try{
+    await navigator.clipboard.writeText(text);
+    copyButton.textContent=document.documentElement.lang==='en'?'COPIED':'คัดลอกแล้ว';
+    setTimeout(()=>{copyButton.textContent=document.documentElement.lang==='en'?'COPY TEMPLATE':'คัดลอกข้อความ'},1800);
+  }catch(error){
+    const field=document.getElementById('issueTemplate');
+    field.focus();field.select();
+    copyButton.textContent=document.documentElement.lang==='en'?'SELECTED — COPY MANUALLY':'เลือกข้อความแล้ว กดคัดลอก';
+  }
+});
+</script></body></html>
