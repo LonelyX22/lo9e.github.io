@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
   "repository": "LonelyX22/lo9e.github.io",
-  "updated_at": "2026-11-20T06:24:27.139Z",
+  "updated_at": "2026-11-20T11:31:48.972Z",
   "boards": [
     {
       "id": "esp32",
       "name": "ESP32 DevKit V1",
       "chip": "ESP32",
-      "latest": "v1.0.1",
+      "latest": "v1.0.2",
       "releases": [
         {
           "version": "v1.0.1",
@@ -19,6 +19,17 @@
           "sha256": "18d0d721ea76e1fe91922863100ef979be3ecb597b076a41da6c3dedfb60bc19",
           "notes": "asd",
           "published_at": "2026-11-20T04:50:43.865Z"
+        },
+        {
+          "version": "v1.0.2",
+          "filename": "test.ino.merged.bin",
+          "path": "firmware/releases/esp32/v1.0.2/test.ino.merged.bin",
+          "address": "0x0",
+          "image_type": "merged",
+          "size_bytes": 4194304,
+          "sha256": "5dde715dd43d27afb95acc80a4d24d256e87cd9e65f86ec2504c6812964aee5f",
+          "notes": "",
+          "published_at": "2026-11-20T11:31:48.971Z"
         }
       ]
     },
