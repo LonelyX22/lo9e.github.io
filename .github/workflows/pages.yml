@@ -48,13 +48,16 @@ jobs:
               if (artifact) {
                 core.setOutput("run_id", String(run.id));
                 core.setOutput("artifact_id", String(artifact.id));
+                core.setOutput("found", "true");
                 core.info(`Using model artifact from training run ${run.id}`);
                 return;
               }
             }
-            core.setFailed("No successful, non-expired cloud model artifact was found.");
+            core.setOutput("found", "false");
+            core.warning("No successful, non-expired cloud model artifact was found. Continuing with static site deployment.");
 
       - name: Download latest completed experimental CCSN model
+        if: steps.latest_model.outputs.found == 'true'
         uses: actions/download-artifact@v4
         with:
           name: ccsn-experimental-baseline
@@ -64,6 +67,7 @@ jobs:
           path: /tmp/ccsn-artifact
 
       - name: Install beta model for public testing
+        if: steps.latest_model.outputs.found == 'true'
         run: |
           set -euo pipefail
           mkdir -p models/cloud-classifier
