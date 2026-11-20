@@ -102,7 +102,7 @@ function applyLanguage(){
 }
 function setLanguage(next){lang=next;localStorage.setItem(LANG_KEY,lang);applyLanguage()}
 function headers(){return {'Accept':'application/vnd.github+json','Authorization':'Bearer '+token,'X-GitHub-Api-Version':'2022-11-28','Content-Type':'application/json'}}
-async function api(path,options){const res=await fetch('https://api.github.com'+path,options||{headers:headers()});const body=await res.text();let data={};try{data=body?JSON.parse(body):{}}catch{}if(!res.ok)throw new Error((data.message||('GitHub API '+res.status))+' (HTTP '+res.status+')');return data}
+async function api(path,options){const request={...(options||{}),headers:(options&&options.headers)||headers()};if(!request.method||request.method.toUpperCase()==='GET')request.cache='no-store';const res=await fetch('https://api.github.com'+path,request);const body=await res.text();let data={};try{data=body?JSON.parse(body):{}}catch{}if(!res.ok)throw new Error((data.message||('GitHub API '+res.status))+' (HTTP '+res.status+')');return data}
 function toB64(bytes){let binary='';for(let i=0;i<bytes.length;i+=0x8000)binary+=String.fromCharCode(...bytes.subarray(i,Math.min(i+0x8000,bytes.length)));return btoa(binary)}
 function fromB64Utf8(s){const raw=atob(s.replace(/\s/g,''));const bytes=new Uint8Array(raw.length);for(let i=0;i<raw.length;i++)bytes[i]=raw.charCodeAt(i);return new TextDecoder().decode(bytes)}
 function safeName(s){return s.replace(/[^a-zA-Z0-9._-]/g,'_')}
