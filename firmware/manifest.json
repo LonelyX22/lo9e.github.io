@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
   "repository": "LonelyX22/lo9e.github.io",
-  "updated_at": "2026-11-20T11:31:48.972Z",
+  "updated_at": "2026-11-20T13:19:03.592Z",
   "boards": [
     {
       "id": "esp32",
       "name": "ESP32 DevKit V1",
       "chip": "ESP32",
-      "latest": "v1.0.2",
+      "latest": "v1.0.6",
       "releases": [
         {
           "version": "v1.0.1",
@@ -30,6 +30,17 @@
           "sha256": "5dde715dd43d27afb95acc80a4d24d256e87cd9e65f86ec2504c6812964aee5f",
           "notes": "",
           "published_at": "2026-11-20T11:31:48.971Z"
+        },
+        {
+          "version": "v1.0.6",
+          "filename": "WJENGDIWA.bin",
+          "path": "firmware/releases/esp32/v1.0.6/WJENGDIWA.bin",
+          "address": "0x0",
+          "image_type": "merged",
+          "size_bytes": 4194304,
+          "sha256": "d2c15d2e6d72fb920e28d69c2a3307865ca9c55dfad0e4764bcbd6f4bc3c2cde",
+          "notes": "ไอเเก็ป",
+          "published_at": "2026-11-20T13:19:03.592Z"
         }
       ]
     },
