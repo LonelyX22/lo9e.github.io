@@ -1,4 +1,4 @@
-# BOAT FLASHER
+# WJ ENG
 
 Browser-based ESP32 firmware flasher for the BOAT RC controller project.
 
