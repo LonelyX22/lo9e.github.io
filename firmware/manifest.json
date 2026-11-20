@@ -1,14 +1,26 @@
 {
   "schema_version": 1,
   "repository": "LonelyX22/lo9e.github.io",
-  "updated_at": null,
+  "updated_at": "2026-11-20T04:29:37.567Z",
   "boards": [
     {
       "id": "esp32",
       "name": "ESP32 DevKit V1",
       "chip": "ESP32",
-      "latest": null,
-      "releases": []
+      "latest": "v1.0.1",
+      "releases": [
+        {
+          "version": "v1.0.1",
+          "filename": "Boalt11.ino.bin",
+          "path": "firmware/releases/esp32/v1.0.1/Boalt11.ino.bin",
+          "address": "0x0",
+          "image_type": "merged",
+          "size_bytes": 1192304,
+          "sha256": "12e1de53d05e2ef12493ac4eef2e8040bb9f3ba3f2c65c0657b93754adf15693",
+          "notes": "Initial BOAT FLASHER firmware release for ESP32-C5.\n\n- ESP32-C5 board support\n- Wi-Fi motor control\n- Initial firmware build\n- Complete merged firmware image",
+          "published_at": "2026-11-20T04:29:37.567Z"
+        }
+      ]
     },
     {
       "id": "esp32c5",
