@@ -18,7 +18,7 @@
 <button class="btn full" id="auth">VERIFY OWNER ACCESS ↗</button>
 <div class="status" id="authStatus">Not connected. Enter an owner token to enable release management.</div>
 <div class="security"><b>SECURITY:</b> This page is public, but publishing requires a token belonging to the repository owner. The token is kept only in this tab's memory and is not saved to localStorage or sent anywhere except api.github.com. Use a fine-grained token limited to this repository with Contents: Read and write and Metadata: Read-only. Never share the token.</div>
-<p class="hint">Create a token in GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens. Select only LonelyX22/lo9e.github.io. The token is cleared when this page is closed or refreshed.</p>
+<p class="hint">Create a token in GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens. <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">Open token settings ↗</a> Select only LonelyX22/lo9e.github.io. The token is cleared when this page is closed or refreshed.</p>
 </section>
 <section class="card">
 <h2>02 / PUBLISH NEW FIRMWARE</h2>
@@ -75,8 +75,8 @@ function render(){
 async function refreshCatalog(){const got=await getManifest();manifest=got.manifest;render()}
 $('auth').addEventListener('click',async()=>{
  const entered=$('token').value.trim();if(!entered){status('authStatus','Paste your fine-grained token first.','err');return}
- token=entered;status('authStatus','Checking GitHub identity and repository access...');
- try{const user=await api('/user');if(user.login!==OWNER)throw new Error('This token belongs to '+user.login+', not '+OWNER+'.');await getManifest();ownerVerified=true;$('publish').disabled=false;status('authStatus','Verified owner: '+user.login+' · Repository write access confirmed.','ok');await refreshCatalog()}
+ token=entered;$('token').value='';status('authStatus','Checking GitHub identity and repository access...');
+ try{const user=await api('/user');if(user.login!==OWNER)throw new Error('This token belongs to '+user.login+', not '+OWNER+'.');await getManifest();const repoInfo=await api('/repos/'+REPO);if(repoInfo.permissions&&repoInfo.permissions.push===false)throw new Error('This token does not have repository write permission. Enable Contents: Read and write.');ownerVerified=true;$('publish').disabled=false;status('authStatus','Verified owner: '+user.login+' · Catalog access confirmed.','ok');await refreshCatalog()}
  catch(e){ownerVerified=false;token='';$('publish').disabled=true;status('authStatus',e.message,'err')}
 });
 $('latestBoard').addEventListener('change',render);
@@ -84,7 +84,7 @@ $('saveLatest').addEventListener('click',async()=>{
  if(!ownerVerified||!manifest)return;const board=boardInfo($('latestBoard').value),version=$('latestVersion').value;if(!board||!version)return;
  $('saveLatest').disabled=true;status('catalogStatus','Saving latest version...');
  try{board.latest=version;manifest.updated_at=new Date().toISOString();await putManifest(manifest);await refreshCatalog();status('catalogStatus','Latest version updated to '+version+'.','ok')}
- catch(e){status('catalogStatus',e.message,'err')}finally{$('saveLatest').disabled=false}
+ catch(e){status('catalogStatus',e.message,'err')}finally{const b=boardInfo($('latestBoard').value);$('saveLatest').disabled=!(ownerVerified&&b&&(b.releases||[]).length)}
 });
 $('publish').addEventListener('click',async()=>{
  if(!ownerVerified)return;const boardId=$('board').value,version=$('version').value.trim(),notes=$('notes').value.trim(),file=$('firmware').files[0],imageType=$('imageType').value;
