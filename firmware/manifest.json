@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "repository": "LonelyX22/lo9e.github.io",
+  "updated_at": null,
+  "boards": [
+    {
+      "id": "esp32",
+      "name": "ESP32 DevKit V1",
+      "chip": "ESP32",
+      "latest": null,
+      "releases": []
+    },
+    {
+      "id": "esp32c5",
+      "name": "ESP32-C5",
+      "chip": "ESP32-C5",
+      "latest": null,
+      "releases": []
+    }
+  ]
+}
