@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090b0b"><meta name="description" content="วิธีเชื่อมต่อและควบคุมเรือเก็บขยะผ่าน Wi-Fi">
+<title>Wi-Fi Boat Control | BOAT FLASHER</title>
+<link rel="stylesheet" href="site-nav.css">
+</head>
+<body class="site-body"><div class="site-wrap"><header class="site-topbar">
+  <a class="site-brand" href="home.html" aria-label="BOAT FLASHER Home">
+    <span><strong>BOAT FLASHER ///</strong><small data-site-i18n="navBrandSub">SMART TRASH COLLECTION BOAT</small></span>
+  </a>
+  <nav class="site-nav" aria-label="Main navigation">
+    <a href="home.html"  data-site-i18n="navHome">หน้า Home</a>
+    <a href="index.html"  data-site-i18n="navFlash">Flash Firmware</a>
+    <a href="wifi.html" aria-current="page" data-site-i18n="navWifi">ควบคุมเรือผ่าน Wi-Fi</a>
+    <a href="faq.html"  data-site-i18n="navFaq">FAQ / แก้ไขปัญหา</a>
+    <a href="contact.html"  data-site-i18n="navContact">ติดต่อผู้พัฒนา</a>
+  </nav>
+  <div class="site-actions">
+    <div class="site-lang" role="group" aria-label="Language">
+      <button type="button" data-site-lang="en" aria-pressed="false">EN</button>
+      <button type="button" data-site-lang="th" aria-pressed="true">ไทย</button>
+    </div>
+    <a class="site-github" href="https://github.com/LonelyX22/lo9e.github.io" target="_blank" rel="noopener" data-site-i18n="navGithub">GitHub</a>
+    <a class="site-cta" href="index.html"><span data-site-i18n="navCta">เริ่มแฟลชเลย</span> ›</a>
+  </div>
+</header>
+<main class="site-page">
+  <section class="site-hero">
+    <div>
+      <p class="site-kicker" data-site-i18n="wifiEyebrow">/// WIRELESS CONTROL GUIDE</p>
+      <h1><span data-site-i18n="wifiTitle1">ควบคุมเรือ</span><br><em data-site-i18n="wifiTitle2">ผ่าน Wi-Fi</em></h1>
+      <p class="site-lead" data-site-i18n="wifiLead">ทำตามขั้นตอนด้านล่างเพื่อเชื่อมต่อกับบอร์ด ESP32-C5 และเปิดหน้าเว็บควบคุมเรือจากโทรศัพท์หรือคอมพิวเตอร์</p>
+      <div class="site-note"><strong data-site-i18n="wifiWarningTitle">ก่อนเริ่มใช้งาน</strong><span data-site-i18n="wifiWarningText">ทดสอบบนพื้นแห้งก่อนลงน้ำ ยกใบพัดหรือส่วนที่หมุนให้พ้นสิ่งกีดขวาง และเตรียมปุ่มหยุดฉุกเฉินไว้เสมอ</span></div>
+    </div>
+    <div class="site-panel">
+      <h2 class="site-panel-title" data-site-i18n="wifiConfigTitle">ค่าการเชื่อมต่อเริ่มต้นของเฟิร์มแวร์ ESP32-C5</h2>
+      <div class="site-code-grid">
+        <div class="site-code-item"><small data-site-i18n="wifiSSID">ชื่อเครือข่าย (SSID)</small><code>BOAT-RC-C5</code></div>
+        <div class="site-code-item"><small data-site-i18n="wifiPassword">รหัสผ่าน Wi-Fi</small><code>12345678</code></div>
+        <div class="site-code-item"><small data-site-i18n="wifiAddress">ที่อยู่หน้าเว็บควบคุม</small><code>192.168.4.1</code></div>
+      </div>
+      <p class="site-lead" style="font-size:11px;margin-top:14px" data-site-i18n="wifiConfigNote">ค่าด้านบนอ้างอิงจากเฟิร์มแวร์ ESP32-C5 ที่จัดเตรียมไว้ หากใช้บอร์ดหรือเฟิร์มแวร์คนละรุ่น ชื่อ Wi-Fi และรหัสผ่านอาจแตกต่างกัน</p>
+    </div>
+  </section>
+
+  <section class="site-section">
+    <div class="site-section-head"><div><p data-site-i18n="wifiStepsEyebrow">CONNECTION / 01</p><h2 data-site-i18n="wifiStepsTitle">วิธีเชื่อมต่อและควบคุม</h2></div></div>
+    <div class="site-step-grid">
+      <article class="site-step"><span class="site-step-no">01</span><div><h3 data-site-i18n="wifiStep1Title">เปิดระบบเรือ</h3><p data-site-i18n="wifiStep1Text">จ่ายไฟให้บอร์ด ESP32 และชุดขับมอเตอร์ รอให้บอร์ดเริ่มกระจายสัญญาณ Wi-Fi</p></div></article>
+      <article class="site-step"><span class="site-step-no">02</span><div><h3 data-site-i18n="wifiStep2Title">เชื่อมต่อเครือข่าย</h3><p data-site-i18n="wifiStep2Text">เปิด Wi-Fi บนมือถือหรือคอมพิวเตอร์ เลือก BOAT-RC-C5 แล้วใส่รหัสผ่านตามที่แสดงด้านบน หากมีข้อความว่าไม่มีอินเทอร์เน็ต ให้เลือกเชื่อมต่อค้างไว้</p></div></article>
+      <article class="site-step"><span class="site-step-no">03</span><div><h3 data-site-i18n="wifiStep3Title">เปิดหน้า Control</h3><p data-site-i18n="wifiStep3Text">เปิดเบราว์เซอร์และพิมพ์ http://192.168.4.1 ในแถบที่อยู่ ต้องเชื่อมต่อกับ Wi-Fi ของเรืออยู่ก่อน</p></div></article>
+      <article class="site-step"><span class="site-step-no">04</span><div><h3 data-site-i18n="wifiStep4Title">เริ่มควบคุมเรือ</h3><p data-site-i18n="wifiStep4Text">ตรวจพื้นที่รอบเรือให้ปลอดภัย กด ENABLE หรือ ARM เพื่อเปิดระบบ จากนั้นใช้จอยสติ๊กบนหน้าจอเพื่อเดินหน้า ถอยหลัง และเลี้ยว กด STOP เมื่อหยุดใช้งาน</p></div></article>
+    </div>
+  </section>
+
+  <section class="site-section site-note">
+    <strong data-site-i18n="wifiSafetyTitle">ระบบ Failsafe ของเฟิร์มแวร์ C5</strong>
+    <span data-site-i18n="wifiSafetyText">เฟิร์มแวร์ C5 ที่อ้างอิงในคู่มือนี้ส่งสัญญาณ heartbeat ทุก 200 มิลลิวินาที และตั้งเวลาหยุดมอเตอร์เมื่อไม่มีคำสั่งเกินประมาณ 900 มิลลิวินาที อย่างไรก็ตามควรเตรียมวิธีตัดไฟมอเตอร์จริงไว้ด้วย</span>
+  </section>
+</main><footer class="site-footer"><span><b>BOAT FLASHER ///</b> <span data-site-i18n="wifiFooterNote"></span></span><span data-site-i18n="wifiFooterTag"></span></footer>
+</div><script src="site-nav.js"></script></body></html>
