@@ -29,9 +29,27 @@ label{display:block;font-size:9px;letter-spacing:1.4px;color:var(--muted);margin
 .lang-switch{display:inline-flex;align-items:center;gap:3px;padding:3px;border:1px solid var(--line);background:#090e0a}.lang-switch button{border:0;background:transparent;color:var(--muted);padding:6px 9px;font:700 10px var(--mono);cursor:pointer}.lang-switch button.active{background:var(--green);color:#0a1008}.header-right{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.admin-link{white-space:nowrap}
 html[lang="th"] body{font-family:'Noto Sans Thai',sans-serif}html[lang="th"] h1,html[lang="th"] h2,html[lang="th"] .btn,html[lang="th"] .brand strong,html[lang="th"] .drop b{font-family:'Noto Sans Thai',sans-serif;letter-spacing:0}html[lang="th"] .eyebrow,html[lang="th"] .step,html[lang="th"] label,html[lang="th"] .stat small,html[lang="th"] .live,html[lang="th"] .admin-link,html[lang="th"] .note,html[lang="th"] .termbar,html[lang="th"] .footer{letter-spacing:0}html[lang="th"] .brand small{letter-spacing:0}html[lang="th"] .lang-switch button{font-family:'Noto Sans Thai',sans-serif}
 @media(max-width:760px){.header-right{gap:7px}.live{display:none}.lang-switch button{padding:6px 7px}}
-</style></head>
+</style>
+<link rel="stylesheet" href="site-nav.css"></head>
 <body><div class="wrap">
-<header><a class="brand" href="./"><span class="mark">B/</span><span><strong>BOAT<span>FLASHER</span></strong><small data-i18n="brandTag">ระบบแฟลชเฟิร์มแวร์เรือ // ศูนย์ระบบ</small></span></a><div class="header-right"><div class="lang-switch" role="group" aria-label="Language"><button type="button" id="langTH" class="active" aria-pressed="true">ไทย</button><button type="button" id="langEN" aria-pressed="false">EN</button></div><span class="live"><i></i> <span data-i18n="webSerialReady">พร้อมเชื่อมต่อ USB</span></span><a class="admin-link" href="admin.html" data-i18n="admin">ผู้ดูแลระบบ ↗</a><span>BUILD 01.02</span></div></header>
+<header class="site-topbar">
+  <a class="site-brand" href="home.html" aria-label="BOAT FLASHER Home"><span><strong>BOAT FLASHER ///</strong><small data-site-i18n="navBrandSub">SMART TRASH COLLECTION BOAT</small></span></a>
+  <nav class="site-nav" aria-label="Main navigation">
+    <a href="home.html" data-site-i18n="navHome">หน้า Home</a>
+    <a href="index.html" aria-current="page" data-site-i18n="navFlash">Flash Firmware</a>
+    <a href="wifi.html" data-site-i18n="navWifi">ควบคุมเรือผ่าน Wi-Fi</a>
+    <a href="faq.html" data-site-i18n="navFaq">FAQ / แก้ไขปัญหา</a>
+    <a href="contact.html" data-site-i18n="navContact">ติดต่อผู้พัฒนา</a>
+  </nav>
+  <div class="site-actions">
+    <div class="site-lang" role="group" aria-label="Language">
+      <button type="button" id="langEN" data-site-lang="en" aria-pressed="false">EN</button>
+      <button type="button" id="langTH" data-site-lang="th" class="active" aria-pressed="true">ไทย</button>
+    </div>
+    <a class="site-github" href="https://github.com/LonelyX22/lo9e.github.io" target="_blank" rel="noopener" data-site-i18n="navGithub">GitHub</a>
+    <a class="site-cta" href="index.html"><span data-site-i18n="navCta">เริ่มแฟลชเลย</span> ›</a>
+  </div>
+</header>
 <section class="hero"><div><div class="eyebrow" data-i18n="heroEyebrow">/// เครื่องมือแฟลช ESP32 ผ่านเว็บไซต์</div><h1><span data-i18n="heroTitle1">แฟลชง่าย.</span><br><em data-i18n="heroTitle2">พร้อมลุย.</em></h1><p data-i18n="heroDesc">ติดตั้งเฟิร์มแวร์ให้กล่องควบคุมเรือผ่าน USB ได้โดยตรง เลือกบอร์ด เลือกเวอร์ชัน แล้วแฟลชผ่านเบราว์เซอร์ ไม่ต้องลงโปรแกรมแฟลชแยก</p></div><div class="hero-stamp"><b data-i18n="heroStamp">ESP / 32</b><small data-i18n="heroStampSub">รองรับ ESP32 รุ่นปกติ + C5</small></div></section>
 <section class="stats"><div class="stat"><small data-i18n="statTargets">บอร์ดที่รองรับ</small><b><span>02</span> <span data-i18n="statChipFamilies">ตระกูลชิป</span></b></div><div class="stat"><small data-i18n="statConnection">การเชื่อมต่อ</small><b>USB <span>/</span> SERIAL</b></div><div class="stat"><small data-i18n="statEngine">ระบบแฟลช</small><b>ESPTOOL.JS <span>↗</span></b></div></section>
 <div class="layout">
@@ -49,8 +67,9 @@ html[lang="th"] body{font-family:'Noto Sans Thai',sans-serif}html[lang="th"] h1,
 <div class="terminal"><div class="termbar"><span data-i18n="deviceOutput">ข้อมูลจากบอร์ด // UART0</span><span class="termled" id="termstate">● รอการเชื่อมต่อ</span></div><div id="log">[ BOAT FLASHER ]&#10;กำลังรอเลือกบอร์ด&#10;เลือก ESP32 หรือ ESP32-C5 โหลดไฟล์ .bin และเชื่อมต่อบอร์ด</div><div class="progress"><i id="bar"></i></div></div>
 <div style="display:flex;gap:9px;margin-top:12px"><button class="btn secondary" id="disconnect" data-i18n="disconnect">ตัดการเชื่อมต่อ</button><button class="btn secondary" id="clear" data-i18n="clearLog">ล้างบันทึก</button></div>
 <p class="note" data-i18n="safetyNote">ข้อควรระวัง: ระหว่างแฟลช ห้ามถอดสาย USB หรือปิดหน้านี้ หากแฟลชไม่สำเร็จ ให้เชื่อมต่อใหม่ในโหมด Bootloader แล้วลองอีกครั้ง</p></section></div>
-<div class="footer"><span>BOAT FLASHER <b>///</b> <span data-i18n="footerTag">ออกแบบเพื่อภารกิจทางน้ำ</span></span><span>ESP32 · ESP32-C5 · WEB SERIAL</span></div>
+<div class="footer"><span>BOAT FLASHER <b>///</b> <span data-i18n="footerTag">ออกแบบเพื่อภารกิจทางน้ำ</span></span><span>ESP32 · ESP32-C5 · WEB SERIAL &nbsp;·&nbsp; <a class="admin-link" href="admin.html" data-i18n="admin">ผู้ดูแลระบบ ↗</a></span></div>
 </div><div class="toast" id="toast"></div>
+<script src="site-nav.js"></script>
 <script type="module">
 import { ESPLoader, Transport } from 'https://esm.sh/esptool-js@0.7.1?bundle';
 const $=id=>document.getElementById(id);
@@ -83,7 +102,7 @@ function applyLanguage(){
  if(manifest)showReleaseInfo();
  document.title=lang==='th'?'BOAT FLASHER // แฟลชเฟิร์มแวร์':'BOAT FLASHER // Firmware Terminal';
 }
-function setLanguage(next){lang=next;localStorage.setItem(LANG_KEY,lang);applyLanguage()}
+function setLanguage(next){lang=next;localStorage.setItem(LANG_KEY,lang);applyLanguage();window.refreshSiteNavLanguage?.()}
 function populateReleases(){const b=getBoard();const sel=$('releaseSelect');sel.innerHTML='';const releases=(b?.releases||[]).slice().sort((a,c)=>String(c.published_at||'').localeCompare(String(a.published_at||'')));if(!releases.length){const o=document.createElement('option');o.value='';o.textContent=tr('noPublished');sel.append(o);sel.disabled=true;setCatalogState('catalogNoReleases');$('releaseInfo').textContent=tr('catalogNoFirmware')+' '+chip+'. '+tr('askAdmin');$('loadRelease').disabled=true;return}releases.forEach(r=>{const o=document.createElement('option');o.value=r.version;o.textContent=r.version+(b.latest===r.version?' — '+tr('latest'):'');sel.append(o)});sel.disabled=false;sel.value=b.latest&&releases.some(r=>r.version===b.latest)?b.latest:releases[0].version;showReleaseInfo();refresh()}
 function showReleaseInfo(){const r=getSelectedRelease();if(!r){$('releaseInfo').textContent=tr('noReleaseSelected');refresh();return}$('releaseInfo').textContent=(r.notes||tr('noReleaseNotes'))+'\n'+tr('imageLabel')+': '+r.filename+' · '+((r.size_bytes||0)/1024).toFixed(1)+' KB · '+tr('flashAddressLabel')+' '+(r.address||'0x0')+'\n'+tr('publishedLabel')+': '+(r.published_at||'')+'\n'+tr('shaLabel')+': '+(r.sha256||'not provided');refresh()}
 async function loadCatalog(){try{const response=await fetch('../firmware/manifest.json?ts='+Date.now(),{cache:'no-store'});if(!response.ok)throw new Error('Catalog HTTP '+response.status);manifest=await response.json();setCatalogState('catalogOnline');populateReleases();log(tr('logCatalogLoaded'),'log-ok')}catch(e){setCatalogState('catalogOffline');$('releaseSelect').innerHTML='<option>'+tr('catalogUnavailableOption')+'</option>';$('releaseSelect').disabled=true;$('releaseInfo').textContent=tr('catalogLoadError')+' '+e.message;log(tr('catalogLoadError')+' '+e.message,'log-warn')}}
