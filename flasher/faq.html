@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090b0b"><meta name="description" content="คำถามที่พบบ่อยและวิธีแก้ไขปัญหา BOAT FLASHER">
+<title>FAQ & Troubleshooting | BOAT FLASHER</title>
+<link rel="stylesheet" href="site-nav.css">
+</head>
+<body class="site-body"><div class="site-wrap"><header class="site-topbar">
+  <a class="site-brand" href="home.html" aria-label="BOAT FLASHER Home">
+    <span><strong>BOAT FLASHER ///</strong><small data-site-i18n="navBrandSub">SMART TRASH COLLECTION BOAT</small></span>
+  </a>
+  <nav class="site-nav" aria-label="Main navigation">
+    <a href="home.html"  data-site-i18n="navHome">หน้า Home</a>
+    <a href="index.html"  data-site-i18n="navFlash">Flash Firmware</a>
+    <a href="wifi.html"  data-site-i18n="navWifi">ควบคุมเรือผ่าน Wi-Fi</a>
+    <a href="faq.html" aria-current="page" data-site-i18n="navFaq">FAQ / แก้ไขปัญหา</a>
+    <a href="contact.html"  data-site-i18n="navContact">ติดต่อผู้พัฒนา</a>
+  </nav>
+  <div class="site-actions">
+    <div class="site-lang" role="group" aria-label="Language">
+      <button type="button" data-site-lang="en" aria-pressed="false">EN</button>
+      <button type="button" data-site-lang="th" aria-pressed="true">ไทย</button>
+    </div>
+    <a class="site-github" href="https://github.com/LonelyX22/lo9e.github.io" target="_blank" rel="noopener" data-site-i18n="navGithub">GitHub</a>
+    <a class="site-cta" href="index.html"><span data-site-i18n="navCta">เริ่มแฟลชเลย</span> ›</a>
+  </div>
+</header>
+<main class="site-page">
+  <section class="site-page-intro">
+    <p class="site-kicker" data-site-i18n="faqEyebrow">/// SUPPORT CENTER</p>
+    <h1><span data-site-i18n="faqTitle1">FAQ &</span><br><em data-site-i18n="faqTitle2">แก้ไขปัญหา</em></h1>
+    <p class="site-lead" data-site-i18n="faqLead">รวมคำถามที่พบบ่อยเกี่ยวกับการแฟลชเฟิร์มแวร์ การเชื่อมต่อ Wi-Fi และการควบคุมเรือ</p>
+  </section>
+  <section class="site-section">
+    <div class="site-faq-list">
+      <details class="site-faq" open><summary data-site-i18n="faqQ1">หน้า Flash Firmware ไม่พบพอร์ต USB ต้องทำอย่างไร?</summary><p data-site-i18n="faqA1">ใช้ Chrome หรือ Microsoft Edge บนคอมพิวเตอร์ ตรวจสอบว่าสาย USB รองรับการรับส่งข้อมูล ไม่ใช่สายชาร์จอย่างเดียว แล้วถอดเสียบใหม่ หากยังไม่พบ ให้ตรวจไดรเวอร์ USB-to-Serial และลองกดปุ่ม BOOT ขณะเชื่อมต่อบอร์ด</p></details>
+      <details class="site-faq"><summary data-site-i18n="faqQ2">กดเชื่อมต่อแล้วแฟลชไม่สำเร็จ?</summary><p data-site-i18n="faqA2">ตรวจสอบว่าเลือกชนิดบอร์ดตรงกับอุปกรณ์ ใช้ไฟล์เฟิร์มแวร์ของบอร์ดรุ่นนั้น และอย่าถอดสาย USB ระหว่างเขียนข้อมูล หากยังล้มเหลว ให้เชื่อมต่อใหม่ในโหมด Bootloader แล้วลองอีกครั้ง</p></details>
+      <details class="site-faq"><summary data-site-i18n="faqQ3">ไม่เห็นชื่อ Wi-Fi ของเรือ?</summary><p data-site-i18n="faqA3">ตรวจสอบไฟเลี้ยงบอร์ดและรอหลังเปิดระบบสักครู่ จากนั้นปิดและเปิด Wi-Fi บนอุปกรณ์อีกครั้ง หากยังไม่พบ ให้รีเซ็ตบอร์ดและตรวจว่าแฟลชเฟิร์มแวร์ที่เปิดใช้งาน Access Point แล้ว</p></details>
+      <details class="site-faq"><summary data-site-i18n="faqQ4">เชื่อมต่อ Wi-Fi ได้ แต่หน้าเว็บเปิดไม่ได้?</summary><p data-site-i18n="faqA4">ตรวจสอบว่าโทรศัพท์ยังเชื่อมต่อกับ Wi-Fi ของเรืออยู่ แล้วพิมพ์ IP ในแถบที่อยู่โดยตรง เช่น http://192.168.4.1 สำหรับเฟิร์มแวร์ ESP32-C5 ที่ใช้ค่าเริ่มต้นนี้</p></details>
+      <details class="site-faq"><summary data-site-i18n="faqQ5">เปิดหน้าเว็บแล้ว แต่มอเตอร์ไม่หมุน?</summary><p data-site-i18n="faqA5">ตรวจว่ากด ENABLE หรือ ARM แล้วหรือยัง ตรวจไฟเลี้ยงมอเตอร์ 12V สายสัญญาณระหว่าง ESP32 กับ L298N และการต่อขั้วมอเตอร์ ทดสอบโดยยกใบพัดให้พ้นพื้นและอย่าแตะส่วนที่หมุน</p></details>
+      <details class="site-faq"><summary data-site-i18n="faqQ6">มอเตอร์หยุดเองเมื่อ Wi-Fi หลุด เป็นเพราะอะไร?</summary><p data-site-i18n="faqA6">เฟิร์มแวร์ ESP32-C5 ที่ใช้ระบบ failsafe จะหยุดมอเตอร์เมื่อไม่ได้รับคำสั่งควบคุมตามเวลาที่กำหนด เป็นระบบป้องกันเมื่อสัญญาณขาด หากต้องการใช้งานต่อ ให้เชื่อมต่อใหม่และเปิดระบบควบคุมอีกครั้ง</p></details>
+      <details class="site-faq"><summary data-site-i18n="faqQ7">มอเตอร์หมุนกลับทิศ ต้องแก้อย่างไร?</summary><p data-site-i18n="faqA7">ตรวจสอบการต่อสายมอเตอร์ซ้ายและขวา หรือปรับค่าตัวแปร INVERT_LEFT_MOTOR / INVERT_RIGHT_MOTOR ในโค้ดให้ตรงกับทิศทางการติดตั้ง แล้วคอมไพล์และแฟลชใหม่</p></details>
+    </div>
+  </section>
+  <section class="site-section site-note"><strong>ยังแก้ปัญหาไม่ได้?</strong><span>รวบรวมรุ่นบอร์ด เวอร์ชัน Firmware และข้อความ Error แล้วส่งรายละเอียดให้ผู้พัฒนาผ่าน GitHub Issues</span><div class="site-actions-row"><a class="site-button primary" href="contact.html">ติดต่อผู้พัฒนา ↗</a></div></section>
+</main><footer class="site-footer"><span><b>BOAT FLASHER ///</b> <span data-site-i18n="faqFooterNote"></span></span><span data-site-i18n="faqFooterTag"></span></footer>
+</div><script src="site-nav.js"></script></body></html>
