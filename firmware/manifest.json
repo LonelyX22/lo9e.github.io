@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
   "repository": "LonelyX22/lo9e.github.io",
-  "updated_at": "2026-11-20T15:11:11.443Z",
+  "updated_at": "2026-11-21T01:08:53.417Z",
   "boards": [
     {
       "id": "esp32",
       "name": "ESP32 DevKit V1",
       "chip": "ESP32",
-      "latest": "v1.6.0",
+      "latest": "v1.7.0",
       "releases": [
         {
           "version": "v1.0.1",
@@ -74,6 +74,17 @@
           "sha256": "580635221fd7d04109af86c2337b9b175a643e5a9eb16e1ad8b40831076c0c40",
           "notes": "หลัก เเก้",
           "published_at": "2026-11-20T15:11:07.174Z"
+        },
+        {
+          "version": "v1.7.0",
+          "filename": "asd.ino.merged.bin",
+          "path": "firmware/releases/esp32/v1.7.0/asd.ino.merged.bin",
+          "address": "0x0",
+          "image_type": "merged",
+          "size_bytes": 4194304,
+          "sha256": "6be54b6976cef098c240f42862eeb519196b547e45bc1928d495325e70c46d7f",
+          "notes": "เเก้ UI ใหม่",
+          "published_at": "2026-11-21T01:08:53.417Z"
         }
       ]
     },
